@@ -1,0 +1,326 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/custom-style.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/plugins.bundle.css asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/style.bundle.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/nav.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/ShopTemplate.styles.css" asp-append-version="true" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+    <link rel="shortcut icon" href="https://app.shopivana.com/Content/images/Icons/favicon.png?1.0.2.4?id=1.0.2.4" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
+    
+    <style>
+        .mid_size_font{
+        
+            font-size: 15px!important;
+        }
+        .bg-body {
+    --bg-color: 255,255,255;
+    background-color: #fff!important;
+    padding : 0;
+    
+}body {
+    display: flex;
+    flex-direction: column;
+    color: #181c32;
+    
+}
+
+.content {
+    padding: 30px 0;
+}
+.flex-xl-row {
+    flex-direction: row!important;
+}
+.ms-lg-15 {
+    margin-left: 3.75rem!important;
+}
+.w-xl-350px {
+    width: 350px!important;
+}
+
+        .validation-summary-errors {
+            font-size: 1rem;
+            color: #f1416c;
+        }
+        .validation-summary-success {
+            font-size: 1rem;
+            color: #08cc6c;
+        }
+
+        .select2-container {
+            padding: 0px;
+        }
+
+        .no-auth {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 540px;
+        }
+
+        .no-auth .btn.btn-primary {
+            background: #cf397e !important;
+            color: #ffffff !important
+        }
+
+            .no-auth .btn.btn-primary:hover:not(.btn-active), .no-auth .btn.btn-primary:active, .no-auth .btn.btn-primary:focus {
+                background-color: #af2864 !important;
+            }
+
+
+        .validation-summary-errors ul {
+            list-style: none;
+            padding: 0;
+        }
+        .modal_content {
+            padding-bottom: 2rem;
+        }
+
+            .modal_content h4 {
+                font-size: 1.125rem;
+                line-height: 1.5rem;
+                color: #000000;
+                margin-bottom: 0.25rem;
+            }
+
+            .modal_content p {
+                margin: 0.375rem 0;
+            }
+
+            .modal_content code {
+                font-family: inherit;
+                color: #42474c;
+                background-color: #e8e9eb;
+                margin: auto 2.5rem;
+                padding: 0.25rem;
+                line-height: 2.5rem;
+            }
+
+            .modal_content ul {
+                margin: 0.625rem 2.5rem;
+                list-style: circle;
+            }
+
+            .modal_content li, .modal_content p {
+                font-size: 1rem;
+                line-height: 1.5rem;
+                color: #000000;
+            }
+        .gradient-bg {
+            background-image: url('https://talsuite.s3.ap-south-1.amazonaws.com/BIZ365/Assets/splash.webp?1.0.2.4');
+            background-repeat: no-repeat;
+            background-position: 50%;
+            background-size: cover;
+            min-height: 100vh;
+            height: fit-content;
+        }
+        .input__label {
+            position: absolute;
+            left: 0;
+            top: 0;
+            padding: 8px 10px;
+            margin: 8px;
+            white-space: nowrap;
+            transform: translate(0, 0);
+            transform-origin: 0 0;
+            background: #fff;
+            transition: transform 120ms ease-in;
+            line-height: 1.2;
+            font-size: 13px;
+            color: #6f7780;
+        }
+
+        .input__field {
+            box-sizing: border-box;
+            display: block;
+            width: 100%;
+            border: 1px solid #e6e6e6;
+            padding: 0px 16px;
+            color: currentColor;
+            background: #fff;
+            border-radius: 4px;
+            height:52px;
+        }
+
+            .input__field:not(:-moz-placeholder-shown) + .input__label {
+                transform: translate(0.25rem, -65%) scale(0.8);
+                color: #cf397e;
+            }
+
+            .input__field:not(:-ms-input-placeholder) + .input__label {
+                transform: translate(0.25rem, -65%) scale(0.8);
+                color: #cf397e;
+            }
+
+            .input__field:focus + .input__label, .input__field:not(:placeholder-shown) + .input__label {
+                transform: translate(0.25rem, -65%) scale(0.8);
+                    color: #cf397e;
+
+            }
+
+            .input__field:focus-visible {
+                outline-offset: 0px;
+                    border: 2px solid #cf397e;
+
+                outline: none;
+            }
+            .input__field:-internal-autofill-selected {
+                appearance: menulist-button;
+            }
+                .input__field:focus + .input__label, .input__field:not(:placeholder-shown) + .input__label {background-image: none !important;
+                background-color: #ffffff !important;
+            }
+            .p10{
+                padding: 2.5rem!important;
+            }
+            .fv-plugins-message-container.invalid-feedback{
+                display: block;
+                font-weight: 400
+            }
+            a {
+    transition: color .2s ease,background-color .2s ease;
+}
+a {
+    color: #009ef7;
+    text-decoration: none;
+}
+            .flex-root {
+    flex: 1;
+}
+.flex-column-fluid {
+    flex: 1 0 auto;
+}
+.py-10 {
+    padding-top: 2.5rem!important;
+    padding-bottom: 2.5rem!important;
+}
+.flex-center {
+    justify-content: center;
+    align-items: center;
+}
+.bg-white {
+    --bs-bg-opacity: 1;
+    background-color: rgba(var(--bs-white-rgb),var(--bs-bg-opacity))!important;
+}
+.p-10 {
+    padding: 2.5rem!important;
+}
+.mb-5 {
+    margin-bottom: 1.25rem!important;
+}
+.pb-10 {
+    padding-bottom: 2.5rem!important;
+}
+.fv-plugins-icon-container {
+    position: relative;
+}
+.btn.btn-icon .svg-icon, .btn.btn-icon i {
+    padding: 0;
+    margin: 0;
+    line-height: 1;
+}
+.btn i {
+    display: inline-flex;
+    font-size: 1rem;
+    padding-right: 0.35rem;
+    vertical-align: middle;
+    line-height: 0;
+}
+    </style>
+    <style>
+        .container-l{
+            width : 85%;
+            margin-right: auto;
+            margin-left: auto;
+        }
+        @@media (min-width: 992px){
+            .container-l {
+            padding: 0 30px;
+            }
+            .w-xl-350px {
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+        
+    </style>
+</head>
+<body class="bg-body">
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5SRRMXB" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    
+        <main role="main">
+            @RenderBody()
+        </main>
+   
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/nav.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script>
+        function displayToggle(id){
+            if($(id).attr('style') == 'display : none') {
+                $(id).attr('style','display : true')
+            }
+            else{
+                $(id).attr('style','display : none')
+            }
+        }
+        function showPassword(elem) {
+            if ($(elem).prev().prev().attr('type') == 'password') {
+                $(elem).prev().prev().attr('type', 'text');
+                $(elem).find('i').removeClass('bi-eye-slash').addClass('bi-eye');
+            }
+            else {
+                $(elem).prev().prev().attr('type', 'password');
+                $(elem).find('i').removeClass('bi-eye').addClass('bi-eye-slash');
+            }
+        }
+        var ApplicationType = 'Shopivana';
+        var blockUI;
+        function showLoader() {
+            var target = document.querySelector('#kt_body1');
+            blockUI = new KTBlockUI(target, { message: '<div class="blockui-message"><span class="spinner-border text-primary"></span> ' + (ApplicationType === 'Bananashop' ? 'Going Bananas...' : 'Processing...') + '</div>' });
+            blockUI.block();
+        }
+        function hideLoader() {
+            if (blockUI.isBlocked()) blockUI.release();
+            blockUI.destroy();
+        }
+        function showInfo(Message) {
+            Swal.fire({ text: Message, icon: "info", buttonsStyling: false, confirmButtonText: "Okay", customClass: { confirmButton: "btn btn-primary" } });
+        }
+        function showSuccess(Message, Url) {
+            if (Url) Swal.fire({ html: Message, icon: "success", buttonsStyling: false, confirmButtonText: "Okay", customClass: { confirmButton: "btn btn-success" } }).then((result) => { if (result.isConfirmed) window.open(Url, "_self"); });
+            else Swal.fire({ html: Message, icon: "success", buttonsStyling: false, confirmButtonText: "Okay", customClass: { confirmButton: "btn btn-success" } });
+        }
+        function showError(Message) {
+            Swal.fire({ html: Message, icon: "error", buttonsStyling: false, confirmButtonText: "Okay", customClass: { confirmButton: "btn btn-danger" } });
+        }
+        function startProcess(selector) { document.querySelector(selector).setAttribute("data-kt-indicator", "on"); document.querySelector(selector).disabled = true; }
+        function endProcess(selector) { document.querySelector(selector).removeAttribute("data-kt-indicator"); document.querySelector(selector).disabled = false; }
+    
+        localStorage.sentToServer = '0';
+    
+        function ValidateEmail(input) {
+            var expr = /^([\w-\.]+)@@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+            if (input.match(expr)) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }        
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

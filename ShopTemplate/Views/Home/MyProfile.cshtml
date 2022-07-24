@@ -1,0 +1,952 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+    string username = "",profilePic="";
+    
+    if (TempData.ContainsKey("UserName"))
+    {
+        if (!(TempData["UserName"] is null)) {
+            username = TempData["UserName"].ToString();
+            profilePic = TempData["ProfilePic"].ToString();
+        }
+    }
+    if (profilePic == "")
+    {
+        profilePic = "blank.png";
+    }
+    string profileSource = "/Images/ProfilePic/" + profilePic;
+    
+
+}
+<style >
+    .modal-footer{
+        justify-content: center !important;
+    }
+    .padding-top-4{
+    padding-top: 4em !important;
+        }
+    .text-gray-800 {
+    color: #3f4254!important;
+        }
+.text-hover-primary {
+    transition: color .2s ease,background-color .2s ease;
+}
+.fw-bolder {
+    font-weight: 600!important;
+}
+.fw-mild{
+    font-weight : 500!important;
+    font-size : 14px;
+}
+.fs-3 {
+    font-size: calc(1rem + .12vw)!important;
+}
+.mb-1 {
+    margin-bottom: 0.25rem!important;
+}
+.indicator-hide {
+    display: none;
+}
+
+.swal2-icon.swal2-success {
+    border-color: #50cd89;
+    color: #50cd89;
+}
+.swal2-icon.swal2-success {
+    border-color: #a5dc86;
+    color: #a5dc86;
+}
+[class^=swal2] {
+    -webkit-tap-highlight-color: transparent;
+}
+.swal2-icon {
+    position: relative;
+    box-sizing: content-box;
+    justify-content: center;
+    width: 5em;
+    height: 5em;
+    margin: 1.5em auto 2em;
+    border: 0.25em solid transparent;
+    border-radius: 50%;
+    border-color: #000;
+    font-family: inherit;
+    line-height: 5em;
+    cursor: default;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.swal2-icon.swal2-success [class^=swal2-success-circular-line][class$=left] {
+    top: -0.4375em;
+    left: -2.0635em;
+    transform: rotate(-45deg);
+    transform-origin: 3.75em 3.75em;
+    border-radius: 7.5em 0 0 7.5em;
+}
+.swal2-icon.swal2-success [class^=swal2-success-circular-line] {
+    position: absolute;
+    width: 3.75em;
+    height: 7.5em;
+    transform: rotate(45deg);
+    border-radius: 50%;
+}
+[class^=swal2] {
+    -webkit-tap-highlight-color: transparent;
+}
+.swal2-icon.swal2-success.swal2-icon-show .swal2-success-line-tip {
+    -webkit-animation: swal2-animate-success-line-tip .75s;
+    animation: swal2-animate-success-line-tip .75s;
+}
+.swal2-icon.swal2-success [class^=swal2-success-line][class$=tip] {
+    top: 2.875em;
+    left: 0.8125em;
+    width: 1.5625em;
+    transform: rotate(45deg);
+}
+.swal2-icon.swal2-success [class^=swal2-success-line] {
+    background-color: #50cd89;
+}
+.swal2-icon.swal2-success [class^=swal2-success-line] {
+    display: block;
+    position: absolute;
+    z-index: 2;
+    height: 0.3125em;
+    border-radius: 0.125em;
+    background-color: #a5dc86;
+}
+[class^=swal2] {
+    -webkit-tap-highlight-color: transparent;
+}
+.swal2-icon.swal2-success.swal2-icon-show .swal2-success-line-long {
+    -webkit-animation: swal2-animate-success-line-long .75s;
+    animation: swal2-animate-success-line-long .75s;
+}
+.swal2-icon.swal2-success [class^=swal2-success-line][class$=long] {
+    top: 2.375em;
+    right: 0.5em;
+    width: 2.9375em;
+    transform: rotate(-45deg);
+}
+.swal2-icon.swal2-success .swal2-success-ring {
+    border-color: rgba(80,205,137,.3);
+}
+.swal2-icon.swal2-success .swal2-success-ring {
+    position: absolute;
+    z-index: 2;
+    top: -0.25em;
+    left: -0.25em;
+    box-sizing: content-box;
+    width: 100%;
+    height: 100%;
+    border: 0.25em solid rgba(165,220,134,.3);
+    border-radius: 50%;
+}
+.swal2-icon.swal2-success .swal2-success-fix {
+    position: absolute;
+    z-index: 1;
+    top: 0.5em;
+    left: 1.625em;
+    width: 0.4375em;
+    height: 5.625em;
+    transform: rotate(-45deg);
+}
+.swal2-icon.swal2-success.swal2-icon-show .swal2-success-circular-line-right {
+    -webkit-animation: swal2-rotate-success-circular-line 4.25s ease-in;
+    animation: swal2-rotate-success-circular-line 4.25s ease-in;
+}
+.swal2-icon.swal2-success [class^=swal2-success-circular-line][class$=right] {
+    top: -0.6875em;
+    left: 1.875em;
+    transform: rotate(-45deg);
+    transform-origin: 0 3.75em;
+    border-radius: 0 7.5em 7.5em 0;
+}
+.swal2-icon.swal2-success [class^=swal2-success-circular-line] {
+    position: absolute;
+    width: 3.75em;
+    height: 7.5em;
+    transform: rotate(45deg);
+    border-radius: 50%;
+}
+.modal-content{
+    width:80%!important;
+}
+.swal2-icon.swal2-error.swal2-icon-show {
+    -webkit-animation: swal2-animate-error-icon .5s;
+    animation: swal2-animate-error-icon .5s;
+}
+.swal2-icon.swal2-error {
+    border-color: #f1416c;
+    color: #f1416c;
+}
+.swal2-icon.swal2-error {
+    border-color: #f27474;
+    color: #f27474;
+}
+.swal2-icon.swal2-error.swal2-icon-show .swal2-x-mark {
+    -webkit-animation: swal2-animate-error-x-mark .5s;
+    animation: swal2-animate-error-x-mark .5s;
+}
+.swal2-icon.swal2-error .swal2-x-mark {
+    position: relative;
+    flex-grow: 1;
+}
+.swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=left] {
+    left: 1.0625em;
+    transform: rotate(45deg);
+}
+.swal2-icon.swal2-error [class^=swal2-x-mark-line] {
+    background-color: rgba(241,65,108,.75);
+}
+.swal2-icon.swal2-error [class^=swal2-x-mark-line] {
+    display: block;
+    position: absolute;
+    top: 2.3125em;
+    width: 2.9375em;
+    height: 0.3125em;
+    border-radius: 0.125em;
+    background-color: #f27474;
+}
+.swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=right] {
+    right: 1em;
+    transform: rotate(-45deg);
+}
+.swal2-icon.swal2-error [class^=swal2-x-mark-line] {
+    background-color: rgba(241,65,108,.75);
+}
+.swal2-icon.swal2-error [class^=swal2-x-mark-line] {
+    display: block;
+    position: absolute;
+    top: 2.3125em;
+    width: 2.9375em;
+    height: 0.3125em;
+    border-radius: 0.125em;
+    background-color: #f27474;
+}
+.bg-active-success.active {
+    --bg-color: 80,205,137;
+    background-color: #50cd89!important;
+}
+.bg-secondary {
+    --bg-color: 228,230,239;
+}
+.rounded {
+    border-radius: 0.475rem!important;
+}
+.bg-secondary {
+    /* --bs-bg-opacity: 1; */
+    background-color: rgba(var(--bs-secondary-rgb),var(--bs-bg-opacity))!important;
+}
+
+.me-2 {
+    margin-right: 0.5rem!important;
+}
+.flex-grow-1 {
+    flex-grow: 1!important;
+}
+.h-5px {
+    height: 5px!important;
+}
+.bg-secondary {
+    --bg-color: 228,230,239;
+}
+.rounded {
+    border-radius: 0.475rem!important;
+}
+.bg-secondary {
+    --bs-bg-opacity: 1;
+    background-color: rgba(var(--bs-secondary-rgb),var(--bs-bg-opacity))!important;
+}
+</style>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<div>
+    <partial name="_Header" />
+    <div id="body-pd" class="body-menu_close">
+        
+        <partial name="_SideNavBar" />
+        <div class="height-100 bg-light padding-top-4">
+            <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+                <div class="post d-flex flex-column-fluid" id="kt_post">
+                    <div id="kt_content_container" class="container-l">
+                        <div class="d-flex flex-column flex-xl-row">
+                            <div class="flex-column flex-lg-row-auto  w-xl-350px mb-10">
+                                <div >
+
+                                    
+
+                                <div class="card mb-5 mb-xl-8">
+                                    <div class="card-body pt-15">
+                                        <div class="d-flex flex-center flex-column mb-5">
+                                            <div class="d-flex flex-center flex-column mb-5">
+                            <!--begin::Avatar-->
+                            <!--begin::Input group-->
+                            <div class="mb-7">
+                                <!--begin::Label-->
+                                <label class="fs-6 fw-bold mb-2">
+                                    <span>Profile Image</span>
+                                    <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="" data-bs-original-title="Allowed file types: png, jpg, jpeg." aria-label="Allowed file types: png, jpg, jpeg."></i>
+                                </label>
+                                <!--end::Label-->
+                                <!--begin::Image input wrapper-->
+                                <div class="mt-1">
+                                    <!--begin::Image input-->
+                                    <div class="image-input image-input-outline" data-kt-image-input="true">
+                                        <!--begin::Preview existing avatar-->
+                                        <div class=" w-125px h-125px"  id="PhotoIMG"><img src="@profileSource"  style="width : inherit; height:inherit" alt="User" id="user-profile-img" /></div>
+                                        <!--end::Preview existing avatar-->
+                                        <!--begin::Edit-->
+                                        <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="" data-bs-original-title="Change Profile Photo">
+                                            <i class="bi bi-pencil-fill fs-7"></i>
+                                            <!--begin::Inputs-->
+                                            <input type="file" name="avatar" id="f_uploadImage" accept=".png, .jpg, .jpeg, .webp" size="500" data-h="125" data-w="125"  data-aws="true" data-lambda="true" data-call="saveVendorUser" onchange=" readURL(this);"> 
+                                            <input type="hidden" name="avatar_remove">
+                                            <!--end::Inputs-->
+                                        </label>
+                                        <!--end::Edit-->
+                                        <!--begin::Cancel-->
+                                        
+                                        <!--end::Cancel-->
+                                        <!--begin::Remove-->
+                                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" onclick="    removeProfilePic();" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="" data-bs-original-title="Remove Profile Photo">
+                                            <i class="bi bi-x fs-2" ></i>
+                                            
+                                        </span>
+                                        <!--end::Remove-->
+                                    </div>
+                                    <!--end::Image input-->
+                                </div>
+                                <!--end::Image input wrapper-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--end::Avatar-->
+                            <!--begin::Name-->
+                            <a href="javascript:void(0);" class="fs-3 text-gray-800 text-hover-primary fw-bolder mb-1 profile-name">qwertys</a>
+                            <!--end::Name-->
+                            <!--begin::Position-->
+                            <div class="fs-5 fw-bold text-muted mb-6 profile-mobile"></div>
+                            <!--end::Position-->
+                            <!--begin::Info-->
+                            <div class="d-flex flex-wrap flex-center">
+                                <!--begin::Stats-->
+                                <div class="border border-gray-300 border-dashed rounded py-3 px-3 mb-3">
+                                    <div class="fw-bold text-muted">(Best if 125 x 125 px)</div>
+                                </div>
+                                <!--end::Stats-->
+                            </div>
+                            <!--end::Info-->
+                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                                
+                            </div>
+                            <div class="flex-lg-row-fluid ms-lg-15">
+                                <div class="d-lg-flex justify-content-between">
+                                    <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-bold mb-8">
+                                        <li class="nav-item">
+                                            <a class="nav-link text-active-primary pb-4 fs-5 active" data-bs-toggle="tab" href="#kt_customer_view_overview_tab" onclick="showSave();">Profile</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link text-active-primary pb-4 fs-5" data-bs-toggle="tab" href="#kt_customer_view_overview_custom_fields" onclick="emptyPassword()">Reset Password</a>
+                                        </li>
+                                    </ul>
+                                    <div class="align-self-center ms-auto mb-4 text-end">
+                                        <button id="kt_user_profile_details_submit" type="button" class="btn btn-sm btn-primary" onclick=" return updateProfileDetails();"> 
+                                            <span class="indicator-label" id="save_profile_btn">
+                                                Save
+                                            </span>
+                                            <span class="indicator-hide" id="progress_profile_btn">
+                                                Please wait... 
+                                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                            </span>
+                                        </button>
+                                        <button id="kt_password_submit" type="button" class="btn btn-sm btn-primary" style="display: none;" onclick="    return updatePasswordDetails();">
+                                            <span class="indicator-label" id="save_profile_btn">
+                                                Save
+                                            </span>
+                                            <span class="indicator-hide" id="progress_profile_btn">
+                                                Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                            </span>
+                                        </button>
+                                    </div> 
+                                </div>
+                                <div class="tab-content" id="myTabContent">
+                                    <div class="tab-pane fade active show" id="kt_customer_view_overview_tab" role="tabpanel">
+                                        <div class="card mb-5 mb-xl-10">
+                                            <div id="kt_account_settings_profile_details" class="form fv-plugins-bootstrap5 fv-plugins-framework" novalidate="novalidate">
+                                                <div class="card-body pt-12 p-9">
+                                                    <div class="row mb-6">
+                                                        <label class="col-lg-4 col-form-label fw-bold fs-6">
+                                                            <span class="required">Name</span>
+                                                        </label>
+                                                        <div class="col-lg-8 fv-row fv-plugins-icon-container">
+                                                            <input type="text" id="Name" name="Name" value =@username class="fs-6 form-control form-control-lg form-control-solid">
+                                                            <div class="fv-plugins-message-container invalid-feedback" id="nameFeedback">
+                                                                
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="card-body  p-0 mb-7">
+                                                        <div class="d-flex flex-wrap align-items-center">
+                                                            <div id="kt_signin_email">
+                                                                <div class="fs-6 fw-bolder mb-1">Email Address
+                                                                    <span class="badge fw-bolder fs-8 px-2 py-1 ms-2 email-verify-badge badge-light-danger">Unverified</span>
+                                                                </div>
+                                                                <div class="fw-bold text-gray-600 profile-email" id="currentEmailDisplay">
+                                                                    @TempData["EmailId"].ToString()
+                                                                </div>
+                                                                <input type="email" id="currentEmailVal" hidden value="@TempData["EmailId"].ToString()" />
+                                                            </div>
+                                                            <div id="kt_signin_email_edit" class="flex-row-fluid d-none fv-plugins-bootstrap5 fv-plugins-framework">
+                                                                <div id="kt_signin_change_email" class="form" novalidate="novalidate">                                                    
+                                                                    <div class="row mb-6">
+                                                                        <div class="col-lg-6 mb-4 mb-lg-0">
+                                                                            <div class="fv-row mb-0 fv-plugins-icon-container">
+                                                                                <label for="Email" class="required form-label fs-6 fw-bolder mb-3">Enter New Email Address</label>
+                                                                                <input type="text" class="form-control form-control-lg form-control-solid" placeholder="Email Address" name="NewEmail" id="NewEmail" onchange="    return validateNewEmail();">
+                                                                                <div class="fv-plugins-message-container invalid-feedback" id="newEmailFeedback"> </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-6">
+                                                                            <div class="fv-row mb-0 fv-plugins-icon-container">
+
+
+                                                                                <label for="ProfilePassword" class="required form-label fs-6 fw-bolder mb-3">Confirm Current Password</label>
+                                                                                <div class="position-relative mb-3">
+                                                                                    <input type="password" class="form-control form-control-lg form-control-solid" placeholder="Confirm Current Password" name="ProfilePassword" id="ProfilePassword" readonly="" onfocus="$(this).removeAttr('readonly');" onblur="$(this).attr('readonly');" autocomplete="off">
+                                                                                    <div></div>
+                                                                                    <span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2" onclick="showPassword(this)">
+                                                                                        <i class="bi bi-eye-slash fs-5"></i>
+                                                                                    </span>
+                                                                                </div> 
+                                                                            <div class="fv-plugins-message-container invalid-feedback">
+                                                                            </div>
+                                                                        </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="d-flex">
+                                                                        <button id="kt_signin_submit" type="button" class="btn btn-primary me-2 px-6" onclick="    return updateEmail();">
+                                                                            <span class="indicator-label">Update Email</span>
+                                                                            <span class="indicator-progress">
+                                                                                Please wait...
+                                                                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                                                            </span>
+                                                                        </button>
+                                                                        <button id="kt_signin_cancel" onclick="    edit_email();" type="button" class="btn btn-color-gray-400 btn-active-light-primary px-6">Cancel</button>
+                                                                    </div>
+                                                                </div> 
+                                                            </div>
+                                                            <div id="kt_signin_email_button" class="ms-auto">
+                                                                <button class="btn btn-light btn-active-light-primary mx-3" id="btnChangeEmail" onclick="    edit_email();">
+                                                                    Change Email
+                                                                </button>
+                                                                <button type="button" class="btn btn-primary my-4" id="btnVerifyEmail" onclick="sendEmailVerificationCode();">
+                                                                    <span class="indicator-label">Verify Email !</span>
+                                                                    <span class="indicator-progress">
+                                                                        Please wait...
+                                                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                                                    </span>
+                                                                </button>
+                                                            </div>
+                                             
+                                                        </div>
+                                                        <div class="email-check mb-4" style="display:none;">
+                                                            <div class="d-flex justify-content-end">
+                                                                <div class="col-8">
+                                                                    <input type="text" maxlength="10" name="EmailVerificationCode" id="EmailVerificationCode" class=" col-lg-4 fs-6 form-control form-control-lg form-control-solid" placeholder="Verification Code">
+                                                                    <div class="text-end">
+                                                                        <button type="button" class="btn btn-primary my-4 btn-verify-email" onclick="VerifyEmail();">
+                                                                            <span class="indicator-label">Verify</span>
+                                                                            <span class="indicator-progress">
+                                                                                Please wait...
+                                                                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                                                            </span>
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="kt_customer_view_overview_custom_fields" role="tabpanel">
+                                        <div class="card  mb-6 mb-xl-9">
+                                            <div class="card-body p-9">
+                                                <div id="kt_signin_change_password" class="form fv-plugins-bootstrap5 fv-plugins-framework" novalidate="novalidate">
+                                                    <div class="fv-row mb-10 fv-plugins-icon-container">
+                                                        <label class="required form-label fs-6 mb-2">Current Password</label>
+                                                        <div class="position-relative mb-3">
+                                                            <input class="form-control form-control-lg form-control-solid" type="password" placeholder="" onchange="    return checkNewPasswordwithCurrent();" id="CurrentPassword" name="CurrentPassword" autocomplete="off" onfocus="$(this).removeAttr('readonly');" onblur="$(this).attr('readonly');">
+                                                            <div></div>
+                                                            <span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2" onclick="showPassword(this)">
+                                                                <i class="bi bi-eye-slash fs-5"></i>
+                                                            </span>
+                                                        </div>
+                                                        <div class="fv-plugins-message-container invalid-feedback" id="currentPasswordFeedback">
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-10 fv-row fv-plugins-icon-container" data-kt-password-meter="true">
+                                                        <div class="mb-1">
+                                                            <label class="form-label fw-bold fs-6 mb-2 required">
+                                                                New Password
+                                                            </label>
+                                                            <div class="position-relative mb-3">
+                                                                <input class="form-control form-control-lg form-control-solid" type="password" placeholder="" id="NewPassword" onchange="    return validateNewPassword();" name="NewPassword" autocomplete="off" onfocus="$(this).removeAttr('readonly');" onblur="$(this).attr('readonly');">
+                                                                <div></div>
+                                                                <span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2" onclick="showPassword(this)">
+                                                                    <i class="bi bi-eye-slash fs-5"></i>
+                                                                </span>
+                                                            </div>
+                                                            <div class="d-flex align-items-center mb-3" data-kt-password-meter-control="highlight" id="passwordHighlight">
+                                                                <div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
+                                                                <div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
+                                                                <div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
+                                                                <div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="text-muted">
+                                                            Use 8 or more characters.
+                                                        </div>
+                                                        <div class="fv-plugins-message-container invalid-feedback" id="newPasswordFeedback">
+                                                        </div>
+                                                    </div>
+                                                    <div class="fv-row mb-10 fv-plugins-icon-container">
+                                                        <label class="form-label fw-bold fs-6 mb-2 required">Confirm New Password</label>
+                                                        <div class="position-relative mb-3">
+                                                            <input class="form-control form-control-lg form-control-solid" onchange="    return checkBothPasswordsMatch();" type="password" placeholder="" id="ConfirmPassword" name="ConfirmPassword" autocomplete="off" onfocus="$(this).removeAttr('readonly');" onblur="$(this).attr('readonly');">
+                                                            <div></div>
+                                                            <span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2" onclick="showPassword(this)">
+                                                                <i class="bi bi-eye-slash fs-5"></i>
+                                                            </span>
+                                                        </div>
+                                                        <div class="fv-plugins-message-container invalid-feedback" id="confirmPassFeedback">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="swal2-icon swal2-success swal2-icon-show" style="display: flex;">
+                    <div class="swal2-success-circular-line-left" style="background-color: rgb(255, 255, 255);">
+                    </div>
+                    <span class="swal2-success-line-tip"></span> <span class="swal2-success-line-long"></span>
+                    <div class="swal2-success-ring">
+                    </div>
+                    <div class="swal2-success-fix" style="background-color: rgb(255, 255, 255);">
+                    </div>
+                    <div class="swal2-success-circular-line-right" style="background-color: rgb(255, 255, 255);">
+                    </div>
+                </div>
+                <div class="swal2-html-container" style="display: block; text-align: center;">
+                    Saved successfully.
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnCloseModal"  onclick="    $('#successModal').modal('hide'); location.reload();" >Okay</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="swal2-icon swal2-error swal2-icon-show" style="display: flex;">
+                    <span class="swal2-x-mark">
+                        <span class="swal2-x-mark-line-left"></span>
+                        <span class="swal2-x-mark-line-right"></span>
+                    </span>
+                </div>
+                <div class="swal2-html-container" id="swal2-html-container" style="display: block; text-align: center;">
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" id="btnCloseModalErr" onclick="    $('#errorModal').modal('hide'); $('#swal2-html-container').text = '';return true;">Okay</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script type="text/javascript">
+
+    function readURL(input) {
+        var _URL = window.URL || window.webkitURL;
+        var file, img;
+        if ((file = input.files[0])) {
+            img = new Image();
+            img.onload = function () {
+                uploadImage(file);
+            };
+            img.onerror = function () {
+                alert("Not a valid file:" + file.type);
+            };
+            img.src = _URL.createObjectURL(file);
+        }
+
+    }
+    
+    function uploadImage(file) {
+        var currentImage = $("#headerProfilePic").attr('src');
+        var currentImageSplit = currentImage.trim().split('/');
+        var path = "";
+        for(var j = 0;j<currentImageSplit.length-1;j++){
+            path+= (currentImageSplit[j] + '/')
+        }
+        console.log(path);
+        var formData = new FormData();
+        var uploadImage = $('#f_uploadImage').get(0)
+        var files=  uploadImage.files
+        for(var i =0;i<files.length;i++){
+            formData.append('file', files[i]);
+        }
+        $.ajax({
+            type: 'post',
+            url: '/Home/uploadProfilePic',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (returnData) {
+                if (returnData.status) {
+                    $("#successModal").modal('show');
+                    returnVal = true;
+                    $("#headerProfilePic").attr('src' ,path + returnData.ProfilePic);
+                    $("#user-profile-img").attr('src' ,path + returnData.ProfilePic);
+                    $("#user-img-dropdown").attr('src' ,path + returnData.ProfilePic);
+                }
+                else {
+                    $("#swal2-html-container").textContent  = returnData.errorMsg
+                    $("#errorModal").modal('show'); 
+                }
+            },
+            error: function () {
+                $("#swal2-html-container").html('Oops! Something went wrong');
+                $("#errorModal").modal('show');
+            }
+        });
+    }
+    function removeProfilePic() {
+        var currentImage = $("#headerProfilePic").attr('src');
+        var currentImageSplit = currentImage.trim().split('/');
+        var path = "";
+        for(var j = 0;j<currentImageSplit.length-1;j++){
+            path+= (currentImageSplit[j] + '/')
+        }
+        $.ajax({
+            type: 'post',
+            url: '/Home/removeProfilePic',
+            processData: false,
+            contentType: false,
+            success: function (returnData) {
+                if (returnData.status) {
+                    $("#successModal").modal('show');
+                    returnVal = true;
+                    $("#headerProfilePic").attr('src' ,path + "blank.png");
+                    $("#user-profile-img").attr('src' ,path + "blank.png");
+                    $("#user-img-dropdown").attr('src' ,path + "blank.png");
+                }
+                else {
+                    $("#swal2-html-container").textContent  = returnData.errorMsg
+                    $("#errorModal").modal('show'); 
+                }
+            },
+            error: function () {
+                $("#swal2-html-container").html('Oops! Something went wrong');
+                $("#errorModal").modal('show');
+            }
+        });
+    }
+
+    function edit_email() 
+    { 
+        var t = document.getElementById("kt_signin_email"), 
+        e = document.getElementById("kt_signin_email_edit"), 
+        i = document.getElementById("kt_signin_email_button");
+        t.classList.toggle("d-none"), i.classList.toggle("d-none"), e.classList.toggle("d-none")
+        $('#NewEmail').val("");
+        $('#ProfilePassword').val("");
+    }
+
+    function emptyPassword() {
+        $("#CurrentPassword").val('');
+        $("#NewPassword").val('');
+        $("#ConfirmPassword").val('');
+        $("#kt_user_profile_details_submit").hide();
+        $("#kt_password_submit").show();
+    }
+    function showSave() {
+        $("#kt_user_profile_details_submit").show();
+        $("#kt_password_submit").hide();
+            
+    }
+    function showPassword(elem) {
+        if ($(elem).prev().prev().attr('type') == 'password') {
+            $(elem).prev().prev().attr('type', 'text');
+            $(elem).find('i').removeClass('bi-eye-slash').addClass('bi-eye');
+        }
+        else {
+            $(elem).prev().prev().attr('type', 'password');
+            $(elem).find('i').removeClass('bi-eye').addClass('bi-eye-slash');
+        }
+    }
+   function checkName(){
+   
+       var Name =  $("#Name").val();
+       if(Name == ""){
+           $("#nameFeedback").html("Name is a required field");
+           return false;
+       }
+       else{
+           $("#nameFeedback").html("");
+           return true;
+       }
+   }
+    
+    function updateProfileDetails(){
+        var nameCheckFlag = checkName();
+        if (!nameCheckFlag) {
+            return false;
+        }
+        returnVal = false;
+        displayToggle("#save_profile_btn")
+                    displayToggle("#progress_profile_btn")
+        $.ajax({
+            url: '/Home/updateProfileDetails',
+            type: 'POST',
+            async: false,
+            cache: false,
+            data: { Name: $("#Name").val() },
+            success: function (returnData) {
+                if(returnData.status) {
+                    $("#successModal").modal('show');
+                    returnVal = true;
+                }
+                else {
+                    $("#swal2-html-container").textContent  = returnData.errorMsg
+                    $("#errorModal").modal('show'); 
+                }
+            },
+             error: function() { 
+                $("#swal2-html-container").html('Oops! Something went wrong');
+                $("#errorModal").modal('show');
+             }
+        });
+        displayToggle("#save_profile_btn")
+        displayToggle("#progress_profile_btn")
+        return returnVal;
+    }
+
+    function checkNewPasswordwithCurrent() {
+        var currPassword = $("#CurrentPassword").val();
+        var newPassword = $("#NewPassword").val();
+        if (currPassword == "") {
+            $("#currentPasswordFeedback").html("Current Password can not be blank");
+            return false;
+        }
+        if (newPassword != "") {
+            if (newPassword == currPassword){
+                $("#newPasswordFeedback").html("New Password can not be Same as Current Password");
+                return false;
+            }
+            else {
+                $("#currentPasswordFeedback").html("");
+                return true;
+            }
+        }
+        else {
+            $("#currentPasswordFeedback").html("");
+            return true;
+        }
+    }
+    function validateNewPassword() { 
+        var newPassword = $("#NewPassword").val();
+        var conPassword = $("#ConfirmPassword").val();
+        var currPassword = $("#CurrentPassword").val();
+        if(newPassword==""){
+            $("#newPasswordFeedback").html("New Password can not be blank");
+            return false;
+        }
+        else{
+            if (newPassword.length >= 8) {
+                 $("#passwordHighlight").children().addClass('active');
+                 
+            }
+            else { 
+                $("#passwordHighlight").children().removeClass('active');
+                $("#newPasswordFeedback").html("New Password Length can not be less than 8");
+                 return false;
+            }
+            if (newPassword == currPassword){
+                $("#newPasswordFeedback").html("New Password can not be Same as Current Password");
+                return false;
+            }
+            else {
+                $("#newPasswordFeedback").html("");
+                if (conPassword != "") {
+                    var checkConandNewMatchFlag = checkBothPasswordsMatch();
+                    return checkConandNewMatchFlag;
+                     
+                }
+                else{
+                     
+                    return true;
+                }
+            }
+        } 
+    }
+    function checkBothPasswordsMatch() {
+
+        var newPassword = $("#NewPassword").val();
+        var conPassword = $("#ConfirmPassword").val();
+        if (conPassword == "") {
+            $("#confirmPassFeedback").html("Confirm Password can not be blank");
+            $("#confirmPassFeedback").focus();
+            return false;
+        }
+        if (newPassword != conPassword) {
+            $("#confirmPassFeedback").html("Confirm Password and New Password does not match");
+            $("#confirmPassFeedback").focus();
+            return false;
+        }
+        else {
+            $("#confirmPassFeedback").html("");
+            return true;
+        }
+    }
+    function validatePasswordChange() { 
+        var returnVal=false;
+        var retValCurr = checkNewPasswordwithCurrent();
+        var retValNew = validateNewPassword()
+        var retValCon = checkBothPasswordsMatch();
+
+        returnVal = retValCurr & retValNew & retValCon;
+        return returnVal;
+    }
+    function updatePasswordDetails(){
+        var returnVal=false;
+        var passwordCheck = validatePasswordChange()
+        if (!passwordCheck)
+            return passwordCheck;
+            displayToggle("#spinnerSpan")
+        displayToggle("#continueButton")
+        var obj = {};
+        obj.newPassword = $("#NewPassword").val();
+        obj.currPassword = $("#CurrentPassword").val();
+        $.ajax({
+            url: '/Home/updatePasswordDetails',
+            type: 'POST',
+            async: false,
+            cache: false,
+            data: JSON.stringify(obj),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (returnData) {
+                console.log(returnData)
+                if(returnData.status) {
+                    $("#successModal").modal('show');
+                    emptyPassword();
+                    returnVal = true;
+                }
+                else {
+                    $("#swal2-html-container").html(returnData.errorMsg);
+                    $("#errorModal").modal('show');
+                    
+                }
+            },
+             error: function() { 
+                 $("#swal2-html-container").html('Oops! Something went wrong');
+                $("#errorModal").modal('show');
+             }
+        });
+        displayToggle("#spinnerSpan")
+        displayToggle("#continueButton")
+        return returnVal;
+    }
+    function validateNewEmail() { 
+        var currentEmailVal = $("#currentEmailVal").val();
+        var newEmail = $("#NewEmail").val();
+        var validateEmailCheck = ValidateEmail(newEmail);
+        if (validateEmailCheck) {
+
+            if (currentEmailVal == newEmail) {
+                $("#newEmailFeedback").html("New Email can not be Same as Current Email");
+                return false;
+            }
+            else{
+                $("#newEmailFeedback").html("");
+                return true;
+            }
+        }
+        else{
+            $("#newEmailFeedback").html("New Email is not in proper format");
+            return false;
+        }
+
+    }
+    function updateEmail(){
+        var newEmail = $("#NewEmail").val();
+        var currPassword = $("#ProfilePassword").val();
+        var validateEmailCheck = validateNewEmail();
+        if (validateEmailCheck) {
+            var obj = {};
+            obj.newEmail = newEmail;
+            obj.currentPassword = currPassword;
+            $.ajax({
+            url: '/Home/updateEmail',
+            type: 'POST',
+            async: false,
+            cache: false,
+            data: JSON.stringify(obj),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (returnData) {
+                if(returnData.status) {
+                    $("#successModal").modal('show');
+                    $("#currentEmailVal").val = newEmail;
+                    $("#currentEmailDisplay").html(newEmail);
+                    edit_email()
+                    returnVal = true;
+                }
+                else {
+                    $("#swal2-html-container").html(returnData.errorMsg);
+                    $("#errorModal").modal('show');
+                }
+            },
+             error: function() { 
+                 $("#swal2-html-container").html('Oops! Something went wrong');
+                $("#errorModal").modal('show');
+             }
+        });
+        }
+        else{
+            return false;
+        }
+        
+    }
+</script>
