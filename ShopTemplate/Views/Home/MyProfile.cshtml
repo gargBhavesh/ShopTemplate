@@ -1,16 +1,17 @@
 ﻿
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "User Profile | Shopivana";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
 
-    string username = "",profilePic="";
+    string username = "",profilePic="",emailId="";
     
     if (TempData.ContainsKey("UserName"))
     {
         if (!(TempData["UserName"] is null)) {
             username = TempData["UserName"].ToString();
             profilePic = TempData["ProfilePic"].ToString();
+            emailId = TempData["EmailId"].ToString();
         }
     }
     if (profilePic == "")
@@ -19,270 +20,45 @@
     }
     string profileSource = "/Images/ProfilePic/" + profilePic;
     
-
-}
-<style >
-    .modal-footer{
-        justify-content: center !important;
-    }
-    .padding-top-4{
-    padding-top: 4em !important;
-        }
-    .text-gray-800 {
-    color: #3f4254!important;
-        }
-.text-hover-primary {
-    transition: color .2s ease,background-color .2s ease;
-}
-.fw-bolder {
-    font-weight: 600!important;
-}
-.fw-mild{
-    font-weight : 500!important;
-    font-size : 14px;
-}
-.fs-3 {
-    font-size: calc(1rem + .12vw)!important;
-}
-.mb-1 {
-    margin-bottom: 0.25rem!important;
-}
-.indicator-hide {
-    display: none;
+     
 }
 
-.swal2-icon.swal2-success {
-    border-color: #50cd89;
-    color: #50cd89;
-}
-.swal2-icon.swal2-success {
-    border-color: #a5dc86;
-    color: #a5dc86;
-}
-[class^=swal2] {
-    -webkit-tap-highlight-color: transparent;
-}
-.swal2-icon {
-    position: relative;
-    box-sizing: content-box;
-    justify-content: center;
-    width: 5em;
-    height: 5em;
-    margin: 1.5em auto 2em;
-    border: 0.25em solid transparent;
-    border-radius: 50%;
-    border-color: #000;
-    font-family: inherit;
-    line-height: 5em;
-    cursor: default;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-.swal2-icon.swal2-success [class^=swal2-success-circular-line][class$=left] {
-    top: -0.4375em;
-    left: -2.0635em;
-    transform: rotate(-45deg);
-    transform-origin: 3.75em 3.75em;
-    border-radius: 7.5em 0 0 7.5em;
-}
-.swal2-icon.swal2-success [class^=swal2-success-circular-line] {
-    position: absolute;
-    width: 3.75em;
-    height: 7.5em;
-    transform: rotate(45deg);
-    border-radius: 50%;
-}
-[class^=swal2] {
-    -webkit-tap-highlight-color: transparent;
-}
-.swal2-icon.swal2-success.swal2-icon-show .swal2-success-line-tip {
-    -webkit-animation: swal2-animate-success-line-tip .75s;
-    animation: swal2-animate-success-line-tip .75s;
-}
-.swal2-icon.swal2-success [class^=swal2-success-line][class$=tip] {
-    top: 2.875em;
-    left: 0.8125em;
-    width: 1.5625em;
-    transform: rotate(45deg);
-}
-.swal2-icon.swal2-success [class^=swal2-success-line] {
-    background-color: #50cd89;
-}
-.swal2-icon.swal2-success [class^=swal2-success-line] {
-    display: block;
-    position: absolute;
-    z-index: 2;
-    height: 0.3125em;
-    border-radius: 0.125em;
-    background-color: #a5dc86;
-}
-[class^=swal2] {
-    -webkit-tap-highlight-color: transparent;
-}
-.swal2-icon.swal2-success.swal2-icon-show .swal2-success-line-long {
-    -webkit-animation: swal2-animate-success-line-long .75s;
-    animation: swal2-animate-success-line-long .75s;
-}
-.swal2-icon.swal2-success [class^=swal2-success-line][class$=long] {
-    top: 2.375em;
-    right: 0.5em;
-    width: 2.9375em;
-    transform: rotate(-45deg);
-}
-.swal2-icon.swal2-success .swal2-success-ring {
-    border-color: rgba(80,205,137,.3);
-}
-.swal2-icon.swal2-success .swal2-success-ring {
-    position: absolute;
-    z-index: 2;
-    top: -0.25em;
-    left: -0.25em;
-    box-sizing: content-box;
-    width: 100%;
-    height: 100%;
-    border: 0.25em solid rgba(165,220,134,.3);
-    border-radius: 50%;
-}
-.swal2-icon.swal2-success .swal2-success-fix {
-    position: absolute;
-    z-index: 1;
-    top: 0.5em;
-    left: 1.625em;
-    width: 0.4375em;
-    height: 5.625em;
-    transform: rotate(-45deg);
-}
-.swal2-icon.swal2-success.swal2-icon-show .swal2-success-circular-line-right {
-    -webkit-animation: swal2-rotate-success-circular-line 4.25s ease-in;
-    animation: swal2-rotate-success-circular-line 4.25s ease-in;
-}
-.swal2-icon.swal2-success [class^=swal2-success-circular-line][class$=right] {
-    top: -0.6875em;
-    left: 1.875em;
-    transform: rotate(-45deg);
-    transform-origin: 0 3.75em;
-    border-radius: 0 7.5em 7.5em 0;
-}
-.swal2-icon.swal2-success [class^=swal2-success-circular-line] {
-    position: absolute;
-    width: 3.75em;
-    height: 7.5em;
-    transform: rotate(45deg);
-    border-radius: 50%;
-}
-.modal-content{
-    width:80%!important;
-}
-.swal2-icon.swal2-error.swal2-icon-show {
-    -webkit-animation: swal2-animate-error-icon .5s;
-    animation: swal2-animate-error-icon .5s;
-}
-.swal2-icon.swal2-error {
-    border-color: #f1416c;
-    color: #f1416c;
-}
-.swal2-icon.swal2-error {
-    border-color: #f27474;
-    color: #f27474;
-}
-.swal2-icon.swal2-error.swal2-icon-show .swal2-x-mark {
-    -webkit-animation: swal2-animate-error-x-mark .5s;
-    animation: swal2-animate-error-x-mark .5s;
-}
-.swal2-icon.swal2-error .swal2-x-mark {
-    position: relative;
-    flex-grow: 1;
-}
-.swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=left] {
-    left: 1.0625em;
-    transform: rotate(45deg);
-}
-.swal2-icon.swal2-error [class^=swal2-x-mark-line] {
-    background-color: rgba(241,65,108,.75);
-}
-.swal2-icon.swal2-error [class^=swal2-x-mark-line] {
-    display: block;
-    position: absolute;
-    top: 2.3125em;
-    width: 2.9375em;
-    height: 0.3125em;
-    border-radius: 0.125em;
-    background-color: #f27474;
-}
-.swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=right] {
-    right: 1em;
-    transform: rotate(-45deg);
-}
-.swal2-icon.swal2-error [class^=swal2-x-mark-line] {
-    background-color: rgba(241,65,108,.75);
-}
-.swal2-icon.swal2-error [class^=swal2-x-mark-line] {
-    display: block;
-    position: absolute;
-    top: 2.3125em;
-    width: 2.9375em;
-    height: 0.3125em;
-    border-radius: 0.125em;
-    background-color: #f27474;
-}
-.bg-active-success.active {
-    --bg-color: 80,205,137;
-    background-color: #50cd89!important;
-}
-.bg-secondary {
-    --bg-color: 228,230,239;
-}
-.rounded {
-    border-radius: 0.475rem!important;
-}
-.bg-secondary {
-    /* --bs-bg-opacity: 1; */
-    background-color: rgba(var(--bs-secondary-rgb),var(--bs-bg-opacity))!important;
-}
+<body id="kt_body" data-kt-aside-minimize="off" class="header-fixed header-tablet-and-mobile-fixed aside-enabled aside-fixed " style="">
 
-.me-2 {
-    margin-right: 0.5rem!important;
-}
-.flex-grow-1 {
-    flex-grow: 1!important;
-}
-.h-5px {
-    height: 5px!important;
-}
-.bg-secondary {
-    --bg-color: 228,230,239;
-}
-.rounded {
-    border-radius: 0.475rem!important;
-}
-.bg-secondary {
-    --bs-bg-opacity: 1;
-    background-color: rgba(var(--bs-secondary-rgb),var(--bs-bg-opacity))!important;
-}
-</style>
-
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-<div>
-    <partial name="_Header" />
-    <div id="body-pd" class="body-menu_close">
-        
-        <partial name="_SideNavBar" />
-        <div class="height-100 bg-light padding-top-4">
-            <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-                <div class="post d-flex flex-column-fluid" id="kt_post">
-                    <div id="kt_content_container" class="container-l">
-                        <div class="d-flex flex-column flex-xl-row">
-                            <div class="flex-column flex-lg-row-auto  w-xl-350px mb-10">
-                                <div >
-
-                                    
-
-                                <div class="card mb-5 mb-xl-8">
-                                    <div class="card-body pt-15">
-                                        <div class="d-flex flex-center flex-column mb-5">
-                                            <div class="d-flex flex-center flex-column mb-5">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5SRRMXB" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <!--begin::Main-->
+    <!--begin::Root-->
+    <div class="d-flex flex-column flex-root" id="kt_body1">
+        <!--begin::Page-->
+        <div class="page d-flex flex-row flex-column-fluid">
+            <!--begin::Aside-->
+            
+            <partial name="_SideNavBar" />
+            <!--end::Aside-->
+            <!--begin::Wrapper-->
+            <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
+                <!--begin::Header-->
+                <partial name="_Header" />
+                <!--end::Header-->
+                <!--begin::Content-->
+                <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+                    <!--begin::Post-->
+                    
+<!--begin::Post-->
+<div class="post d-flex flex-column-fluid" id="kt_post">
+    <div id="kt_content_container" class="container-xxl">
+        <!--begin::Layout-->
+        <div class="d-flex flex-column flex-xl-row">
+            <!--begin::Sidebar-->
+            <div class="flex-column flex-lg-row-auto w-100 w-xl-350px mb-10">
+                <!--begin::Card-->
+                <div class="card mb-5 mb-xl-8">
+                    <!--begin::Card body-->
+                    <div class="card-body pt-15">
+                        <!--begin::Summary-->
+                        <div class="d-flex flex-center flex-column mb-5">
                             <!--begin::Avatar-->
                             <!--begin::Input group-->
                             <div class="mb-7">
@@ -295,26 +71,39 @@
                                 <!--begin::Image input wrapper-->
                                 <div class="mt-1">
                                     <!--begin::Image input-->
-                                    <div class="image-input image-input-outline" data-kt-image-input="true">
+                                    <div class="image-input image-input-outline">
+                                        @{
+                                                if(profilePic=="" || profilePic=="blank.png"){
+                                                            <div class="image-input-wrapper w-125px h-125px" style="background-image: none;" id="PhotoIMG">
+                                                    
+                                                            </div>
+                                                }
+                                                else{
+                                                            <div class="image-input-wrapper w-125px h-125px" style="background-image: url('@profileSource');" id="PhotoIMG" >
+                                                    
+                                                            </div>
+                                                }
+                                            }
                                         <!--begin::Preview existing avatar-->
-                                        <div class=" w-125px h-125px"  id="PhotoIMG"><img src="@profileSource"  style="width : inherit; height:inherit" alt="User" id="user-profile-img" /></div>
+                                        
                                         <!--end::Preview existing avatar-->
                                         <!--begin::Edit-->
                                         <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="" data-bs-original-title="Change Profile Photo">
                                             <i class="bi bi-pencil-fill fs-7"></i>
                                             <!--begin::Inputs-->
-                                            <input type="file" name="avatar" id="f_uploadImage" accept=".png, .jpg, .jpeg, .webp" size="500" data-h="125" data-w="125"  data-aws="true" data-lambda="true" data-call="saveVendorUser" onchange=" readURL(this);"> 
+                                            <input type="file" name="avatar" id="f_uploadImage" accept=".png, .jpg, .jpeg, .webp" size="500" data-h="125" data-w="125" onchange=" readURL(this);"  >
                                             <input type="hidden" name="avatar_remove">
                                             <!--end::Inputs-->
                                         </label>
                                         <!--end::Edit-->
                                         <!--begin::Cancel-->
-                                        
+                                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="" data-bs-original-title="Cancel Profile Photo">
+                                            <i class="bi bi-x fs-2"></i>
+                                        </span>
                                         <!--end::Cancel-->
                                         <!--begin::Remove-->
                                         <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" onclick="    removeProfilePic();" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="" data-bs-original-title="Remove Profile Photo">
-                                            <i class="bi bi-x fs-2" ></i>
-                                            
+                                            <i class="bi bi-x fs-2"></i>
                                         </span>
                                         <!--end::Remove-->
                                     </div>
@@ -325,7 +114,7 @@
                             <!--end::Input group-->
                             <!--end::Avatar-->
                             <!--begin::Name-->
-                            <a href="javascript:void(0);" class="fs-3 text-gray-800 text-hover-primary fw-bolder mb-1 profile-name">qwertys</a>
+                            <a href="javascript:void(0);" class="fs-3 text-gray-800 text-hover-primary fw-bolder mb-1 profile-name">@username</a>
                             <!--end::Name-->
                             <!--begin::Position-->
                             <div class="fs-5 fw-bold text-muted mb-6 profile-mobile"></div>
@@ -340,200 +129,396 @@
                             </div>
                             <!--end::Info-->
                         </div>
-                                        </div>
+                        <!--end::Summary-->
+                        <!-- <div class="separator separator-dashed my-3"></div> -->
+                    </div>
+                    <!--end::Card body-->
+                </div>
+                <!--end::Card-->
+            </div>
+            <!--end::Sidebar-->
+            <!--begin::Content-->
+            <div class="flex-lg-row-fluid ms-lg-15">
+                <div class="d-lg-flex justify-content-between">
+                    <!--begin:::Tabs-->
+                    <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-bold mb-8">
+                        <!--begin:::Tab item-->
+                        <li class="nav-item">
+                            <a class="nav-link text-active-primary pb-4 active fs-5" data-bs-toggle="tab" href="#kt_customer_view_overview_tab" onclick="showSave();">Profile</a>
+                        </li>
+                        <!--end:::Tab item-->
+                        <!--begin:::Tab item-->
+                        <li class="nav-item">
+                            <a class="nav-link text-active-primary pb-4 fs-5" data-bs-toggle="tab" href="#kt_customer_view_overview_custom_fields" onclick="emptyPassword()">Reset Password</a>
+                        </li>
+                        <!--end:::Tab item-->
+
+                    </ul>
+                    <!--end:::Tabs-->
+                    <!--begin::Card title-->
+                    <div class="align-self-center ms-auto mb-4 text-end">
+                        <button type="button" class="btn btn-sm btn-primary" id="kt_user_profile_details_submit" onclick=" return updateProfileDetails();">
+                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr012.svg-->
+                            <span class="svg-icon svg-icon-3 d-none">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path opacity="0.3" d="M10 18C9.7 18 9.5 17.9 9.3 17.7L2.3 10.7C1.9 10.3 1.9 9.7 2.3 9.3C2.7 8.9 3.29999 8.9 3.69999 9.3L10.7 16.3C11.1 16.7 11.1 17.3 10.7 17.7C10.5 17.9 10.3 18 10 18Z" fill=""></path>
+                                    <path d="M10 18C9.7 18 9.5 17.9 9.3 17.7C8.9 17.3 8.9 16.7 9.3 16.3L20.3 5.3C20.7 4.9 21.3 4.9 21.7 5.3C22.1 5.7 22.1 6.30002 21.7 6.70002L10.7 17.7C10.5 17.9 10.3 18 10 18Z" fill=""></path>
+                                </svg>
+                            </span>
+                            <!--end::Svg Icon-->
+                            <!--begin::Indicator-->
+                            <span class="indicator-label" ">Save</span>
+                            <span class="indicator-progress">
+                                Please wait...
+                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                            </span>
+                            <!--end::Indicator-->
+                        </button>
+                        <!--begin::Actions-->
+                        <button id="kt_password_submit" type="submit" class="btn btn-sm btn-primary" style="display:none;" onclick="    return updatePasswordDetails();">
+                            <span class="indicator-label">
+                                Save
+                            </span>
+                            <span class="indicator-progress">
+                                Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                            </span>
+                        </button>
+                        <!--end::Actions-->
+                    </div>
+                    <!--end::Card title-->
+                </div>
+                <!--begin:::Tab content-->
+                <div class="tab-content" id="myTabContent">
+                    <!--begin:::Tab pane-->
+                    <div class="tab-pane fade show active" id="kt_customer_view_overview_tab" role="tabpanel">
+                        <!--begin::Card-->
+                        <div class="card mb-5 mb-xl-10">
+                            <!--begin::Content-->
+                            <div id="kt_account_settings_profile_details" class="form fv-plugins-bootstrap5 fv-plugins-framework" novalidate="novalidate">
+
+                                <!--begin::Card body-->
+                                <div class="card-body pt-12 p-9">
+                                    <!--begin::Input group-->
+                                    <div class="row mb-6">
+                                        <!--begin::Label-->
+                                        <label class="col-lg-4 col-form-label fw-bold fs-6">
+                                            <span class="required">Name</span>
+                                        </label>
+                                        <!--end::Label-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-8 fv-row fv-plugins-icon-container">
+                                            <input type="text" id="Name" name="Name" value ="@username" class="fs-6 form-control form-control-lg form-control-solid">
+                                        <div class="fv-plugins-message-container invalid-feedback" id="nameFeedback"></div></div>
+                                        <!--end::Col-->
                                     </div>
-                                </div>
-                                </div>
-                                
-                            </div>
-                            <div class="flex-lg-row-fluid ms-lg-15">
-                                <div class="d-lg-flex justify-content-between">
-                                    <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-bold mb-8">
-                                        <li class="nav-item">
-                                            <a class="nav-link text-active-primary pb-4 fs-5 active" data-bs-toggle="tab" href="#kt_customer_view_overview_tab" onclick="showSave();">Profile</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link text-active-primary pb-4 fs-5" data-bs-toggle="tab" href="#kt_customer_view_overview_custom_fields" onclick="emptyPassword()">Reset Password</a>
-                                        </li>
-                                    </ul>
-                                    <div class="align-self-center ms-auto mb-4 text-end">
-                                        <button id="kt_user_profile_details_submit" type="button" class="btn btn-sm btn-primary" onclick=" return updateProfileDetails();"> 
-                                            <span class="indicator-label" id="save_profile_btn">
-                                                Save
-                                            </span>
-                                            <span class="indicator-hide" id="progress_profile_btn">
-                                                Please wait... 
-                                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
-                                            </span>
-                                        </button>
-                                        <button id="kt_password_submit" type="button" class="btn btn-sm btn-primary" style="display: none;" onclick="    return updatePasswordDetails();">
-                                            <span class="indicator-label" id="save_profile_btn">
-                                                Save
-                                            </span>
-                                            <span class="indicator-hide" id="progress_profile_btn">
-                                                Please wait... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
-                                            </span>
-                                        </button>
-                                    </div> 
-                                </div>
-                                <div class="tab-content" id="myTabContent">
-                                    <div class="tab-pane fade active show" id="kt_customer_view_overview_tab" role="tabpanel">
-                                        <div class="card mb-5 mb-xl-10">
-                                            <div id="kt_account_settings_profile_details" class="form fv-plugins-bootstrap5 fv-plugins-framework" novalidate="novalidate">
-                                                <div class="card-body pt-12 p-9">
-                                                    <div class="row mb-6">
-                                                        <label class="col-lg-4 col-form-label fw-bold fs-6">
-                                                            <span class="required">Name</span>
-                                                        </label>
-                                                        <div class="col-lg-8 fv-row fv-plugins-icon-container">
-                                                            <input type="text" id="Name" name="Name" value =@username class="fs-6 form-control form-control-lg form-control-solid">
-                                                            <div class="fv-plugins-message-container invalid-feedback" id="nameFeedback">
-                                                                
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-
-                                                    <div class="card-body  p-0 mb-7">
-                                                        <div class="d-flex flex-wrap align-items-center">
-                                                            <div id="kt_signin_email">
-                                                                <div class="fs-6 fw-bolder mb-1">Email Address
-                                                                    <span class="badge fw-bolder fs-8 px-2 py-1 ms-2 email-verify-badge badge-light-danger">Unverified</span>
-                                                                </div>
-                                                                <div class="fw-bold text-gray-600 profile-email" id="currentEmailDisplay">
-                                                                    @TempData["EmailId"].ToString()
-                                                                </div>
-                                                                <input type="email" id="currentEmailVal" hidden value="@TempData["EmailId"].ToString()" />
-                                                            </div>
-                                                            <div id="kt_signin_email_edit" class="flex-row-fluid d-none fv-plugins-bootstrap5 fv-plugins-framework">
-                                                                <div id="kt_signin_change_email" class="form" novalidate="novalidate">                                                    
-                                                                    <div class="row mb-6">
-                                                                        <div class="col-lg-6 mb-4 mb-lg-0">
-                                                                            <div class="fv-row mb-0 fv-plugins-icon-container">
-                                                                                <label for="Email" class="required form-label fs-6 fw-bolder mb-3">Enter New Email Address</label>
-                                                                                <input type="text" class="form-control form-control-lg form-control-solid" placeholder="Email Address" name="NewEmail" id="NewEmail" onchange="    return validateNewEmail();">
-                                                                                <div class="fv-plugins-message-container invalid-feedback" id="newEmailFeedback"> </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-lg-6">
-                                                                            <div class="fv-row mb-0 fv-plugins-icon-container">
-
-
-                                                                                <label for="ProfilePassword" class="required form-label fs-6 fw-bolder mb-3">Confirm Current Password</label>
-                                                                                <div class="position-relative mb-3">
-                                                                                    <input type="password" class="form-control form-control-lg form-control-solid" placeholder="Confirm Current Password" name="ProfilePassword" id="ProfilePassword" readonly="" onfocus="$(this).removeAttr('readonly');" onblur="$(this).attr('readonly');" autocomplete="off">
-                                                                                    <div></div>
-                                                                                    <span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2" onclick="showPassword(this)">
-                                                                                        <i class="bi bi-eye-slash fs-5"></i>
-                                                                                    </span>
-                                                                                </div> 
-                                                                            <div class="fv-plugins-message-container invalid-feedback">
-                                                                            </div>
-                                                                        </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="d-flex">
-                                                                        <button id="kt_signin_submit" type="button" class="btn btn-primary me-2 px-6" onclick="    return updateEmail();">
-                                                                            <span class="indicator-label">Update Email</span>
-                                                                            <span class="indicator-progress">
-                                                                                Please wait...
-                                                                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
-                                                                            </span>
-                                                                        </button>
-                                                                        <button id="kt_signin_cancel" onclick="    edit_email();" type="button" class="btn btn-color-gray-400 btn-active-light-primary px-6">Cancel</button>
-                                                                    </div>
-                                                                </div> 
-                                                            </div>
-                                                            <div id="kt_signin_email_button" class="ms-auto">
-                                                                <button class="btn btn-light btn-active-light-primary mx-3" id="btnChangeEmail" onclick="    edit_email();">
-                                                                    Change Email
-                                                                </button>
-                                                                <button type="button" class="btn btn-primary my-4" id="btnVerifyEmail" onclick="sendEmailVerificationCode();">
-                                                                    <span class="indicator-label">Verify Email !</span>
-                                                                    <span class="indicator-progress">
-                                                                        Please wait...
-                                                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
-                                                                    </span>
-                                                                </button>
-                                                            </div>
-                                             
-                                                        </div>
-                                                        <div class="email-check mb-4" style="display:none;">
-                                                            <div class="d-flex justify-content-end">
-                                                                <div class="col-8">
-                                                                    <input type="text" maxlength="10" name="EmailVerificationCode" id="EmailVerificationCode" class=" col-lg-4 fs-6 form-control form-control-lg form-control-solid" placeholder="Verification Code">
-                                                                    <div class="text-end">
-                                                                        <button type="button" class="btn btn-primary my-4 btn-verify-email" onclick="VerifyEmail();">
-                                                                            <span class="indicator-label">Verify</span>
-                                                                            <span class="indicator-progress">
-                                                                                Please wait...
-                                                                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
-                                                                            </span>
-                                                                        </button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div> 
+                                    <!--end::Input group-->
+                                    <!--begin::Card body-->
+                                    <div class="card-body  p-0 mb-7">
+                                        <!--begin::Email Address-->
+                                        <div class="d-flex flex-wrap align-items-center">
+                                            <!--begin::Label-->
+                                            <div id="kt_signin_email">
+                                                <div class="fs-6 fw-bolder mb-1">Email Address<span class="badge fw-bolder fs-8 px-2 py-1 ms-2 email-verify-badge badge-light-danger">Unverified</span></div>
+                                                <div class="fw-bold text-gray-600 profile-email" id="currentEmailDisplay">@emailId</div>
+                                                <input type="email" id="currentEmailVal" hidden value="@emailId" />
                                             </div>
+                                            <!--end::Label-->
+                                            <!--begin::Edit-->
+                                            <div id="kt_signin_email_edit" class="flex-row-fluid d-none fv-plugins-bootstrap5 fv-plugins-framework">
+                                                <!--begin::Form-->
+                                                <div id="kt_signin_change_email" class="form" novalidate="novalidate">                                                    
+                                                    <div class="row mb-6">
+                                                        <div class="col-lg-6 mb-4 mb-lg-0">
+                                                            <div class="fv-row mb-0 fv-plugins-icon-container">
+                                                                <label for="Email" class="required form-label fs-6 fw-bolder mb-3">Enter New Email Address</label>
+                                                                <input type="text" class="form-control form-control-lg form-control-solid" placeholder="Email Address" name="NewEmail" id="NewEmail" onchange="    return validateNewEmail();">
+                                                             <div class="fv-plugins-message-container invalid-feedback" id="newEmailFeedback"> </div></div>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <div class="fv-row mb-0 fv-plugins-icon-container">
+                                                                <label for="ProfilePassword" class="required form-label fs-6 fw-bolder mb-3">Confirm Current Password</label>
+                                                                <div class="position-relative mb-3">
+                                                                    <input type="password" class="form-control form-control-lg form-control-solid" placeholder="Confirm Current Password" name="ProfilePassword" id="ProfilePassword" readonly="" onfocus="$(this).removeAttr('readonly');" onblur="$(this).attr('readonly');" autocomplete="off">
+                                                                    <div></div>
+                                                                    <span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2" onclick="showPassword(this)">
+                                                                        <i class="bi bi-eye-slash fs-2"></i>
+                                                                    </span>
+                                                                </div>
+
+                                                            <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex">
+                                                        <button id="kt_signin_submit" onclick="return updateEmail();" type="button" class="btn btn-primary me-2 px-6">
+                                                            <!--begin::Indicator-->
+                                                            <span class="indicator-label">Update Email</span>
+                                                            <span class="indicator-progress">
+                                                                Please wait...
+                                                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                                            </span>
+                                                            <!--end::Indicator-->
+                                                        </button>
+                                                        <button id="kt_signin_cancel" type="button" onclick="    edit_email();" class="btn btn-color-gray-400 btn-active-light-primary px-6">Cancel</button>
+                                                    </div>
+                                                </div>
+                                                <!--end::Form-->
+                                            <div></div></div>
+                                            
+                                    
+                                            <!--end::Edit-->
+                                            <!--begin::Action-->
+                                            <div id="kt_signin_email_button" class="ms-auto">
+                                                <button class="btn btn-light btn-active-light-primary mx-3" id="btnChangeEmail" onclick="     edit_email();">Change Email</button>
+                                                <button type="button" class="btn btn-primary my-4" id="btnVerifyEmail" >
+                                                    <!--begin::Indicator-->
+                                                    <span class="indicator-label">Verify Email !</span>
+                                                    <span class="indicator-progress">
+                                                        Please wait...
+                                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                                    </span>
+                                                    <!--end::Indicator-->
+                                                </button>
+                                            </div>
+                                            <!--end::Action-->
                                         </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="kt_customer_view_overview_custom_fields" role="tabpanel">
-                                        <div class="card  mb-6 mb-xl-9">
-                                            <div class="card-body p-9">
-                                                <div id="kt_signin_change_password" class="form fv-plugins-bootstrap5 fv-plugins-framework" novalidate="novalidate">
-                                                    <div class="fv-row mb-10 fv-plugins-icon-container">
-                                                        <label class="required form-label fs-6 mb-2">Current Password</label>
-                                                        <div class="position-relative mb-3">
-                                                            <input class="form-control form-control-lg form-control-solid" type="password" placeholder="" onchange="    return checkNewPasswordwithCurrent();" id="CurrentPassword" name="CurrentPassword" autocomplete="off" onfocus="$(this).removeAttr('readonly');" onblur="$(this).attr('readonly');">
-                                                            <div></div>
-                                                            <span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2" onclick="showPassword(this)">
-                                                                <i class="bi bi-eye-slash fs-5"></i>
+                                        <div class="email-check mb-4" style="display:none;">
+                                            <div class="d-flex justify-content-end">
+                                                <div class="col-8">
+                                                    <input type="text" maxlength="10" name="EmailVerificationCode" id="EmailVerificationCode" class=" col-lg-4 fs-6 form-control form-control-lg form-control-solid" placeholder="Verification Code">
+                                                    <div class="text-end">
+                                                        <button type="button" class="btn btn-primary my-4 btn-verify-email" onclick="VerifyEmail();">
+                                                            <!--begin::Indicator-->
+                                                            <span class="indicator-label">Verify</span>
+                                                            <span class="indicator-progress">
+                                                                Please wait...
+                                                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
                                                             </span>
-                                                        </div>
-                                                        <div class="fv-plugins-message-container invalid-feedback" id="currentPasswordFeedback">
-                                                        </div>
-                                                    </div>
-                                                    <div class="mb-10 fv-row fv-plugins-icon-container" data-kt-password-meter="true">
-                                                        <div class="mb-1">
-                                                            <label class="form-label fw-bold fs-6 mb-2 required">
-                                                                New Password
-                                                            </label>
-                                                            <div class="position-relative mb-3">
-                                                                <input class="form-control form-control-lg form-control-solid" type="password" placeholder="" id="NewPassword" onchange="    return validateNewPassword();" name="NewPassword" autocomplete="off" onfocus="$(this).removeAttr('readonly');" onblur="$(this).attr('readonly');">
-                                                                <div></div>
-                                                                <span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2" onclick="showPassword(this)">
-                                                                    <i class="bi bi-eye-slash fs-5"></i>
-                                                                </span>
-                                                            </div>
-                                                            <div class="d-flex align-items-center mb-3" data-kt-password-meter-control="highlight" id="passwordHighlight">
-                                                                <div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
-                                                                <div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
-                                                                <div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
-                                                                <div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="text-muted">
-                                                            Use 8 or more characters.
-                                                        </div>
-                                                        <div class="fv-plugins-message-container invalid-feedback" id="newPasswordFeedback">
-                                                        </div>
-                                                    </div>
-                                                    <div class="fv-row mb-10 fv-plugins-icon-container">
-                                                        <label class="form-label fw-bold fs-6 mb-2 required">Confirm New Password</label>
-                                                        <div class="position-relative mb-3">
-                                                            <input class="form-control form-control-lg form-control-solid" onchange="    return checkBothPasswordsMatch();" type="password" placeholder="" id="ConfirmPassword" name="ConfirmPassword" autocomplete="off" onfocus="$(this).removeAttr('readonly');" onblur="$(this).attr('readonly');">
-                                                            <div></div>
-                                                            <span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2" onclick="showPassword(this)">
-                                                                <i class="bi bi-eye-slash fs-5"></i>
-                                                            </span>
-                                                        </div>
-                                                        <div class="fv-plugins-message-container invalid-feedback" id="confirmPassFeedback">
-                                                        </div>
+                                                            <!--end::Indicator-->
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <!--end::Email Address-->
+                                        <!--begin::Separator-->
+                                        <!-- <div class="separator separator-dashed my-6"></div> -->
+                                        <!--end::Separator-->
+
+                                    </div>
+                                    <!--end::Card body-->
+                                    <!--begin::Input group-->
+                                    <div class="row mb-6">
+                                        <!--begin::Label-->
+                                        <label class="col-lg-4 col-form-label fw-bold fs-6">
+                                            <span class="">Mobile No</span>
+                                            
+                                        </label>
+                                        <!--end::Label-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-8 fv-row">
+                                            <input type="number" maxlength="10" name="Phone1" id="Phone1" class="fs-6 form-control form-control-lg form-control-solid mb-5">
+                                            <!--<div class="text-end div-verify-mobile" style="display: none;">
+                                                <button type="button" id="kt_verify_mobile_submit" class="btn btn-primary my-4">-->
+                                                    <!--begin::Indicator-->
+                                                    <!--<span class="indicator-label">Verify Mobile !</span>
+                                                    <span class="indicator-progress">
+                                                        Please wait...
+                                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                                    </span>-->
+                                                    <!--end::Indicator-->
+                                                <!--</button>
+                                            </div>-->
+
+                                            <!--<div class="mobile-check mb-4" style="display: none;">
+                                                <input type="text" maxlength="10" name="VerificationCode" id="VerificationCode" class="fs-6 form-control form-control-lg form-control-solid" placeholder=" Verification Code">
+                                                <div class="text-end">
+                                                    <button type="button" class="btn btn-primary my-4 btn-verify-mobile">-->
+                                                        <!--begin::Indicator-->
+                                                        <!--<span class="indicator-label">Verify</span>
+                                                        <span class="indicator-progress">
+                                                            Please wait...
+                                                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                                        </span>-->
+                                                        <!--end::Indicator-->
+                                                    <!--</button>
+                                                </div>
+                                            </div>-->
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Input group-->
+                                </div>
+                                <!--end::Card body-->
+
+                            <div></div></div>
+                            <!--end::Content-->
+                        </div>
+                        <!--end::Card-->
+                    </div>
+                    <!--end:::Tab pane-->
+                    <!--begin:::Tab pane-->
+                    <div class="tab-pane fade" id="kt_customer_view_overview_custom_fields" role="tabpanel">
+                        <!--begin::Card-->
+                        <div class="card  mb-6 mb-xl-9">
+                            <!--begin::Card body-->
+                            <div class="card-body p-9">
+                                <div id="kt_signin_change_password" class="form fv-plugins-bootstrap5 fv-plugins-framework" novalidate="novalidate">
+                                    <input type="hidden" id="Password_hdn">
+                                    <!--begin::Input group--->
+                                    <div class="fv-row mb-10 fv-plugins-icon-container">
+                                        <label class="required form-label fs-6 mb-2">Current Password</label>
+                                        <div class="position-relative mb-3">
+                                            <input class="form-control form-control-lg form-control-solid" type="password" placeholder="" id="CurrentPassword" name="CurrentPassword" onchange="    return checkNewPasswordwithCurrent();"  autocomplete="off" readonly="" onfocus="$(this).removeAttr('readonly');" onblur="$(this).attr('readonly');">
+                                            <div></div>
+                                            <span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2" onclick="showPassword(this)">
+                                                <i class="bi bi-eye-slash fs-2"></i>
+                                            </span>
+                                        </div>
+                                   <div class="fv-plugins-message-container invalid-feedback" id="currentPasswordFeedback">
+                                                        </div>
+                                                        </div>
+                                    <!--end::Input group--->
+                                    <!--begin::Input group-->
+                                    <div class="mb-10 fv-row fv-plugins-icon-container" data-kt-password-meter="true">
+                                        <!--begin::Wrapper-->
+                                        <div class="mb-1">
+                                            <!--begin::Label-->
+                                            <label class="form-label fw-bold fs-6 mb-2 required">
+                                                New Password
+                                            </label>
+                                            <!--end::Label-->
+                                            <!--begin::Input wrapper-->
+                                            <div class="position-relative mb-3">
+                                                <input class="form-control form-control-lg form-control-solid" type="password" placeholder="" onchange="    return validateNewPassword();"  id="NewPassword" name="NewPassword" autocomplete="off" readonly="" onfocus="$(this).removeAttr('readonly');" onblur="$(this).attr('readonly');">
+
+                                                <span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2" data-kt-password-meter-control="visibility">
+                                                    <i class="bi bi-eye-slash fs-2"></i>
+
+                                                    <i class="bi bi-eye fs-2 d-none"></i>
+                                                </span>
+                                            </div>
+                                            <!--end::Input wrapper-->
+                                            <!--begin::Meter-->
+                                            <div class="d-flex align-items-center mb-3" data-kt-password-meter-control="highlight">
+                                                <div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
+                                                <div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
+                                                <div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
+                                                <div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px"></div>
+                                            </div>
+                                            <!--end::Meter-->
+                                        </div>
+                                        <!--end::Wrapper-->
+                                        <!--begin::Hint-->
+                                        <div class="text-muted">Use 8 or more characters.</div>
+                                        <!--end::Hint-->
+                                    <div class="fv-plugins-message-container invalid-feedback" id="newPasswordFeedback"></div></div>
+                                    <!--end::Input group--->
+                                    <!--begin::Input group--->
+                                    <div class="fv-row mb-10 fv-plugins-icon-container">
+                                        <label class="form-label fw-bold fs-6 mb-2 required">Confirm New Password</label>
+                                        <div class="position-relative mb-3">
+                                            <input class="form-control form-control-lg form-control-solid" type="password" placeholder="" id="ConfirmPassword" onchange="    return checkBothPasswordsMatch();" name="ConfirmPassword" autocomplete="off" readonly="" onfocus="$(this).removeAttr('readonly');" onblur="$(this).attr('readonly');">
+                                            <div></div>
+                                            <span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2" onclick="showPassword(this)">
+                                                <i class="bi bi-eye-slash fs-2"></i>
+                                            </span>
+                                        </div>
+                                    <div class="fv-plugins-message-container invalid-feedback" id="confirmPassFeedback"></div></div>
+                                    <!--end::Input group--->
+                                    
+                                <div></div></div>
+                                <!--end::Form-->
+                            </div>
+                            <!--end::Form-->
+                        </div>
+                        <!--end::Card-->
+                    </div>
+                    <!--end:::Tab pane-->
+                </div>
+                <!--end:::Tab content-->
+            </div>
+            <!--end::Content-->
+        </div>
+        <!--end::Layout-->
+    </div>
+</div>
+<!--end::Post-->
+
+                    <!--end::Post-->
+                </div>
+                <!--end::Content-->
+                <!--begin::Footer-->
+                <partial name="_Footer" />
+                <!--end::Footer-->
+            </div>
+            <!--end::Wrapper-->
+        </div>
+        <!--end::Page-->
+    </div>
+    <!--end::Root-->
+    <!--begin::Scrolltop-->
+    <div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
+        <!--begin::Svg Icon | path: icons/duotune/arrows/arr066.svg-->
+        <span class="svg-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <rect opacity="0.5" x="13" y="6" width="13" height="2" rx="1" transform="rotate(90 13 6)" fill="" />
+                <path d="M12.5657 8.56569L16.75 12.75C17.1642 13.1642 17.8358 13.1642 18.25 12.75C18.6642 12.3358 18.6642 11.6642 18.25 11.25L12.7071 5.70711C12.3166 5.31658 11.6834 5.31658 11.2929 5.70711L5.75 11.25C5.33579 11.6642 5.33579 12.3358 5.75 12.75C6.16421 13.1642 6.83579 13.1642 7.25 12.75L11.4343 8.56569C11.7467 8.25327 12.2533 8.25327 12.5657 8.56569Z" fill="" />
+            </svg>
+        </span>
+        <!--end::Svg Icon-->
+    </div>
+    <!--end::Scrolltop-->
+    <!--begin::Chat drawer-->
+    
+    <!--end::Chat drawer-->
+   
+    
+    <!--begin::Modal - Create App-->
+    <div class="modal fade" id="kt_friend_modal" tabindex="-1" aria-hidden="true">
+        <!--begin::Modal dialog-->
+        <div class="modal-dialog modal-dialog-centered">
+            <!--begin::Modal content-->
+            <div class="modal-content">
+                <!--begin::Modal body-->
+                <div class="modal-body py-lg-10 px-lg-10">
+                    <p id="friendMsg" class="mb-0">Let's go Bananas 🍌 with https://bananashop.ai/?id=20209 <br />Easy to Create, Simple to Manage.<br />Start creating your shop today.<br />No credit card required.</p>
+                </div>
+                <div class="modal-footer p-2">
+                    <button type="button" class="btn btn-sm btn-primary" onclick="CopyText('friendMsg');">Copy to share</button>
+                </div>
+                <!--end::Modal body-->
+            </div>
+            <!--end::Modal content-->
+        </div>
+        <!--end::Modal dialog-->
+    </div>
+    <!--end::Modal - Create App-->
+    <div class="modal fade" id="GlobalSearchModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog mt-0 mw-650px">
+            <div class="modal-content">
+                <div class="modal-body p-0">
+                    <div class="full-search">
+                        <div class="full-search-inner">
+                            <div class="fs-bg">
+                                <div class="fs-box">
+                                    <div class="fs">
+                                        <span class="svg-icon svg-icon-3 svg-icon-gray-500 position-absolute top-50 translate-middle" style="left:20px;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill=""></rect>
+                                                <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill=""></path>
+                                            </svg>
+                                        </span>
+                                        <input type="text" class="" id="GlobalSearchText" name="GlobalSearchText" value="" placeholder="Search for..." onkeyup="SearchGlobalData(event);">
+                                    </div>
+                                </div>
+                                <div class="search-result-box">
+                                    <div class="search-default">
+                                        <p>Search for features, shortcuts and settings.</p>
+                                    </div>
+                                    <div class="search-result" style="display:none;">
+                                        <div class="sr-list">
+                                            <ul class="sr-listing">
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
@@ -541,11 +526,18 @@
                         </div>
                     </div>
                 </div>
-            </div> 
+            </div>
         </div>
     </div>
-</div>
-<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModal" aria-hidden="true">
+
+    <!--end::Main-->
+    
+    <!--begin::Javascript-->
+    <!--begin::Global Javascript Bundle(used by all pages)-->
+    
+    
+    <!--end::Javascript-->
+    <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-body">
@@ -591,10 +583,162 @@
     </div>
 </div>
 
+    
+   <script>
+        
+         
+        var ApplicationType = 'Shopivana';
+        var ControllerName = 'Dashboard';
+        var fromPageSlice = 1;
+        var GeoCountryCode = "";
+        var GlobalSearchData = [];
+
+        var font_formats = "ABeeZee=ABeeZee; Abel=Abel; Abhaya Libre=Abhaya Libre; Abril Fatface=Abril Fatface; Aclonica=Aclonica; Acme=Acme; Actor=Actor; Adamina=Adamina; Advent Pro=Advent Pro; Aguafina Script=Aguafina Script; Akaya Kanadaka=Akaya Kanadaka; Akaya Telivigala=Akaya Telivigala; Akronim=Akronim; Akshar=Akshar; Aladin=Aladin; Alata=Alata; Alatsi=Alatsi; Albert Sans=Albert Sans; Aldrich=Aldrich; Alef=Alef; Alegreya Sans SC=Alegreya Sans SC; Alegreya Sans=Alegreya Sans; Alegreya SC=Alegreya SC; Alegreya=Alegreya; Aleo=Aleo; Alex Brush=Alex Brush; Alfa Slab One=Alfa Slab One; Alice=Alice; Alike Angular=Alike Angular; Alike=Alike; Allan=Allan; Allerta Stencil=Allerta Stencil; Allerta=Allerta; Allison=Allison; Allura=Allura; Almarai=Almarai; Almendra Display=Almendra Display; Almendra SC=Almendra SC; Almendra=Almendra; Alumni Sans Inline One=Alumni Sans Inline One; Alumni Sans=Alumni Sans; Amarante=Amarante; Amaranth=Amaranth; Amatic SC=Amatic SC; Amethysta=Amethysta; Amiko=Amiko; Amiri=Amiri; Amita=Amita; Anaheim=Anaheim; Andada Pro=Andada Pro; Andika=Andika; Anek Bangla=Anek Bangla; Anek Devanagari=Anek Devanagari; Anek Gujarati=Anek Gujarati; Anek Gurmukhi=Anek Gurmukhi; Anek Kannada=Anek Kannada; Anek Latin=Anek Latin; Anek Malayalam=Anek Malayalam; Anek Odia=Anek Odia; Anek Tamil=Anek Tamil; Anek Telugu=Anek Telugu; Angkor=Angkor; Annie Use Your Telescope=Annie Use Your Telescope; Anonymous Pro=Anonymous Pro; Antic Didone=Antic Didone; Antic Slab=Antic Slab; Antic=Antic; Anton=Anton; Antonio=Antonio; Anybody=Anybody; Arapey=Arapey; Arbutus Slab=Arbutus Slab; Arbutus=Arbutus; Architects Daughter=Architects Daughter; Archivo Black=Archivo Black; Archivo Narrow=Archivo Narrow; Archivo=Archivo; Are You Serious=Are You Serious; Aref Ruqaa=Aref Ruqaa; Arima Madurai=Arima Madurai; Arima=Arima; Arimo=Arimo; Arizonia=Arizonia; Armata=Armata; Arsenal=Arsenal; Artifika=Artifika; Arvo=Arvo; Arya=Arya; Asap Condensed=Asap Condensed; Asap=Asap; Asar=Asar; Asset=Asset; Assistant=Assistant; Astloch=Astloch; Asul=Asul; Athiti=Athiti; Atkinson Hyperlegible=Atkinson Hyperlegible; Atma=Atma; Atomic Age=Atomic Age; Aubrey=Aubrey; Audiowide=Audiowide; Autour One=Autour One; Average Sans=Average Sans; Average=Average; Averia Gruesa Libre=Averia Gruesa Libre; Averia Libre=Averia Libre; Averia Sans Libre=Averia Sans Libre; Averia Serif Libre=Averia Serif Libre; Azeret Mono=Azeret Mono; B612 Mono=B612 Mono; B612=B612; Babylonica=Babylonica; Bad Script=Bad Script; Bahiana=Bahiana; Bahianita=Bahianita; Bai Jamjuree=Bai Jamjuree; Bakbak One=Bakbak One; Ballet=Ballet; Baloo 2=Baloo 2; Baloo Bhai 2=Baloo Bhai 2; Baloo Bhaijaan 2=Baloo Bhaijaan 2; Baloo Bhaina 2=Baloo Bhaina 2; Baloo Chettan 2=Baloo Chettan 2; Baloo Da 2=Baloo Da 2; Baloo Paaji 2=Baloo Paaji 2; Baloo Tamma 2=Baloo Tamma 2; Baloo Tammudu 2=Baloo Tammudu 2; Baloo Thambi 2=Baloo Thambi 2; Balsamiq Sans=Balsamiq Sans; Balthazar=Balthazar; Bangers=Bangers; Barlow Condensed=Barlow Condensed; Barlow Semi Condensed=Barlow Semi Condensed; Barlow=Barlow; Barriecito=Barriecito; Barrio=Barrio; Basic=Basic; Baskervville=Baskervville; Battambang=Battambang; Baumans=Baumans; Bayon=Bayon; Be Vietnam Pro=Be Vietnam Pro; Beau Rivage=Beau Rivage; Bebas Neue=Bebas Neue; Belgrano=Belgrano; Bellefair=Bellefair; Belleza=Belleza; Bellota Text=Bellota Text; Bellota=Bellota; BenchNine=BenchNine; Benne=Benne; Bentham=Bentham; Berkshire Swash=Berkshire Swash; Besley=Besley; Beth Ellen=Beth Ellen; Bevan=Bevan; BhuTuka Expanded One=BhuTuka Expanded One; Big Shoulders Display=Big Shoulders Display; Big Shoulders Inline Display=Big Shoulders Inline Display; Big Shoulders Inline Text=Big Shoulders Inline Text; Big Shoulders Stencil Display=Big Shoulders Stencil Display; Big Shoulders Stencil Text=Big Shoulders Stencil Text; Big Shoulders Text=Big Shoulders Text; Bigelow Rules=Bigelow Rules; Bigshot One=Bigshot One; Bilbo Swash Caps=Bilbo Swash Caps; Bilbo=Bilbo; BioRhyme Expanded=BioRhyme Expanded; BioRhyme=BioRhyme; Birthstone Bounce=Birthstone Bounce; Birthstone=Birthstone; Biryani=Biryani; Bitter=Bitter; BIZ UDGothic=BIZ UDGothic; BIZ UDMincho=BIZ UDMincho; BIZ UDPGothic=BIZ UDPGothic; BIZ UDPMincho=BIZ UDPMincho; Black And White Picture=Black And White Picture; Black Han Sans=Black Han Sans; Black Ops One=Black Ops One; Blaka Hollow=Blaka Hollow; Blaka=Blaka; Blinker=Blinker; Bodoni Moda=Bodoni Moda; Bokor=Bokor; Bona Nova=Bona Nova; Bonbon=Bonbon; Bonheur Royale=Bonheur Royale; Boogaloo=Boogaloo; Bowlby One SC=Bowlby One SC; Bowlby One=Bowlby One; Brawler=Brawler; Bree Serif=Bree Serif; Brygada 1918=Brygada 1918; Bubblegum Sans=Bubblegum Sans; Bubbler One=Bubbler One; Buda=Buda; Buenard=Buenard; Bungee Hairline=Bungee Hairline; Bungee Inline=Bungee Inline; Bungee Outline=Bungee Outline; Bungee Shade=Bungee Shade; Bungee=Bungee; Butcherman=Butcherman; Butterfly Kids=Butterfly Kids; Cabin Condensed=Cabin Condensed; Cabin Sketch=Cabin Sketch; Cabin=Cabin; Caesar Dressing=Caesar Dressing; Cagliostro=Cagliostro; Cairo=Cairo; Caladea=Caladea; Calistoga=Calistoga; Calligraffitti=Calligraffitti; Cambay=Cambay; Cambo=Cambo; Candal=Candal; Cantarell=Cantarell; Cantata One=Cantata One; Cantora One=Cantora One; Capriola=Capriola; Caramel=Caramel; Carattere=Carattere; Cardo=Cardo; Carme=Carme; Carrois Gothic SC=Carrois Gothic SC; Carrois Gothic=Carrois Gothic; Carter One=Carter One; Castoro=Castoro; Catamaran=Catamaran; Caudex=Caudex; Caveat Brush=Caveat Brush; Caveat=Caveat; Cedarville Cursive=Cedarville Cursive; Ceviche One=Ceviche One; Chakra Petch=Chakra Petch; Changa One=Changa One; Changa=Changa; Chango=Chango; Charis SIL=Charis SIL; Charm=Charm; Charmonman=Charmonman; Chathura=Chathura; Chau Philomene One=Chau Philomene One; Chela One=Chela One; Chelsea Market=Chelsea Market; Chenla=Chenla; Cherish=Cherish; Cherry Cream Soda=Cherry Cream Soda; Cherry Swash=Cherry Swash; Chewy=Chewy; Chicle=Chicle; Chilanka=Chilanka; Chivo=Chivo; Chonburi=Chonburi; Cinzel Decorative=Cinzel Decorative; Cinzel=Cinzel; Clicker Script=Clicker Script; Coda Caption=Coda Caption; Coda=Coda; Codystar=Codystar; Coiny=Coiny; Combo=Combo; Comfortaa=Comfortaa; Comforter Brush=Comforter Brush; Comforter=Comforter; Comic Neue=Comic Neue; Coming Soon=Coming Soon; Commissioner=Commissioner; Concert One=Concert One; Condiment=Condiment; Content=Content; Contrail One=Contrail One; Convergence=Convergence; Cookie=Cookie; Copse=Copse; Corben=Corben; Corinthia=Corinthia; Cormorant Garamond=Cormorant Garamond; Cormorant Infant=Cormorant Infant; Cormorant SC=Cormorant SC; Cormorant Unicase=Cormorant Unicase; Cormorant Upright=Cormorant Upright; Cormorant=Cormorant; Courgette=Courgette; Courier Prime=Courier Prime; Cousine=Cousine; Coustard=Coustard; Covered By Your Grace=Covered By Your Grace; Crafty Girls=Crafty Girls; Creepster=Creepster; Crete Round=Crete Round; Crimson Pro=Crimson Pro; Crimson Text=Crimson Text; Croissant One=Croissant One; Crushed=Crushed; Cuprum=Cuprum; Cute Font=Cute Font; Cutive Mono=Cutive Mono; Cutive=Cutive; Damion=Damion; Dancing Script=Dancing Script; Dangrek=Dangrek; Darker Grotesque=Darker Grotesque; David Libre=David Libre; Dawning of a New Day=Dawning of a New Day; Days One=Days One; Dekko=Dekko; Dela Gothic One=Dela Gothic One; Delius Swash Caps=Delius Swash Caps; Delius Unicase=Delius Unicase; Delius=Delius; Della Respira=Della Respira; Denk One=Denk One; Devonshire=Devonshire; Dhurjati=Dhurjati; Didact Gothic=Didact Gothic; Diplomata SC=Diplomata SC; Diplomata=Diplomata; DM Mono=DM Mono; DM Sans=DM Sans; DM Serif Display=DM Serif Display; DM Serif Text=DM Serif Text; Do Hyeon=Do Hyeon; Dokdo=Dokdo; Domine=Domine; Donegal One=Donegal One; Dongle=Dongle; Doppio One=Doppio One; Dorsa=Dorsa; Dosis=Dosis; DotGothic16=DotGothic16; Dr Sugiyama=Dr Sugiyama; Duru Sans=Duru Sans; Dynalight=Dynalight; Eagle Lake=Eagle Lake; East Sea Dokdo=East Sea Dokdo; Eater=Eater; EB Garamond=EB Garamond; Economica=Economica; Eczar=Eczar; Edu NSW ACT Foundation=Edu NSW ACT Foundation; Edu QLD Beginner=Edu QLD Beginner; Edu SA Beginner=Edu SA Beginner; Edu TAS Beginner=Edu TAS Beginner; Edu VIC WA NT Beginner=Edu VIC WA NT Beginner; El Messiri=El Messiri; Electrolize=Electrolize; Elsie Swash Caps=Elsie Swash Caps; Elsie=Elsie; Emblema One=Emblema One; Emilys Candy=Emilys Candy; Encode Sans Condensed=Encode Sans Condensed; Encode Sans Expanded=Encode Sans Expanded; Encode Sans SC=Encode Sans SC; Encode Sans Semi Condensed=Encode Sans Semi Condensed; Encode Sans Semi Expanded=Encode Sans Semi Expanded; Encode Sans=Encode Sans; Engagement=Engagement; Englebert=Englebert; Enriqueta=Enriqueta; Ephesis=Ephesis; Epilogue=Epilogue; Erica One=Erica One; Esteban=Esteban; Estonia=Estonia; Euphoria Script=Euphoria Script; Ewert=Ewert; Exo 2=Exo 2; Exo=Exo; Expletus Sans=Expletus Sans; Explora=Explora; Fahkwang=Fahkwang; Familjen Grotesk=Familjen Grotesk; Fanwood Text=Fanwood Text; Farro=Farro; Farsan=Farsan; Fascinate Inline=Fascinate Inline; Fascinate=Fascinate; Faster One=Faster One; Fasthand=Fasthand; Fauna One=Fauna One; Faustina=Faustina; Federant=Federant; Federo=Federo; Felipa=Felipa; Fenix=Fenix; Festive=Festive; Finger Paint=Finger Paint; Finlandica=Finlandica; Fira Code=Fira Code; Fira Mono=Fira Mono; Fira Sans Condensed=Fira Sans Condensed; Fira Sans Extra Condensed=Fira Sans Extra Condensed; Fira Sans=Fira Sans; Fjalla One=Fjalla One; Fjord One=Fjord One; Flamenco=Flamenco; Flavors=Flavors; Fleur De Leah=Fleur De Leah; Flow Block=Flow Block; Flow Circular=Flow Circular; Flow Rounded=Flow Rounded; Fondamento=Fondamento; Fontdiner Swanky=Fontdiner Swanky; Forum=Forum; Francois One=Francois One; Frank Ruhl Libre=Frank Ruhl Libre; Fraunces=Fraunces; Freckle Face=Freckle Face; Fredericka the Great=Fredericka the Great; Fredoka One=Fredoka One; Fredoka=Fredoka; Freehand=Freehand; Fresca=Fresca; Frijole=Frijole; Fruktur=Fruktur; Fugaz One=Fugaz One; Fuggles=Fuggles; Fuzzy Bubbles=Fuzzy Bubbles; Gabriela=Gabriela; Gaegu=Gaegu; Gafata=Gafata; Galada=Galada; Galdeano=Galdeano; Galindo=Galindo; Gamja Flower=Gamja Flower; Gantari=Gantari; Gayathri=Gayathri; Gelasio=Gelasio; Gemunu Libre=Gemunu Libre; Genos=Genos; Gentium Basic=Gentium Basic; Gentium Book Basic=Gentium Book Basic; Gentium Book Plus=Gentium Book Plus; Gentium Plus=Gentium Plus; Geo=Geo; Georama=Georama; Geostar Fill=Geostar Fill; Geostar=Geostar; Germania One=Germania One; GFS Didot=GFS Didot; GFS Neohellenic=GFS Neohellenic; Gideon Roman=Gideon Roman; Gidugu=Gidugu; Gilda Display=Gilda Display; Girassol=Girassol; Give You Glory=Give You Glory; Glass Antiqua=Glass Antiqua; Glegoo=Glegoo; Gloria Hallelujah=Gloria Hallelujah; Glory=Glory; Gluten=Gluten; Goblin One=Goblin One; Gochi Hand=Gochi Hand; Goldman=Goldman; Gorditas=Gorditas; Gothic A1=Gothic A1; Gotu=Gotu; Goudy Bookletter 1911=Goudy Bookletter 1911; Gowun Batang=Gowun Batang; Gowun Dodum=Gowun Dodum; Graduate=Graduate; Grand Hotel=Grand Hotel; Grandstander=Grandstander; Grape Nuts=Grape Nuts; Gravitas One=Gravitas One; Great Vibes=Great Vibes; Grechen Fuemen=Grechen Fuemen; Grenze Gotisch=Grenze Gotisch; Grenze=Grenze; Grey Qo=Grey Qo; Griffy=Griffy; Gruppo=Gruppo; Gudea=Gudea; Gugi=Gugi; Gulzar=Gulzar; Gupter=Gupter; Gurajada=Gurajada; Gwendolyn=Gwendolyn; Habibi=Habibi; Hachi Maru Pop=Hachi Maru Pop; Hahmlet=Hahmlet; Halant=Halant; Hammersmith One=Hammersmith One; Hanalei Fill=Hanalei Fill; Hanalei=Hanalei; Handlee=Handlee; Hanuman=Hanuman; Happy Monkey=Happy Monkey; Harmattan=Harmattan; Headland One=Headland One; Heebo=Heebo; Henny Penny=Henny Penny; Hepta Slab=Hepta Slab; Herr Von Muellerhoff=Herr Von Muellerhoff; Hi Melody=Hi Melody; Hina Mincho=Hina Mincho; Hind Guntur=Hind Guntur; Hind Madurai=Hind Madurai; Hind Siliguri=Hind Siliguri; Hind Vadodara=Hind Vadodara; Hind=Hind; Holtwood One SC=Holtwood One SC; Homemade Apple=Homemade Apple; Homenaje=Homenaje; Hubballi=Hubballi; Hurricane=Hurricane; Ibarra Real Nova=Ibarra Real Nova; IBM Plex Mono=IBM Plex Mono; IBM Plex Sans Arabic=IBM Plex Sans Arabic; IBM Plex Sans Condensed=IBM Plex Sans Condensed; IBM Plex Sans Devanagari=IBM Plex Sans Devanagari; IBM Plex Sans Hebrew=IBM Plex Sans Hebrew; IBM Plex Sans KR=IBM Plex Sans KR; IBM Plex Sans Thai Looped=IBM Plex Sans Thai Looped; IBM Plex Sans Thai=IBM Plex Sans Thai; IBM Plex Sans=IBM Plex Sans; IBM Plex Serif=IBM Plex Serif; Iceberg=Iceberg; Iceland=Iceland; IM Fell Double Pica SC=IM Fell Double Pica SC; IM Fell Double Pica=IM Fell Double Pica; IM Fell DW Pica SC=IM Fell DW Pica SC; IM Fell DW Pica=IM Fell DW Pica; IM Fell English SC=IM Fell English SC; IM Fell English=IM Fell English; IM Fell French Canon SC=IM Fell French Canon SC; IM Fell French Canon=IM Fell French Canon; IM Fell Great Primer SC=IM Fell Great Primer SC; IM Fell Great Primer=IM Fell Great Primer; Imbue=Imbue; Imperial Script=Imperial Script; Imprima=Imprima; Inconsolata=Inconsolata; Inder=Inder; Indie Flower=Indie Flower; Ingrid Darling=Ingrid Darling; Inika=Inika; Inknut Antiqua=Inknut Antiqua; Inria Sans=Inria Sans; Inria Serif=Inria Serif; Inspiration=Inspiration; Inter=Inter; Irish Grover=Irish Grover; Island Moments=Island Moments; Istok Web=Istok Web; Italiana=Italiana; Italianno=Italianno; Itim=Itim; Jacques Francois Shadow=Jacques Francois Shadow; Jacques Francois=Jacques Francois; Jaldi=Jaldi; JetBrains Mono=JetBrains Mono; Jim Nightshade=Jim Nightshade; Joan=Joan; Jockey One=Jockey One; Jolly Lodger=Jolly Lodger; Jomhuria=Jomhuria; Jomolhari=Jomolhari; Josefin Sans=Josefin Sans; Josefin Slab=Josefin Slab; Jost=Jost; Joti One=Joti One; Jua=Jua; Judson=Judson; Julee=Julee; Julius Sans One=Julius Sans One; Junge=Junge; Jura=Jura; Just Another Hand=Just Another Hand; Just Me Again Down Here=Just Me Again Down Here; K2D=K2D; Kadwa=Kadwa; Kaisei Decol=Kaisei Decol; Kaisei HarunoUmi=Kaisei HarunoUmi; Kaisei Opti=Kaisei Opti; Kaisei Tokumin=Kaisei Tokumin; Kalam=Kalam; Kameron=Kameron; Kanit=Kanit; Kantumruy Pro=Kantumruy Pro; Kantumruy=Kantumruy; Karantina=Karantina; Karla=Karla; Karma=Karma; Katibeh=Katibeh; Kaushan Script=Kaushan Script; Kavivanar=Kavivanar; Kavoon=Kavoon; Kdam Thmor Pro=Kdam Thmor Pro; Keania One=Keania One; Kelly Slab=Kelly Slab; Kenia=Kenia; Khand=Khand; Khmer=Khmer; Khula=Khula; Kings=Kings; Kirang Haerang=Kirang Haerang; Kite One=Kite One; Kiwi Maru=Kiwi Maru; Klee One=Klee One; Knewave=Knewave; Kodchasan=Kodchasan; Koh Santepheap=Koh Santepheap; KoHo=KoHo; Kolker Brush=Kolker Brush; Kosugi Maru=Kosugi Maru; Kosugi=Kosugi; Kotta One=Kotta One; Koulen=Koulen; Kranky=Kranky; Kreon=Kreon; Kristi=Kristi; Krona One=Krona One; Krub=Krub; Kufam=Kufam; Kulim Park=Kulim Park; Kumar One Outline=Kumar One Outline; Kumar One=Kumar One; Kumbh Sans=Kumbh Sans; Kurale=Kurale; La Belle Aurore=La Belle Aurore; Lacquer=Lacquer; Laila=Laila; Lakki Reddy=Lakki Reddy; Lalezar=Lalezar; Lancelot=Lancelot; Langar=Langar; Lateef=Lateef; Lato=Lato; Lavishly Yours=Lavishly Yours; League Gothic=League Gothic; League Script=League Script; League Spartan=League Spartan; Leckerli One=Leckerli One; Ledger=Ledger; Lekton=Lekton; Lemon=Lemon; Lemonada=Lemonada; Lexend Deca=Lexend Deca; Lexend Exa=Lexend Exa; Lexend Giga=Lexend Giga; Lexend Mega=Lexend Mega; Lexend Peta=Lexend Peta; Lexend Tera=Lexend Tera; Lexend Zetta=Lexend Zetta; Lexend=Lexend; Libre Barcode 128 Text=Libre Barcode 128 Text; Libre Barcode 128=Libre Barcode 128; Libre Barcode 39 Extended Text=Libre Barcode 39 Extended Text; Libre Barcode 39 Extended=Libre Barcode 39 Extended; Libre Barcode 39 Text=Libre Barcode 39 Text; Libre Barcode 39=Libre Barcode 39; Libre Barcode EAN13 Text=Libre Barcode EAN13 Text; Libre Baskerville=Libre Baskerville; Libre Bodoni=Libre Bodoni; Libre Caslon Display=Libre Caslon Display; Libre Caslon Text=Libre Caslon Text; Libre Franklin=Libre Franklin; Licorice=Licorice; Life Savers=Life Savers; Lilita One=Lilita One; Lily Script One=Lily Script One; Limelight=Limelight; Linden Hill=Linden Hill; Literata=Literata; Liu Jian Mao Cao=Liu Jian Mao Cao; Livvic=Livvic; Lobster Two=Lobster Two; Lobster=Lobster; Londrina Outline=Londrina Outline; Londrina Shadow=Londrina Shadow; Londrina Sketch=Londrina Sketch; Londrina Solid=Londrina Solid; Long Cang=Long Cang; Lora=Lora; Love Light=Love Light; Love Ya Like A Sister=Love Ya Like A Sister; Loved by the King=Loved by the King; Lovers Quarrel=Lovers Quarrel; Luckiest Guy=Luckiest Guy; Lusitana=Lusitana; Lustria=Lustria; Luxurious Roman=Luxurious Roman; Luxurious Script=Luxurious Script; M PLUS 1 Code=M PLUS 1 Code; M PLUS 1=M PLUS 1; M PLUS 1p=M PLUS 1p; M PLUS 2=M PLUS 2; M PLUS Code Latin=M PLUS Code Latin; M PLUS Rounded 1c=M PLUS Rounded 1c; Ma Shan Zheng=Ma Shan Zheng; Macondo Swash Caps=Macondo Swash Caps; Macondo=Macondo; Mada=Mada; Magra=Magra; Maiden Orange=Maiden Orange; Maitree=Maitree; Major Mono Display=Major Mono Display; Mako=Mako; Mali=Mali; Mallanna=Mallanna; Mandali=Mandali; Manjari=Manjari; Manrope=Manrope; Mansalva=Mansalva; Manuale=Manuale; Marcellus SC=Marcellus SC; Marcellus=Marcellus; Marck Script=Marck Script; Margarine=Margarine; Markazi Text=Markazi Text; Marko One=Marko One; Marmelad=Marmelad; Martel Sans=Martel Sans; Martel=Martel; Marvel=Marvel; Mate SC=Mate SC; Mate=Mate; Maven Pro=Maven Pro; McLaren=McLaren; Mea Culpa=Mea Culpa; Meddon=Meddon; MedievalSharp=MedievalSharp; Medula One=Medula One; Meera Inimai=Meera Inimai; Megrim=Megrim; Meie Script=Meie Script; Meow Script=Meow Script; Merienda One=Merienda One; Merienda=Merienda; Merriweather Sans=Merriweather Sans; Merriweather=Merriweather; Metal Mania=Metal Mania; Metal=Metal; Metamorphous=Metamorphous; Metrophobic=Metrophobic; Michroma=Michroma; Milonga=Milonga; Miltonian Tattoo=Miltonian Tattoo; Miltonian=Miltonian; Mina=Mina; Mingzat=Mingzat; Miniver=Miniver; Miriam Libre=Miriam Libre; Mirza=Mirza; Miss Fajardose=Miss Fajardose; Mitr=Mitr; Mochiy Pop One=Mochiy Pop One; Mochiy Pop P One=Mochiy Pop P One; Modak=Modak; Modern Antiqua=Modern Antiqua; Mogra=Mogra; Mohave=Mohave; Molengo=Molengo; Molle=Molle; Monda=Monda; Monofett=Monofett; Monoton=Monoton; Monsieur La Doulaise=Monsieur La Doulaise; Montaga=Montaga; Montagu Slab=Montagu Slab; MonteCarlo=MonteCarlo; Montez=Montez; Montserrat Alternates=Montserrat Alternates; Montserrat Subrayada=Montserrat Subrayada; Montserrat=Montserrat; Moo Lah Lah=Moo Lah Lah; Moon Dance=Moon Dance; Moul=Moul; Moulpali=Moulpali; Mountains of Christmas=Mountains of Christmas; Mouse Memoirs=Mouse Memoirs; Mr Bedfort=Mr Bedfort; Mr Dafoe=Mr Dafoe; Mr De Haviland=Mr De Haviland; Mrs Saint Delafield=Mrs Saint Delafield; Mrs Sheppards=Mrs Sheppards; Ms Madi=Ms Madi; Mukta Mahee=Mukta Mahee; Mukta Malar=Mukta Malar; Mukta Vaani=Mukta Vaani; Mukta=Mukta; Mulish=Mulish; Murecho=Murecho; MuseoModerno=MuseoModerno; My Soul=My Soul; Mystery Quest=Mystery Quest; Nanum Brush Script=Nanum Brush Script; Nanum Gothic Coding=Nanum Gothic Coding; Nanum Gothic=Nanum Gothic; Nanum Myeongjo=Nanum Myeongjo; Nanum Pen Script=Nanum Pen Script; Neonderthaw=Neonderthaw; Nerko One=Nerko One; Neucha=Neucha; Neuton=Neuton; New Rocker=New Rocker; New Tegomin=New Tegomin; News Cycle=News Cycle; Newsreader=Newsreader; Niconne=Niconne; Niramit=Niramit; Nixie One=Nixie One; Nobile=Nobile; Nokora=Nokora; Norican=Norican; Nosifer=Nosifer; Notable=Notable; Nothing You Could Do=Nothing You Could Do; Noticia Text=Noticia Text; Noto Emoji=Noto Emoji; Noto Kufi Arabic=Noto Kufi Arabic; Noto Music=Noto Music; Noto Naskh Arabic=Noto Naskh Arabic; Noto Nastaliq Urdu=Noto Nastaliq Urdu; Noto Rashi Hebrew=Noto Rashi Hebrew; Noto Sans Adlam Unjoined=Noto Sans Adlam Unjoined; Noto Sans Adlam=Noto Sans Adlam; Noto Sans Anatolian Hieroglyphs=Noto Sans Anatolian Hieroglyphs; Noto Sans Arabic=Noto Sans Arabic; Noto Sans Armenian=Noto Sans Armenian; Noto Sans Avestan=Noto Sans Avestan; Noto Sans Balinese=Noto Sans Balinese; Noto Sans Bamum=Noto Sans Bamum; Noto Sans Bassa Vah=Noto Sans Bassa Vah; Noto Sans Batak=Noto Sans Batak; Noto Sans Bengali=Noto Sans Bengali; Noto Sans Bhaiksuki=Noto Sans Bhaiksuki; Noto Sans Brahmi=Noto Sans Brahmi; Noto Sans Buginese=Noto Sans Buginese; Noto Sans Buhid=Noto Sans Buhid; Noto Sans Canadian Aboriginal=Noto Sans Canadian Aboriginal; Noto Sans Carian=Noto Sans Carian; Noto Sans Caucasian Albanian=Noto Sans Caucasian Albanian; Noto Sans Chakma=Noto Sans Chakma; Noto Sans Cham=Noto Sans Cham; Noto Sans Cherokee=Noto Sans Cherokee; Noto Sans Coptic=Noto Sans Coptic; Noto Sans Cuneiform=Noto Sans Cuneiform; Noto Sans Cypriot=Noto Sans Cypriot; Noto Sans Deseret=Noto Sans Deseret; Noto Sans Devanagari=Noto Sans Devanagari; Noto Sans Display=Noto Sans Display; Noto Sans Duployan=Noto Sans Duployan; Noto Sans Egyptian Hieroglyphs=Noto Sans Egyptian Hieroglyphs; Noto Sans Elbasan=Noto Sans Elbasan; Noto Sans Elymaic=Noto Sans Elymaic; Noto Sans Georgian=Noto Sans Georgian; Noto Sans Glagolitic=Noto Sans Glagolitic; Noto Sans Gothic=Noto Sans Gothic; Noto Sans Grantha=Noto Sans Grantha; Noto Sans Gujarati=Noto Sans Gujarati; Noto Sans Gunjala Gondi=Noto Sans Gunjala Gondi; Noto Sans Gurmukhi=Noto Sans Gurmukhi; Noto Sans Hanifi Rohingya=Noto Sans Hanifi Rohingya; Noto Sans Hanunoo=Noto Sans Hanunoo; Noto Sans Hatran=Noto Sans Hatran; Noto Sans Hebrew=Noto Sans Hebrew; Noto Sans HK=Noto Sans HK; Noto Sans Imperial Aramaic=Noto Sans Imperial Aramaic; Noto Sans Indic Siyaq Numbers=Noto Sans Indic Siyaq Numbers; Noto Sans Inscriptional Pahlavi=Noto Sans Inscriptional Pahlavi; Noto Sans Inscriptional Parthian=Noto Sans Inscriptional Parthian; Noto Sans Javanese=Noto Sans Javanese; Noto Sans JP=Noto Sans JP; Noto Sans Kaithi=Noto Sans Kaithi; Noto Sans Kannada=Noto Sans Kannada; Noto Sans Kayah Li=Noto Sans Kayah Li; Noto Sans Kharoshthi=Noto Sans Kharoshthi; Noto Sans Khmer=Noto Sans Khmer; Noto Sans Khojki=Noto Sans Khojki; Noto Sans Khudawadi=Noto Sans Khudawadi; Noto Sans KR=Noto Sans KR; Noto Sans Lao=Noto Sans Lao; Noto Sans Lepcha=Noto Sans Lepcha; Noto Sans Limbu=Noto Sans Limbu; Noto Sans Linear A=Noto Sans Linear A; Noto Sans Linear B=Noto Sans Linear B; Noto Sans Lisu=Noto Sans Lisu; Noto Sans Lycian=Noto Sans Lycian; Noto Sans Lydian=Noto Sans Lydian; Noto Sans Mahajani=Noto Sans Mahajani; Noto Sans Malayalam=Noto Sans Malayalam; Noto Sans Mandaic=Noto Sans Mandaic; Noto Sans Manichaean=Noto Sans Manichaean; Noto Sans Marchen=Noto Sans Marchen; Noto Sans Masaram Gondi=Noto Sans Masaram Gondi; Noto Sans Math=Noto Sans Math; Noto Sans Mayan Numerals=Noto Sans Mayan Numerals; Noto Sans Medefaidrin=Noto Sans Medefaidrin; Noto Sans Meetei Mayek=Noto Sans Meetei Mayek; Noto Sans Meroitic=Noto Sans Meroitic; Noto Sans Miao=Noto Sans Miao; Noto Sans Modi=Noto Sans Modi; Noto Sans Mongolian=Noto Sans Mongolian; Noto Sans Mono=Noto Sans Mono; Noto Sans Mro=Noto Sans Mro; Noto Sans Multani=Noto Sans Multani; Noto Sans Myanmar=Noto Sans Myanmar; Noto Sans N Ko=Noto Sans N Ko; Noto Sans Nabataean=Noto Sans Nabataean; Noto Sans New Tai Lue=Noto Sans New Tai Lue; Noto Sans Newa=Noto Sans Newa; Noto Sans Nushu=Noto Sans Nushu; Noto Sans Ogham=Noto Sans Ogham; Noto Sans Ol Chiki=Noto Sans Ol Chiki; Noto Sans Old Hungarian=Noto Sans Old Hungarian; Noto Sans Old Italic=Noto Sans Old Italic; Noto Sans Old North Arabian=Noto Sans Old North Arabian; Noto Sans Old Permic=Noto Sans Old Permic; Noto Sans Old Persian=Noto Sans Old Persian; Noto Sans Old Sogdian=Noto Sans Old Sogdian; Noto Sans Old South Arabian=Noto Sans Old South Arabian; Noto Sans Old Turkic=Noto Sans Old Turkic; Noto Sans Oriya=Noto Sans Oriya; Noto Sans Osage=Noto Sans Osage; Noto Sans Osmanya=Noto Sans Osmanya; Noto Sans Pahawh Hmong=Noto Sans Pahawh Hmong; Noto Sans Palmyrene=Noto Sans Palmyrene; Noto Sans Pau Cin Hau=Noto Sans Pau Cin Hau; Noto Sans Phags Pa=Noto Sans Phags Pa; Noto Sans Phoenician=Noto Sans Phoenician; Noto Sans Psalter Pahlavi=Noto Sans Psalter Pahlavi; Noto Sans Rejang=Noto Sans Rejang; Noto Sans Runic=Noto Sans Runic; Noto Sans Samaritan=Noto Sans Samaritan; Noto Sans Saurashtra=Noto Sans Saurashtra; Noto Sans SC=Noto Sans SC; Noto Sans Sharada=Noto Sans Sharada; Noto Sans Shavian=Noto Sans Shavian; Noto Sans Siddham=Noto Sans Siddham; Noto Sans Sinhala=Noto Sans Sinhala; Noto Sans Sogdian=Noto Sans Sogdian; Noto Sans Sora Sompeng=Noto Sans Sora Sompeng; Noto Sans Soyombo=Noto Sans Soyombo; Noto Sans Sundanese=Noto Sans Sundanese; Noto Sans Syloti Nagri=Noto Sans Syloti Nagri; Noto Sans Symbols 2=Noto Sans Symbols 2; Noto Sans Symbols=Noto Sans Symbols; Noto Sans Syriac=Noto Sans Syriac; Noto Sans Tagalog=Noto Sans Tagalog; Noto Sans Tagbanwa=Noto Sans Tagbanwa; Noto Sans Tai Le=Noto Sans Tai Le; Noto Sans Tai Tham=Noto Sans Tai Tham; Noto Sans Tai Viet=Noto Sans Tai Viet; Noto Sans Takri=Noto Sans Takri; Noto Sans Tamil Supplement=Noto Sans Tamil Supplement; Noto Sans Tamil=Noto Sans Tamil; Noto Sans TC=Noto Sans TC; Noto Sans Telugu=Noto Sans Telugu; Noto Sans Thaana=Noto Sans Thaana; Noto Sans Thai Looped=Noto Sans Thai Looped; Noto Sans Thai=Noto Sans Thai; Noto Sans Tifinagh=Noto Sans Tifinagh; Noto Sans Tirhuta=Noto Sans Tirhuta; Noto Sans Ugaritic=Noto Sans Ugaritic; Noto Sans Vai=Noto Sans Vai; Noto Sans Wancho=Noto Sans Wancho; Noto Sans Warang Citi=Noto Sans Warang Citi; Noto Sans Yi=Noto Sans Yi; Noto Sans Zanabazar Square=Noto Sans Zanabazar Square; Noto Sans=Noto Sans; Noto Serif Ahom=Noto Serif Ahom; Noto Serif Armenian=Noto Serif Armenian; Noto Serif Balinese=Noto Serif Balinese; Noto Serif Bengali=Noto Serif Bengali; Noto Serif Devanagari=Noto Serif Devanagari; Noto Serif Display=Noto Serif Display; Noto Serif Dogra=Noto Serif Dogra; Noto Serif Ethiopic=Noto Serif Ethiopic; Noto Serif Georgian=Noto Serif Georgian; Noto Serif Grantha=Noto Serif Grantha; Noto Serif Gujarati=Noto Serif Gujarati; Noto Serif Gurmukhi=Noto Serif Gurmukhi; Noto Serif Hebrew=Noto Serif Hebrew; Noto Serif JP=Noto Serif JP; Noto Serif Kannada=Noto Serif Kannada; Noto Serif Khmer=Noto Serif Khmer; Noto Serif KR=Noto Serif KR; Noto Serif Lao=Noto Serif Lao; Noto Serif Malayalam=Noto Serif Malayalam; Noto Serif Myanmar=Noto Serif Myanmar; Noto Serif Nyiakeng Puachue Hmong=Noto Serif Nyiakeng Puachue Hmong; Noto Serif SC=Noto Serif SC; Noto Serif Sinhala=Noto Serif Sinhala; Noto Serif Tamil=Noto Serif Tamil; Noto Serif Tangut=Noto Serif Tangut; Noto Serif TC=Noto Serif TC; Noto Serif Telugu=Noto Serif Telugu; Noto Serif Thai=Noto Serif Thai; Noto Serif Tibetan=Noto Serif Tibetan; Noto Serif Yezidi=Noto Serif Yezidi; Noto Serif=Noto Serif; Noto Traditional Nushu=Noto Traditional Nushu; Nova Cut=Nova Cut; Nova Flat=Nova Flat; Nova Mono=Nova Mono; Nova Oval=Nova Oval; Nova Round=Nova Round; Nova Script=Nova Script; Nova Slim=Nova Slim; Nova Square=Nova Square; NTR=NTR; Numans=Numans; Nunito Sans=Nunito Sans; Nunito=Nunito; Nuosu SIL=Nuosu SIL; Odibee Sans=Odibee Sans; Odor Mean Chey=Odor Mean Chey; Offside=Offside; Oi=Oi; Old Standard TT=Old Standard TT; Oldenburg=Oldenburg; Ole=Ole; Oleo Script Swash Caps=Oleo Script Swash Caps; Oleo Script=Oleo Script; Oooh Baby=Oooh Baby; Open Sans=Open Sans; Oranienbaum=Oranienbaum; Orbitron=Orbitron; Oregano=Oregano; Orelega One=Orelega One; Orienta=Orienta; Original Surfer=Original Surfer; Oswald=Oswald; Outfit=Outfit; Over the Rainbow=Over the Rainbow; Overlock SC=Overlock SC; Overlock=Overlock; Overpass Mono=Overpass Mono; Overpass=Overpass; Ovo=Ovo; Oxanium=Oxanium; Oxygen Mono=Oxygen Mono; Oxygen=Oxygen; Pacifico=Pacifico; Padauk=Padauk; Palanquin Dark=Palanquin Dark; Palanquin=Palanquin; Pangolin=Pangolin; Paprika=Paprika; Parisienne=Parisienne; Passero One=Passero One; Passion One=Passion One; Passions Conflict=Passions Conflict; Pathway Gothic One=Pathway Gothic One; Patrick Hand SC=Patrick Hand SC; Patrick Hand=Patrick Hand; Pattaya=Pattaya; Patua One=Patua One; Pavanam=Pavanam; Paytone One=Paytone One; Peddana=Peddana; Peralta=Peralta; Permanent Marker=Permanent Marker; Petemoss=Petemoss; Petit Formal Script=Petit Formal Script; Petrona=Petrona; Philosopher=Philosopher; Piazzolla=Piazzolla; Piedra=Piedra; Pinyon Script=Pinyon Script; Pirata One=Pirata One; Plaster=Plaster; Play=Play; Playball=Playball; Playfair Display SC=Playfair Display SC; Playfair Display=Playfair Display; Plus Jakarta Sans=Plus Jakarta Sans; Podkova=Podkova; Poiret One=Poiret One; Poller One=Poller One; Poly=Poly; Pompiere=Pompiere; Pontano Sans=Pontano Sans; Poor Story=Poor Story; Poppins=Poppins; Port Lligat Sans=Port Lligat Sans; Port Lligat Slab=Port Lligat Slab; Potta One=Potta One; Pragati Narrow=Pragati Narrow; Praise=Praise; Prata=Prata; Preahvihear=Preahvihear; Press Start 2P=Press Start 2P; Pridi=Pridi; Princess Sofia=Princess Sofia; Prociono=Prociono; Prompt=Prompt; Prosto One=Prosto One; Proza Libre=Proza Libre; PT Mono=PT Mono; PT Sans Caption=PT Sans Caption; PT Sans Narrow=PT Sans Narrow; PT Sans=PT Sans; PT Serif Caption=PT Serif Caption; PT Serif=PT Serif; Public Sans=Public Sans; Puppies Play=Puppies Play; Puritan=Puritan; Purple Purse=Purple Purse; Qahiri=Qahiri; Quando=Quando; Quantico=Quantico; Quattrocento Sans=Quattrocento Sans; Quattrocento=Quattrocento; Questrial=Questrial; Quicksand=Quicksand; Quintessential=Quintessential; Qwigley=Qwigley; Qwitcher Grypen=Qwitcher Grypen; Racing Sans One=Racing Sans One; Radio Canada=Radio Canada; Radley=Radley; Rajdhani=Rajdhani; Rakkas=Rakkas; Raleway Dots=Raleway Dots; Raleway=Raleway; Ramabhadra=Ramabhadra; Ramaraja=Ramaraja; Rambla=Rambla; Rammetto One=Rammetto One; Rampart One=Rampart One; Ranchers=Ranchers; Rancho=Rancho; Ranga=Ranga; Rasa=Rasa; Rationale=Rationale; Ravi Prakash=Ravi Prakash; Readex Pro=Readex Pro; Recursive=Recursive; Red Hat Display=Red Hat Display; Red Hat Mono=Red Hat Mono; Red Hat Text=Red Hat Text; Red Rose=Red Rose; Redacted Script=Redacted Script; Redacted=Redacted; Redressed=Redressed; Reem Kufi=Reem Kufi; Reenie Beanie=Reenie Beanie; Reggae One=Reggae One; Revalia=Revalia; Rhodium Libre=Rhodium Libre; Ribeye Marrow=Ribeye Marrow; Ribeye=Ribeye; Righteous=Righteous; Risque=Risque; Road Rage=Road Rage; Roboto Condensed=Roboto Condensed; Roboto Flex=Roboto Flex; Roboto Mono=Roboto Mono; Roboto Serif=Roboto Serif; Roboto Slab=Roboto Slab; Roboto=Roboto; Rochester=Rochester; Rock Salt=Rock Salt; RocknRoll One=RocknRoll One; Rokkitt=Rokkitt; Romanesco=Romanesco; Ropa Sans=Ropa Sans; Rosario=Rosario; Rosarivo=Rosarivo; Rouge Script=Rouge Script; Rowdies=Rowdies; Rozha One=Rozha One; Rubik Beastly=Rubik Beastly; Rubik Bubbles=Rubik Bubbles; Rubik Glitch=Rubik Glitch; Rubik Microbe=Rubik Microbe; Rubik Mono One=Rubik Mono One; Rubik Moonrocks=Rubik Moonrocks; Rubik Puddles=Rubik Puddles; Rubik Wet Paint=Rubik Wet Paint; Rubik=Rubik; Ruda=Ruda; Rufina=Rufina; Ruge Boogie=Ruge Boogie; Ruluko=Ruluko; Rum Raisin=Rum Raisin; Ruslan Display=Ruslan Display; Russo One=Russo One; Ruthie=Ruthie; Rye=Rye; Sacramento=Sacramento; Sahitya=Sahitya; Sail=Sail; Saira Condensed=Saira Condensed; Saira Extra Condensed=Saira Extra Condensed; Saira Semi Condensed=Saira Semi Condensed; Saira Stencil One=Saira Stencil One; Saira=Saira; Salsa=Salsa; Sanchez=Sanchez; Sancreek=Sancreek; Sansita Swashed=Sansita Swashed; Sansita=Sansita; Sarabun=Sarabun; Sarala=Sarala; Sarina=Sarina; Sarpanch=Sarpanch; Sassy Frass=Sassy Frass; Satisfy=Satisfy; Sawarabi Gothic=Sawarabi Gothic; Sawarabi Mincho=Sawarabi Mincho; Scada=Scada; Scheherazade New=Scheherazade New; Schoolbell=Schoolbell; Scope One=Scope One; Seaweed Script=Seaweed Script; Secular One=Secular One; Sedgwick Ave Display=Sedgwick Ave Display; Sedgwick Ave=Sedgwick Ave; Sen=Sen; Send Flowers=Send Flowers; Sevillana=Sevillana; Seymour One=Seymour One; Shadows Into Light Two=Shadows Into Light Two; Shadows Into Light=Shadows Into Light; Shalimar=Shalimar; Shanti=Shanti; Share Tech Mono=Share Tech Mono; Share Tech=Share Tech; Share=Share; Shippori Antique B1=Shippori Antique B1; Shippori Antique=Shippori Antique; Shippori Mincho B1=Shippori Mincho B1; Shippori Mincho=Shippori Mincho; Shojumaru=Shojumaru; Short Stack=Short Stack; Shrikhand=Shrikhand; Siemreap=Siemreap; Sigmar One=Sigmar One; Signika Negative=Signika Negative; Signika=Signika; Simonetta=Simonetta; Single Day=Single Day; Sintony=Sintony; Sirin Stencil=Sirin Stencil; Six Caps=Six Caps; Skranji=Skranji; Slabo 13px=Slabo 13px; Slabo 27px=Slabo 27px; Slackey=Slackey; Smokum=Smokum; Smooch Sans=Smooch Sans; Smooch=Smooch; Smythe=Smythe; Sniglet=Sniglet; Snippet=Snippet; Snowburst One=Snowburst One; Sofadi One=Sofadi One; Sofia=Sofia; Solway=Solway; Song Myung=Song Myung; Sonsie One=Sonsie One; Sora=Sora; Sorts Mill Goudy=Sorts Mill Goudy; Source Code Pro=Source Code Pro; Source Sans 3=Source Sans 3; Source Sans Pro=Source Sans Pro; Source Serif 4=Source Serif 4; Source Serif Pro=Source Serif Pro; Space Grotesk=Space Grotesk; Space Mono=Space Mono; Special Elite=Special Elite; Spectral SC=Spectral SC; Spectral=Spectral; Spicy Rice=Spicy Rice; Spinnaker=Spinnaker; Spirax=Spirax; Splash=Splash; Spline Sans Mono=Spline Sans Mono; Spline Sans=Spline Sans; Squada One=Squada One; Square Peg=Square Peg; Sree Krushnadevaraya=Sree Krushnadevaraya; Sriracha=Sriracha; Srisakdi=Srisakdi; Staatliches=Staatliches; Stalemate=Stalemate; Stalinist One=Stalinist One; Stardos Stencil=Stardos Stencil; Stick No Bills=Stick No Bills; Stick=Stick; Stint Ultra Condensed=Stint Ultra Condensed; Stint Ultra Expanded=Stint Ultra Expanded; STIX Two Text=STIX Two Text; Stoke=Stoke; Strait=Strait; Style Script=Style Script; Stylish=Stylish; Sue Ellen Francisco=Sue Ellen Francisco; Suez One=Suez One; Sulphur Point=Sulphur Point; Sumana=Sumana; Sunflower=Sunflower; Sunshiney=Sunshiney; Supermercado One=Supermercado One; Sura=Sura; Suranna=Suranna; Suravaram=Suravaram; Suwannaphum=Suwannaphum; Swanky and Moo Moo=Swanky and Moo Moo; Syncopate=Syncopate; Syne Mono=Syne Mono; Syne Tactile=Syne Tactile; Syne=Syne; Tai Heritage Pro=Tai Heritage Pro; Tajawal=Tajawal; Tangerine=Tangerine; Tapestry=Tapestry; Taprom=Taprom; Tauri=Tauri; Taviraj=Taviraj; Teko=Teko; Telex=Telex; Tenali Ramakrishna=Tenali Ramakrishna; Tenor Sans=Tenor Sans; Text Me One=Text Me One; Texturina=Texturina; Thasadith=Thasadith; The Girl Next Door=The Girl Next Door; The Nautigal=The Nautigal; Tienne=Tienne; Tillana=Tillana; Timmana=Timmana; Tinos=Tinos; Tiro Bangla=Tiro Bangla; Tiro Devanagari Hindi=Tiro Devanagari Hindi; Tiro Devanagari Marathi=Tiro Devanagari Marathi; Tiro Devanagari Sanskrit=Tiro Devanagari Sanskrit; Tiro Gurmukhi=Tiro Gurmukhi; Tiro Kannada=Tiro Kannada; Tiro Tamil=Tiro Tamil; Tiro Telugu=Tiro Telugu; Titan One=Titan One; Titillium Web=Titillium Web; Tomorrow=Tomorrow; Tourney=Tourney; Trade Winds=Trade Winds; Train One=Train One; Trirong=Trirong; Trispace=Trispace; Trocchi=Trocchi; Trochut=Trochut; Truculenta=Truculenta; Trykker=Trykker; Tulpen One=Tulpen One; Turret Road=Turret Road; Twinkle Star=Twinkle Star; Ubuntu Condensed=Ubuntu Condensed; Ubuntu Mono=Ubuntu Mono; Ubuntu=Ubuntu; Uchen=Uchen; Ultra=Ultra; Uncial Antiqua=Uncial Antiqua; Underdog=Underdog; Unica One=Unica One; UnifrakturCook=UnifrakturCook; UnifrakturMaguntia=UnifrakturMaguntia; Unkempt=Unkempt; Unlock=Unlock; Unna=Unna; Updock=Updock; Urbanist=Urbanist; Vampiro One=Vampiro One; Varela Round=Varela Round; Varela=Varela; Varta=Varta; Vast Shadow=Vast Shadow; Vazirmatn=Vazirmatn; Vesper Libre=Vesper Libre; Viaoda Libre=Viaoda Libre; Vibes=Vibes; Vibur=Vibur; Vidaloka=Vidaloka; Viga=Viga; Voces=Voces; Volkhov=Volkhov; Vollkorn SC=Vollkorn SC; Vollkorn=Vollkorn; Voltaire=Voltaire; VT323=VT323; Vujahday Script=Vujahday Script; Waiting for the Sunrise=Waiting for the Sunrise; Wallpoet=Wallpoet; Walter Turncoat=Walter Turncoat; Warnes=Warnes; Water Brush=Water Brush; Waterfall=Waterfall; Wellfleet=Wellfleet; Wendy One=Wendy One; Whisper=Whisper; WindSong=WindSong; Wire One=Wire One; Work Sans=Work Sans; Xanh Mono=Xanh Mono; Yaldevi=Yaldevi; Yanone Kaffeesatz=Yanone Kaffeesatz; Yantramanav=Yantramanav; Yatra One=Yatra One; Yellowtail=Yellowtail; Yeon Sung=Yeon Sung; Yeseva One=Yeseva One; Yesteryear=Yesteryear; Yomogi=Yomogi; Yrsa=Yrsa; Yuji Boku=Yuji Boku; Yuji Mai=Yuji Mai; Yuji Syuku=Yuji Syuku; Yusei Magic=Yusei Magic; ZCOOL KuaiLe=ZCOOL KuaiLe; ZCOOL QingKe HuangYou=ZCOOL QingKe HuangYou; ZCOOL XiaoWei=ZCOOL XiaoWei; Zen Antique Soft=Zen Antique Soft; Zen Antique=Zen Antique; Zen Dots=Zen Dots; Zen Kaku Gothic Antique=Zen Kaku Gothic Antique; Zen Kaku Gothic New=Zen Kaku Gothic New; Zen Kurenaido=Zen Kurenaido; Zen Loop=Zen Loop; Zen Maru Gothic=Zen Maru Gothic; Zen Old Mincho=Zen Old Mincho; Zen Tokyo Zoo=Zen Tokyo Zoo; Zeyada=Zeyada; Zhi Mang Xing=Zhi Mang Xing; Zilla Slab Highlight=Zilla Slab Highlight; Zilla Slab=Zilla Slab;";
+
+        var content_style = "ABeeZee|Abel|Abhaya+Libre|Abril+Fatface|Aclonica|Acme|Actor|Adamina|Advent+Pro|Aguafina+Script|Akaya+Kanadaka|Akaya+Telivigala|Akronim|Akshar|Aladin|Alata|Alatsi|Albert+Sans|Aldrich|Alef|Alegreya+Sans+SC|Alegreya+Sans|Alegreya+SC|Alegreya|Aleo|Alex+Brush|Alfa+Slab+One|Alice|Alike+Angular|Alike|Allan|Allerta+Stencil|Allerta|Allison|Allura|Almarai|Almendra+Display|Almendra+SC|Almendra|Alumni+Sans+Inline+One|Alumni+Sans|Amarante|Amaranth|Amatic+SC|Amethysta|Amiko|Amiri|Amita|Anaheim|Andada+Pro|Andika|Anek+Bangla|Anek+Devanagari|Anek+Gujarati|Anek+Gurmukhi|Anek+Kannada|Anek+Latin|Anek+Malayalam|Anek+Odia|Anek+Tamil|Anek+Telugu|Angkor|Annie+Use+Your+Telescope|Anonymous+Pro|Antic+Didone|Antic+Slab|Antic|Anton|Antonio|Anybody|Arapey|Arbutus+Slab|Arbutus|Architects+Daughter|Archivo+Black|Archivo+Narrow|Archivo|Are+You+Serious|Aref+Ruqaa|Arima+Madurai|Arima|Arimo|Arizonia|Armata|Arsenal|Artifika|Arvo|Arya|Asap+Condensed|Asap|Asar|Asset|Assistant|Astloch|Asul|Athiti|Atkinson+Hyperlegible|Atma|Atomic+Age|Aubrey|Audiowide|Autour+One|Average+Sans|Average|Averia+Gruesa+Libre|Averia+Libre|Averia+Sans+Libre|Averia+Serif+Libre|Azeret+Mono|B612+Mono|B612|Babylonica|Bad+Script|Bahiana|Bahianita|Bai+Jamjuree|Bakbak+One|Ballet|Baloo+2|Baloo+Bhai+2|Baloo+Bhaijaan+2|Baloo+Bhaina+2|Baloo+Chettan+2|Baloo+Da+2|Baloo+Paaji+2|Baloo+Tamma+2|Baloo+Tammudu+2|Baloo+Thambi+2|Balsamiq+Sans|Balthazar|Bangers|Barlow+Condensed|Barlow+Semi+Condensed|Barlow|Barriecito|Barrio|Basic|Baskervville|Battambang|Baumans|Bayon|Be+Vietnam+Pro|Beau+Rivage|Bebas+Neue|Belgrano|Bellefair|Belleza|Bellota+Text|Bellota|BenchNine|Benne|Bentham|Berkshire+Swash|Besley|Beth+Ellen|Bevan|BhuTuka+Expanded+One|Big+Shoulders+Display|Big+Shoulders+Inline+Display|Big+Shoulders+Inline+Text|Big+Shoulders+Stencil+Display|Big+Shoulders+Stencil+Text|Big+Shoulders+Text|Bigelow+Rules|Bigshot+One|Bilbo+Swash+Caps|Bilbo|BioRhyme+Expanded|BioRhyme|Birthstone+Bounce|Birthstone|Biryani|Bitter|BIZ+UDGothic|BIZ+UDMincho|BIZ+UDPGothic|BIZ+UDPMincho|Black+And+White+Picture|Black+Han+Sans|Black+Ops+One|Blaka+Hollow|Blaka|Blinker|Bodoni+Moda|Bokor|Bona+Nova|Bonbon|Bonheur+Royale|Boogaloo|Bowlby+One+SC|Bowlby+One|Brawler|Bree+Serif|Brygada+1918|Bubblegum+Sans|Bubbler+One|Buda|Buenard|Bungee+Hairline|Bungee+Inline|Bungee+Outline|Bungee+Shade|Bungee|Butcherman|Butterfly+Kids|Cabin+Condensed|Cabin+Sketch|Cabin|Caesar+Dressing|Cagliostro|Cairo|Caladea|Calistoga|Calligraffitti|Cambay|Cambo|Candal|Cantarell|Cantata+One|Cantora+One|Capriola|Caramel|Carattere|Cardo|Carme|Carrois+Gothic+SC|Carrois+Gothic|Carter+One|Castoro|Catamaran|Caudex|Caveat+Brush|Caveat|Cedarville+Cursive|Ceviche+One|Chakra+Petch|Changa+One|Changa|Chango|Charis+SIL|Charm|Charmonman|Chathura|Chau+Philomene+One|Chela+One|Chelsea+Market|Chenla|Cherish|Cherry+Cream+Soda|Cherry+Swash|Chewy|Chicle|Chilanka|Chivo|Chonburi|Cinzel+Decorative|Cinzel|Clicker+Script|Coda+Caption|Coda|Codystar|Coiny|Combo|Comfortaa|Comforter+Brush|Comforter|Comic+Neue|Coming+Soon|Commissioner|Concert+One|Condiment|Content|Contrail+One|Convergence|Cookie|Copse|Corben|Corinthia|Cormorant+Garamond|Cormorant+Infant|Cormorant+SC|Cormorant+Unicase|Cormorant+Upright|Cormorant|Courgette|Courier+Prime|Cousine|Coustard|Covered+By+Your+Grace|Crafty+Girls|Creepster|Crete+Round|Crimson+Pro|Crimson+Text|Croissant+One|Crushed|Cuprum|Cute+Font|Cutive+Mono|Cutive|Damion|Dancing+Script|Dangrek|Darker+Grotesque|David+Libre|Dawning+of+a+New+Day|Days+One|Dekko|Dela+Gothic+One|Delius+Swash+Caps|Delius+Unicase|Delius|Della+Respira|Denk+One|Devonshire|Dhurjati|Didact+Gothic|Diplomata+SC|Diplomata|DM+Mono|DM+Sans|DM+Serif+Display|DM+Serif+Text|Do+Hyeon|Dokdo|Domine|Donegal+One|Dongle|Doppio+One|Dorsa|Dosis|DotGothic16|Dr+Sugiyama|Duru+Sans|Dynalight|Eagle+Lake|East+Sea+Dokdo|Eater|EB+Garamond|Economica|Eczar|Edu+NSW+ACT+Foundation|Edu+QLD+Beginner|Edu+SA+Beginner|Edu+TAS+Beginner|Edu+VIC+WA+NT+Beginner|El+Messiri|Electrolize|Elsie+Swash+Caps|Elsie|Emblema+One|Emilys+Candy|Encode+Sans+Condensed|Encode+Sans+Expanded|Encode+Sans+SC|Encode+Sans+Semi+Condensed|Encode+Sans+Semi+Expanded|Encode+Sans|Engagement|Englebert|Enriqueta|Ephesis|Epilogue|Erica+One|Esteban|Estonia|Euphoria+Script|Ewert|Exo+2|Exo|Expletus+Sans|Explora|Fahkwang|Familjen+Grotesk|Fanwood+Text|Farro|Farsan|Fascinate+Inline|Fascinate|Faster+One|Fasthand|Fauna+One|Faustina|Federant|Federo|Felipa|Fenix|Festive|Finger+Paint|Finlandica|Fira+Code|Fira+Mono|Fira+Sans+Condensed|Fira+Sans+Extra+Condensed|Fira+Sans|Fjalla+One|Fjord+One|Flamenco|Flavors|Fleur+De+Leah|Flow+Block|Flow+Circular|Flow+Rounded|Fondamento|Fontdiner+Swanky|Forum|Francois+One|Frank+Ruhl+Libre|Fraunces|Freckle+Face|Fredericka+the+Great|Fredoka+One|Fredoka|Freehand|Fresca|Frijole|Fruktur|Fugaz+One|Fuggles|Fuzzy+Bubbles|Gabriela|Gaegu|Gafata|Galada|Galdeano|Galindo|Gamja+Flower|Gantari|Gayathri|Gelasio|Gemunu+Libre|Genos|Gentium+Basic|Gentium+Book+Basic|Gentium+Book+Plus|Gentium+Plus|Geo|Georama|Geostar+Fill|Geostar|Germania+One|GFS+Didot|GFS+Neohellenic|Gideon+Roman|Gidugu|Gilda+Display|Girassol|Give+You+Glory|Glass+Antiqua|Glegoo|Gloria+Hallelujah|Glory|Gluten|Goblin+One|Gochi+Hand|Goldman|Gorditas|Gothic+A1|Gotu|Goudy+Bookletter+1911|Gowun+Batang|Gowun+Dodum|Graduate|Grand+Hotel|Grandstander|Grape+Nuts|Gravitas+One|Great+Vibes|Grechen+Fuemen|Grenze+Gotisch|Grenze|Grey+Qo|Griffy|Gruppo|Gudea|Gugi|Gulzar|Gupter|Gurajada|Gwendolyn|Habibi|Hachi+Maru+Pop|Hahmlet|Halant|Hammersmith+One|Hanalei+Fill|Hanalei|Handlee|Hanuman|Happy+Monkey|Harmattan|Headland+One|Heebo|Henny+Penny|Hepta+Slab|Herr+Von+Muellerhoff|Hi+Melody|Hina+Mincho|Hind+Guntur|Hind+Madurai|Hind+Siliguri|Hind+Vadodara|Hind|Holtwood+One+SC|Homemade+Apple|Homenaje|Hubballi|Hurricane|Ibarra+Real+Nova|IBM+Plex+Mono|IBM+Plex+Sans+Arabic|IBM+Plex+Sans+Condensed|IBM+Plex+Sans+Devanagari|IBM+Plex+Sans+Hebrew|IBM+Plex+Sans+KR|IBM+Plex+Sans+Thai+Looped|IBM+Plex+Sans+Thai|IBM+Plex+Sans|IBM+Plex+Serif|Iceberg|Iceland|IM+Fell+Double+Pica+SC|IM+Fell+Double+Pica|IM+Fell+DW+Pica+SC|IM+Fell+DW+Pica|IM+Fell+English+SC|IM+Fell+English|IM+Fell+French+Canon+SC|IM+Fell+French+Canon|IM+Fell+Great+Primer+SC|IM+Fell+Great+Primer|Imbue|Imperial+Script|Imprima|Inconsolata|Inder|Indie+Flower|Ingrid+Darling|Inika|Inknut+Antiqua|Inria+Sans|Inria+Serif|Inspiration|Inter|Irish+Grover|Island+Moments|Istok+Web|Italiana|Italianno|Itim|Jacques+Francois+Shadow|Jacques+Francois|Jaldi|JetBrains+Mono|Jim+Nightshade|Joan|Jockey+One|Jolly+Lodger|Jomhuria|Jomolhari|Josefin+Sans|Josefin+Slab|Jost|Joti+One|Jua|Judson|Julee|Julius+Sans+One|Junge|Jura|Just+Another+Hand|Just+Me+Again+Down+Here|K2D|Kadwa|Kaisei+Decol|Kaisei+HarunoUmi|Kaisei+Opti|Kaisei+Tokumin|Kalam|Kameron|Kanit|Kantumruy+Pro|Kantumruy|Karantina|Karla|Karma|Katibeh|Kaushan+Script|Kavivanar|Kavoon|Kdam+Thmor+Pro|Keania+One|Kelly+Slab|Kenia|Khand|Khmer|Khula|Kings|Kirang+Haerang|Kite+One|Kiwi+Maru|Klee+One|Knewave|Kodchasan|Koh+Santepheap|KoHo|Kolker+Brush|Kosugi+Maru|Kosugi|Kotta+One|Koulen|Kranky|Kreon|Kristi|Krona+One|Krub|Kufam|Kulim+Park|Kumar+One+Outline|Kumar+One|Kumbh+Sans|Kurale|La+Belle+Aurore|Lacquer|Laila|Lakki+Reddy|Lalezar|Lancelot|Langar|Lateef|Lato|Lavishly+Yours|League+Gothic|League+Script|League+Spartan|Leckerli+One|Ledger|Lekton|Lemon|Lemonada|Lexend+Deca|Lexend+Exa|Lexend+Giga|Lexend+Mega|Lexend+Peta|Lexend+Tera|Lexend+Zetta|Lexend|Libre+Barcode+128+Text|Libre+Barcode+128|Libre+Barcode+39+Extended+Text|Libre+Barcode+39+Extended|Libre+Barcode+39+Text|Libre+Barcode+39|Libre+Barcode+EAN13+Text|Libre+Baskerville|Libre+Bodoni|Libre+Caslon+Display|Libre+Caslon+Text|Libre+Franklin|Licorice|Life+Savers|Lilita+One|Lily+Script+One|Limelight|Linden+Hill|Literata|Liu+Jian+Mao+Cao|Livvic|Lobster+Two|Lobster|Londrina+Outline|Londrina+Shadow|Londrina+Sketch|Londrina+Solid|Long+Cang|Lora|Love+Light|Love+Ya+Like+A+Sister|Loved+by+the+King|Lovers+Quarrel|Luckiest+Guy|Lusitana|Lustria|Luxurious+Roman|Luxurious+Script|M+PLUS+1+Code|M+PLUS+1|M+PLUS+1p|M+PLUS+2|M+PLUS+Code+Latin|M+PLUS+Rounded+1c|Ma+Shan+Zheng|Macondo+Swash+Caps|Macondo|Mada|Magra|Maiden+Orange|Maitree|Major+Mono+Display|Mako|Mali|Mallanna|Mandali|Manjari|Manrope|Mansalva|Manuale|Marcellus+SC|Marcellus|Marck+Script|Margarine|Markazi+Text|Marko+One|Marmelad|Martel+Sans|Martel|Marvel|Mate+SC|Mate|Maven+Pro|McLaren|Mea+Culpa|Meddon|MedievalSharp|Medula+One|Meera+Inimai|Megrim|Meie+Script|Meow+Script|Merienda+One|Merienda|Merriweather+Sans|Merriweather|Metal+Mania|Metal|Metamorphous|Metrophobic|Michroma|Milonga|Miltonian+Tattoo|Miltonian|Mina|Mingzat|Miniver|Miriam+Libre|Mirza|Miss+Fajardose|Mitr|Mochiy+Pop+One|Mochiy+Pop+P+One|Modak|Modern+Antiqua|Mogra|Mohave|Molengo|Molle|Monda|Monofett|Monoton|Monsieur+La+Doulaise|Montaga|Montagu+Slab|MonteCarlo|Montez|Montserrat+Alternates|Montserrat+Subrayada|Montserrat|Moo+Lah+Lah|Moon+Dance|Moul|Moulpali|Mountains+of+Christmas|Mouse+Memoirs|Mr+Bedfort|Mr+Dafoe|Mr+De+Haviland|Mrs+Saint+Delafield|Mrs+Sheppards|Ms+Madi|Mukta+Mahee|Mukta+Malar|Mukta+Vaani|Mukta|Mulish|Murecho|MuseoModerno|My+Soul|Mystery+Quest|Nanum+Brush+Script|Nanum+Gothic+Coding|Nanum+Gothic|Nanum+Myeongjo|Nanum+Pen+Script|Neonderthaw|Nerko+One|Neucha|Neuton|New+Rocker|New+Tegomin|News+Cycle|Newsreader|Niconne|Niramit|Nixie+One|Nobile|Nokora|Norican|Nosifer|Notable|Nothing+You+Could+Do|Noticia+Text|Noto+Emoji|Noto+Kufi+Arabic|Noto+Music|Noto+Naskh+Arabic|Noto+Nastaliq+Urdu|Noto+Rashi+Hebrew|Noto+Sans+Adlam+Unjoined|Noto+Sans+Adlam|Noto+Sans+Anatolian+Hieroglyphs|Noto+Sans+Arabic|Noto+Sans+Armenian|Noto+Sans+Avestan|Noto+Sans+Balinese|Noto+Sans+Bamum|Noto+Sans+Bassa+Vah|Noto+Sans+Batak|Noto+Sans+Bengali|Noto+Sans+Bhaiksuki|Noto+Sans+Brahmi|Noto+Sans+Buginese|Noto+Sans+Buhid|Noto+Sans+Canadian+Aboriginal|Noto+Sans+Carian|Noto+Sans+Caucasian+Albanian|Noto+Sans+Chakma|Noto+Sans+Cham|Noto+Sans+Cherokee|Noto+Sans+Coptic|Noto+Sans+Cuneiform|Noto+Sans+Cypriot|Noto+Sans+Deseret|Noto+Sans+Devanagari|Noto+Sans+Display|Noto+Sans+Duployan|Noto+Sans+Egyptian+Hieroglyphs|Noto+Sans+Elbasan|Noto+Sans+Elymaic|Noto+Sans+Georgian|Noto+Sans+Glagolitic|Noto+Sans+Gothic|Noto+Sans+Grantha|Noto+Sans+Gujarati|Noto+Sans+Gunjala+Gondi|Noto+Sans+Gurmukhi|Noto+Sans+Hanifi+Rohingya|Noto+Sans+Hanunoo|Noto+Sans+Hatran|Noto+Sans+Hebrew|Noto+Sans+HK|Noto+Sans+Imperial+Aramaic|Noto+Sans+Indic+Siyaq+Numbers|Noto+Sans+Inscriptional+Pahlavi|Noto+Sans+Inscriptional+Parthian|Noto+Sans+Javanese|Noto+Sans+JP|Noto+Sans+Kaithi|Noto+Sans+Kannada|Noto+Sans+Kayah+Li|Noto+Sans+Kharoshthi|Noto+Sans+Khmer|Noto+Sans+Khojki|Noto+Sans+Khudawadi|Noto+Sans+KR|Noto+Sans+Lao|Noto+Sans+Lepcha|Noto+Sans+Limbu|Noto+Sans+Linear+A|Noto+Sans+Linear+B|Noto+Sans+Lisu|Noto+Sans+Lycian|Noto+Sans+Lydian|Noto+Sans+Mahajani|Noto+Sans+Malayalam|Noto+Sans+Mandaic|Noto+Sans+Manichaean|Noto+Sans+Marchen|Noto+Sans+Masaram+Gondi|Noto+Sans+Math|Noto+Sans+Mayan+Numerals|Noto+Sans+Medefaidrin|Noto+Sans+Meetei+Mayek|Noto+Sans+Meroitic|Noto+Sans+Miao|Noto+Sans+Modi|Noto+Sans+Mongolian|Noto+Sans+Mono|Noto+Sans+Mro|Noto+Sans+Multani|Noto+Sans+Myanmar|Noto+Sans+N+Ko|Noto+Sans+Nabataean|Noto+Sans+New+Tai+Lue|Noto+Sans+Newa|Noto+Sans+Nushu|Noto+Sans+Ogham|Noto+Sans+Ol+Chiki|Noto+Sans+Old+Hungarian|Noto+Sans+Old+Italic|Noto+Sans+Old+North+Arabian|Noto+Sans+Old+Permic|Noto+Sans+Old+Persian|Noto+Sans+Old+Sogdian|Noto+Sans+Old+South+Arabian|Noto+Sans+Old+Turkic|Noto+Sans+Oriya|Noto+Sans+Osage|Noto+Sans+Osmanya|Noto+Sans+Pahawh+Hmong|Noto+Sans+Palmyrene|Noto+Sans+Pau+Cin+Hau|Noto+Sans+Phags+Pa|Noto+Sans+Phoenician|Noto+Sans+Psalter+Pahlavi|Noto+Sans+Rejang|Noto+Sans+Runic|Noto+Sans+Samaritan|Noto+Sans+Saurashtra|Noto+Sans+SC|Noto+Sans+Sharada|Noto+Sans+Shavian|Noto+Sans+Siddham|Noto+Sans+Sinhala|Noto+Sans+Sogdian|Noto+Sans+Sora+Sompeng|Noto+Sans+Soyombo|Noto+Sans+Sundanese|Noto+Sans+Syloti+Nagri|Noto+Sans+Symbols+2|Noto+Sans+Symbols|Noto+Sans+Syriac|Noto+Sans+Tagalog|Noto+Sans+Tagbanwa|Noto+Sans+Tai+Le|Noto+Sans+Tai+Tham|Noto+Sans+Tai+Viet|Noto+Sans+Takri|Noto+Sans+Tamil+Supplement|Noto+Sans+Tamil|Noto+Sans+TC|Noto+Sans+Telugu|Noto+Sans+Thaana|Noto+Sans+Thai+Looped|Noto+Sans+Thai|Noto+Sans+Tifinagh|Noto+Sans+Tirhuta|Noto+Sans+Ugaritic|Noto+Sans+Vai|Noto+Sans+Wancho|Noto+Sans+Warang+Citi|Noto+Sans+Yi|Noto+Sans+Zanabazar+Square|Noto+Sans|Noto+Serif+Ahom|Noto+Serif+Armenian|Noto+Serif+Balinese|Noto+Serif+Bengali|Noto+Serif+Devanagari|Noto+Serif+Display|Noto+Serif+Dogra|Noto+Serif+Ethiopic|Noto+Serif+Georgian|Noto+Serif+Grantha|Noto+Serif+Gujarati|Noto+Serif+Gurmukhi|Noto+Serif+Hebrew|Noto+Serif+JP|Noto+Serif+Kannada|Noto+Serif+Khmer|Noto+Serif+KR|Noto+Serif+Lao|Noto+Serif+Malayalam|Noto+Serif+Myanmar|Noto+Serif+Nyiakeng+Puachue+Hmong|Noto+Serif+SC|Noto+Serif+Sinhala|Noto+Serif+Tamil|Noto+Serif+Tangut|Noto+Serif+TC|Noto+Serif+Telugu|Noto+Serif+Thai|Noto+Serif+Tibetan|Noto+Serif+Yezidi|Noto+Serif|Noto+Traditional+Nushu|Nova+Cut|Nova+Flat|Nova+Mono|Nova+Oval|Nova+Round|Nova+Script|Nova+Slim|Nova+Square|NTR|Numans|Nunito+Sans|Nunito|Nuosu+SIL|Odibee+Sans|Odor+Mean+Chey|Offside|Oi|Old+Standard+TT|Oldenburg|Ole|Oleo+Script+Swash+Caps|Oleo+Script|Oooh+Baby|Open+Sans|Oranienbaum|Orbitron|Oregano|Orelega+One|Orienta|Original+Surfer|Oswald|Outfit|Over+the+Rainbow|Overlock+SC|Overlock|Overpass+Mono|Overpass|Ovo|Oxanium|Oxygen+Mono|Oxygen|Pacifico|Padauk|Palanquin+Dark|Palanquin|Pangolin|Paprika|Parisienne|Passero+One|Passion+One|Passions+Conflict|Pathway+Gothic+One|Patrick+Hand+SC|Patrick+Hand|Pattaya|Patua+One|Pavanam|Paytone+One|Peddana|Peralta|Permanent+Marker|Petemoss|Petit+Formal+Script|Petrona|Philosopher|Piazzolla|Piedra|Pinyon+Script|Pirata+One|Plaster|Play|Playball|Playfair+Display+SC|Playfair+Display|Plus+Jakarta+Sans|Podkova|Poiret+One|Poller+One|Poly|Pompiere|Pontano+Sans|Poor+Story|Poppins|Port+Lligat+Sans|Port+Lligat+Slab|Potta+One|Pragati+Narrow|Praise|Prata|Preahvihear|Press+Start+2P|Pridi|Princess+Sofia|Prociono|Prompt|Prosto+One|Proza+Libre|PT+Mono|PT+Sans+Caption|PT+Sans+Narrow|PT+Sans|PT+Serif+Caption|PT+Serif|Public+Sans|Puppies+Play|Puritan|Purple+Purse|Qahiri|Quando|Quantico|Quattrocento+Sans|Quattrocento|Questrial|Quicksand|Quintessential|Qwigley|Qwitcher+Grypen|Racing+Sans+One|Radio+Canada|Radley|Rajdhani|Rakkas|Raleway+Dots|Raleway|Ramabhadra|Ramaraja|Rambla|Rammetto+One|Rampart+One|Ranchers|Rancho|Ranga|Rasa|Rationale|Ravi+Prakash|Readex+Pro|Recursive|Red+Hat+Display|Red+Hat+Mono|Red+Hat+Text|Red+Rose|Redacted+Script|Redacted|Redressed|Reem+Kufi|Reenie+Beanie|Reggae+One|Revalia|Rhodium+Libre|Ribeye+Marrow|Ribeye|Righteous|Risque|Road+Rage|Roboto+Condensed|Roboto+Flex|Roboto+Mono|Roboto+Serif|Roboto+Slab|Roboto|Rochester|Rock+Salt|RocknRoll+One|Rokkitt|Romanesco|Ropa+Sans|Rosario|Rosarivo|Rouge+Script|Rowdies|Rozha+One|Rubik+Beastly|Rubik+Bubbles|Rubik+Glitch|Rubik+Microbe|Rubik+Mono+One|Rubik+Moonrocks|Rubik+Puddles|Rubik+Wet+Paint|Rubik|Ruda|Rufina|Ruge+Boogie|Ruluko|Rum+Raisin|Ruslan+Display|Russo+One|Ruthie|Rye|Sacramento|Sahitya|Sail|Saira+Condensed|Saira+Extra+Condensed|Saira+Semi+Condensed|Saira+Stencil+One|Saira|Salsa|Sanchez|Sancreek|Sansita+Swashed|Sansita|Sarabun|Sarala|Sarina|Sarpanch|Sassy+Frass|Satisfy|Sawarabi+Gothic|Sawarabi+Mincho|Scada|Scheherazade+New|Schoolbell|Scope+One|Seaweed+Script|Secular+One|Sedgwick+Ave+Display|Sedgwick+Ave|Sen|Send+Flowers|Sevillana|Seymour+One|Shadows+Into+Light+Two|Shadows+Into+Light|Shalimar|Shanti|Share+Tech+Mono|Share+Tech|Share|Shippori+Antique+B1|Shippori+Antique|Shippori+Mincho+B1|Shippori+Mincho|Shojumaru|Short+Stack|Shrikhand|Siemreap|Sigmar+One|Signika+Negative|Signika|Simonetta|Single+Day|Sintony|Sirin+Stencil|Six+Caps|Skranji|Slabo+13px|Slabo+27px|Slackey|Smokum|Smooch+Sans|Smooch|Smythe|Sniglet|Snippet|Snowburst+One|Sofadi+One|Sofia|Solway|Song+Myung|Sonsie+One|Sora|Sorts+Mill+Goudy|Source+Code+Pro|Source+Sans+3|Source+Sans+Pro|Source+Serif+4|Source+Serif+Pro|Space+Grotesk|Space+Mono|Special+Elite|Spectral+SC|Spectral|Spicy+Rice|Spinnaker|Spirax|Splash|Spline+Sans+Mono|Spline+Sans|Squada+One|Square+Peg|Sree+Krushnadevaraya|Sriracha|Srisakdi|Staatliches|Stalemate|Stalinist+One|Stardos+Stencil|Stick+No+Bills|Stick|Stint+Ultra+Condensed|Stint+Ultra+Expanded|STIX+Two+Text|Stoke|Strait|Style+Script|Stylish|Sue+Ellen+Francisco|Suez+One|Sulphur+Point|Sumana|Sunflower|Sunshiney|Supermercado+One|Sura|Suranna|Suravaram|Suwannaphum|Swanky+and+Moo+Moo|Syncopate|Syne+Mono|Syne+Tactile|Syne|Tai+Heritage+Pro|Tajawal|Tangerine|Tapestry|Taprom|Tauri|Taviraj|Teko|Telex|Tenali+Ramakrishna|Tenor+Sans|Text+Me+One|Texturina|Thasadith|The+Girl+Next+Door|The+Nautigal|Tienne|Tillana|Timmana|Tinos|Tiro+Bangla|Tiro+Devanagari+Hindi|Tiro+Devanagari+Marathi|Tiro+Devanagari+Sanskrit|Tiro+Gurmukhi|Tiro+Kannada|Tiro+Tamil|Tiro+Telugu|Titan+One|Titillium+Web|Tomorrow|Tourney|Trade+Winds|Train+One|Trirong|Trispace|Trocchi|Trochut|Truculenta|Trykker|Tulpen+One|Turret+Road|Twinkle+Star|Ubuntu+Condensed|Ubuntu+Mono|Ubuntu|Uchen|Ultra|Uncial+Antiqua|Underdog|Unica+One|UnifrakturCook|UnifrakturMaguntia|Unkempt|Unlock|Unna|Updock|Urbanist|Vampiro+One|Varela+Round|Varela|Varta|Vast+Shadow|Vazirmatn|Vesper+Libre|Viaoda+Libre|Vibes|Vibur|Vidaloka|Viga|Voces|Volkhov|Vollkorn+SC|Vollkorn|Voltaire|VT323|Vujahday+Script|Waiting+for+the+Sunrise|Wallpoet|Walter+Turncoat|Warnes|Water+Brush|Waterfall|Wellfleet|Wendy+One|Whisper|WindSong|Wire+One|Work+Sans|Xanh+Mono|Yaldevi|Yanone+Kaffeesatz|Yantramanav|Yatra+One|Yellowtail|Yeon+Sung|Yeseva+One|Yesteryear|Yomogi|Yrsa|Yuji+Boku|Yuji+Mai|Yuji+Syuku|Yusei+Magic|ZCOOL+KuaiLe|ZCOOL+QingKe+HuangYou|ZCOOL+XiaoWei|Zen+Antique+Soft|Zen+Antique|Zen+Dots|Zen+Kaku+Gothic+Antique|Zen+Kaku+Gothic+New|Zen+Kurenaido|Zen+Loop|Zen+Maru+Gothic|Zen+Old+Mincho|Zen+Tokyo+Zoo|Zeyada|Zhi+Mang+Xing|Zilla+Slab+Highlight|Zilla+Slab";
+        // Format options
+        
+        $(document).ready(function () {
+           
+            $('[name=menuSearch]').keyup(function () {
+                var filter_items = $('[data-filter]');
+                var search_val = $(this).val();
+                if (search_val != '') { filter_items.addClass('search-hide'); $('[data-filter*=' + (search_val.toLowerCase()) + ']').removeClass('search-hide'); }
+                else filter_items.removeClass('search-hide');
+            });
+            $.getJSON("https://ipgeolocation.abstractapi.com/v1/?api_key=90966403381a480e9b9a918e7248d73d", function (data) {
+                GeoCountryCode = data.country_code;
+                if (GeoCountryCode === "IN") {
+                    $(".pck-cur").text('₹');
+                    $(".pck-price-m").text('700');
+                    $(".pck-price-y").text('6000');
+                    $(".pck-btn-m").off('click');
+                    $(".pck-btn-m").click(function () { PayNow(-106); });
+                    $(".pck-btn-y").off('click');
+                    $(".pck-btn-y").click(function () { PayNow(-105); });
+                }
+                else {
+                    $(".pck-cur").text('$');
+                    $(".pck-price-m").text('19');
+                    $(".pck-price-y").text('99');
+                    $(".pck-btn-m").off('click');
+                    $(".pck-btn-m").click(function () { PayNow(-108); });
+                    $(".pck-btn-y").off('click');
+                    $(".pck-btn-y").click(function () { PayNow(-109); });
+                }
+            });
+            
+
+            $("#GlobalSearchModal").on('shown.bs.modal', function () {
+                $("#GlobalSearchText").val($("#mainSearch").val()).focus();
+                $("#mainSearch").val('');
+                $(".sr-listing").empty();
+            });
+
+        });
+        
 
 
+        function ShowGlobalSearch() {
+            $("#GlobalSearchModal").modal('show');
 
-<script type="text/javascript">
+            $.ajax({
+                url: '/Account/GetGlobalSearchData',
+                type: 'POST',
+                data: {},
+                success: function (returnData) {
+                    if (returnData.Result == "OK") {
+                        GlobalSearchData = JSON.parse(returnData.data);
+                    }
+                },
+                error: function () { toastr.error("Oops! Something went wrong. Please try again later."); return data; }
+            });
+        }
+        function SearchGlobalData(e) {
+            if (e.keyCode !== 40 && e.keyCode !== 38) {
+                var searchTerm = $("#GlobalSearchText").val().trim().toLowerCase();
+                var SearchData = GlobalSearchData.filter(x => x.Title.toLowerCase().indexOf(searchTerm) > -1 || x.Keywords.indexOf(searchTerm) > -1);
+                $(".sr-listing").empty();
+                if ($("#GlobalSearchText").val() !== "") {
+
+                    $(".search-default").hide();
+                    $(".search-result").show();
+                    for (var i = 0; i < SearchData.length; i++) {
+                        if (i < 8) {
+                            $(".sr-listing").append(`
+                        <li>
+                            <a href="`+ SearchData[i].URL + `">
+                                <span class="sr-icon">
+                                    `+ SearchData[i].Icon + `
+                                </span>
+                                <span class="sr-text">
+                                    <h6>`+ SearchData[i].Title + `</h6>
+                                    <p>`+ SearchData[i].Type + `</p>
+                                </span>
+                            </a>
+                        </li>`);
+                        }
+                    }
+
+
+                    var li = $('.sr-listing > li');
+                    var liSelected;
+                    $(window).on('keydown', function (e) {
+
+                        if (e.which === 40) {
+                            if (liSelected) {
+                                liSelected.removeClass('active');
+                                next = liSelected.next();
+                                if (next.length > 0) {
+                                    liSelected = next.addClass('active');
+
+                                } else {
+                                    liSelected = li.eq(0).addClass('active');
+                                }
+                            } else {
+                                liSelected = li.eq(0).addClass('active');
+                            }
+                        } else if (e.which === 38) {
+                            if (liSelected) {
+                                liSelected.removeClass('active');
+                                next = liSelected.prev();
+                                if (next.length > 0) {
+                                    liSelected = next.addClass('active');
+                                } else {
+                                    liSelected = li.last().addClass('active');
+                                }
+                            } else {
+                                liSelected = li.last().addClass('active');
+                            }
+                        }
+                        else if (e.which === 13) {
+                            $("#GlobalSearchModal").modal('hide');
+                            var url = $('.sr-listing li.active a').attr('href');
+                            if (url != undefined && url != "") location.href = url;
+                        }
+                    });
+                }
+                else {
+                    $(".search-default").show();
+                    $(".search-result").hide();
+                }
+            }
+        }
+    
+
+    </script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/kineticjs/5.2.0/kinetic.js"  > </script>
+    
+    
+    <script>
+        //Set Menu Active
+        $("#Menu_HomeParent").addClass('active show');
+        $(".home-submenu").addClass('show');
+        
+      
+    </script>
+        <script type="text/javascript">
 
     function readURL(input) {
         var _URL = window.URL || window.webkitURL;
@@ -614,7 +758,7 @@
     
     function uploadImage(file) {
         var currentImage = $("#headerProfilePic").attr('src');
-        var currentImageSplit = currentImage.trim().split('/');
+        var currentImageSplit = currentImage.split('/');
         var path = "";
         for(var j = 0;j<currentImageSplit.length-1;j++){
             path+= (currentImageSplit[j] + '/')
@@ -636,12 +780,16 @@
                 if (returnData.status) {
                     $("#successModal").modal('show');
                     returnVal = true;
+                    console.log(path + returnData.ProfilePic);
                     $("#headerProfilePic").attr('src' ,path + returnData.ProfilePic);
-                    $("#user-profile-img").attr('src' ,path + returnData.ProfilePic);
+                    
                     $("#user-img-dropdown").attr('src' ,path + returnData.ProfilePic);
+                    $("#PhotoIMG").attr('style' , "background-image: url('"+path + returnData.ProfilePic+"');" );
+                    
                 }
                 else {
                     $("#swal2-html-container").textContent  = returnData.errorMsg
+                    $("#PhotoIMG").attr('style','background-image: none');
                     $("#errorModal").modal('show'); 
                 }
             },
@@ -653,7 +801,7 @@
     }
     function removeProfilePic() {
         var currentImage = $("#headerProfilePic").attr('src');
-        var currentImageSplit = currentImage.trim().split('/');
+        var currentImageSplit = currentImage.split('/');
         var path = "";
         for(var j = 0;j<currentImageSplit.length-1;j++){
             path+= (currentImageSplit[j] + '/')
@@ -668,8 +816,9 @@
                     $("#successModal").modal('show');
                     returnVal = true;
                     $("#headerProfilePic").attr('src' ,path + "blank.png");
-                    $("#user-profile-img").attr('src' ,path + "blank.png");
+                    
                     $("#user-img-dropdown").attr('src' ,path + "blank.png");
+                    $("#PhotoIMG").attr('style','background-image: none');
                 }
                 else {
                     $("#swal2-html-container").textContent  = returnData.errorMsg
@@ -734,8 +883,7 @@
             return false;
         }
         returnVal = false;
-        displayToggle("#save_profile_btn")
-                    displayToggle("#progress_profile_btn")
+        
         $.ajax({
             url: '/Home/updateProfileDetails',
             type: 'POST',
@@ -757,8 +905,7 @@
                 $("#errorModal").modal('show');
              }
         });
-        displayToggle("#save_profile_btn")
-        displayToggle("#progress_profile_btn")
+        
         return returnVal;
     }
 
@@ -950,3 +1097,12 @@
         
     }
 </script>
+</body>
+
+
+
+
+
+
+
+

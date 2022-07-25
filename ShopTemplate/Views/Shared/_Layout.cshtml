@@ -1,59 +1,28 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
+    <base href="../../">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/custom-style.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/plugins.bundle.css asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/style.bundle.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/nav.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/css.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ShopTemplate.styles.css" asp-append-version="true" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
     <link rel="shortcut icon" href="https://app.shopivana.com/Content/images/Icons/favicon.png?1.0.2.4?id=1.0.2.4" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!--begin::Fonts-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
-    
+    <!--end::Fonts-->
+    <!--begin::Global Stylesheets Bundle(used by all pages)-->
+    <link href="~/css/plugins.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/style.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/custom-style.css" rel="stylesheet" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!--end::Global Stylesheets Bundle-->
     <style>
-        .mid_size_font{
-        
-            font-size: 15px!important;
-        }
-        .bg-body {
-    --bg-color: 255,255,255;
-    background-color: #fff!important;
-    padding : 0;
-    
-}body {
-    display: flex;
-    flex-direction: column;
-    color: #181c32;
-    
-}
-
-.content {
-    padding: 30px 0;
-}
-.flex-xl-row {
-    flex-direction: row!important;
-}
-.ms-lg-15 {
-    margin-left: 3.75rem!important;
-}
-.w-xl-350px {
-    width: 350px!important;
-}
-
         .validation-summary-errors {
-            font-size: 1rem;
+            font-size: .925rem;
             color: #f1416c;
-        }
-        .validation-summary-success {
-            font-size: 1rem;
-            color: #08cc6c;
         }
 
         .select2-container {
@@ -179,80 +148,247 @@
                 .input__field:focus + .input__label, .input__field:not(:placeholder-shown) + .input__label {background-image: none !important;
                 background-color: #ffffff !important;
             }
-            .p10{
-                padding: 2.5rem!important;
-            }
-            .fv-plugins-message-container.invalid-feedback{
-                display: block;
-                font-weight: 400
-            }
-            a {
-    transition: color .2s ease,background-color .2s ease;
-}
-a {
-    color: #009ef7;
-    text-decoration: none;
-}
-            .flex-root {
-    flex: 1;
-}
-.flex-column-fluid {
-    flex: 1 0 auto;
-}
-.py-10 {
-    padding-top: 2.5rem!important;
-    padding-bottom: 2.5rem!important;
-}
-.flex-center {
-    justify-content: center;
-    align-items: center;
-}
-.bg-white {
-    --bs-bg-opacity: 1;
-    background-color: rgba(var(--bs-white-rgb),var(--bs-bg-opacity))!important;
-}
-.p-10 {
-    padding: 2.5rem!important;
-}
-.mb-5 {
-    margin-bottom: 1.25rem!important;
-}
-.pb-10 {
-    padding-bottom: 2.5rem!important;
-}
-.fv-plugins-icon-container {
-    position: relative;
-}
-.btn.btn-icon .svg-icon, .btn.btn-icon i {
-    padding: 0;
-    margin: 0;
-    line-height: 1;
-}
-.btn i {
-    display: inline-flex;
-    font-size: 1rem;
-    padding-right: 0.35rem;
-    vertical-align: middle;
-    line-height: 0;
-}
     </style>
     <style>
-        .container-l{
-            width : 85%;
-            margin-right: auto;
-            margin-left: auto;
+        .timeline-label:before {
+            left: 91px;
         }
-        @@media (min-width: 992px){
-            .container-l {
-            padding: 0 30px;
+
+        .blob {
+            background: black;
+            box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
+            transform: scale(1);
+            animation: pulse-black 1.5s infinite;
+            padding: 10px 20px;
+            border-radius: 6px;
+            color: #fff;
+            font-weight: 500;
+            font-size: 1.2em;
+            cursor: pointer;
+        }
+
+            .blob.red {
+                background-color: #50cd89;
+                box-shadow: 0 0 0 0 #50cd89;
+                animation: pulse-red 2s infinite;
             }
-            .w-xl-350px {
-                margin-left: auto;
-                margin-right: auto;
+
+                .blob.red:hover {
+                    color: #ffffff;
+                    background-color: #47be7d !important;
+                    animation: none;
+                }
+
+            .blob.btn-primary:hover {
+                color: #ffffff !important;
+            }
+
+        @@keyframes pulse-red {
+            0% {
+                transform: scale(0.90);
+                box-shadow: 0 0 0 0 #50cd89AA;
+            }
+
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 16px #50cd8900;
+            }
+
+            100% {
+                transform: scale(0.90);
+                box-shadow: 0 0 0 0 #50cd8900;
             }
         }
-        
     </style>
+    <style>
+        .onboarding-card {
+            margin: auto;
+            max-width: 450px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px #1a181e0a;
+            background-color: #fff;
+        }
+
+        .p48 {
+            padding: 48px;
+        }
+
+        .mb40 {
+            margin-bottom: 40px;
+        }
+
+        .onboarding-card .section-text-1 {
+            font-size: 28px;
+            line-height: 36px;
+            font-weight: 500;
+        }
+
+        .onboarding-card .mb8 {
+            margin-bottom: 8px;
+        }
+
+        .onboarding-card .c-black-3 {
+            color: #4d4d4d;
+        }
+
+        .onboarding-card .custom-stepper-step {
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            height: auto;
+        }
+
+        .onboarding-card .custom-stepper-step-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            align-self: stretch;
+            flex-direction: column;
+        }
+
+        .onboarding-card .custom-stepper-step-status-indicator.checked {
+            background-color: #009ef7;
+            border-color: #009ef7;
+        }
+
+        .onboarding-card .custom-stepper-step-status-indicator {
+            width: 40px;
+            height: 40px;
+            background-color: #fff;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            line-height: 20px;
+            font-weight: 500;
+            border: 2px solid rgba(0,0,0,0);
+            padding: 8px;
+            -webkit-user-select: none;
+            user-select: none;
+            min-height: 40px;
+        }
+
+        .onboarding-card .custom-stepper-step-connector.active {
+            background-color: #009ef7;
+        }
+
+        .onboarding-card .custom-stepper-step-connector {
+            width: 2px;
+            height: 100%;
+        }
+
+        .onboarding-card .flex-1 {
+            flex: 1 1;
+        }
+
+        .onboarding-card .custom-stepper-step-details {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            flex-direction: column;
+            min-height: 40px;
+            margin-left: 16px;
+            margin-bottom: 28px;
+        }
+
+        .onboarding-card .section-text-5 {
+            font-size: 16px;
+            margin: 0;
+            line-height: 24px;
+            font-weight: 500;
+        }
+
+        .onboarding-card .c-gray-1 {
+            color: gray;
+        }
+
+        .onboarding-card .text-8 {
+            font-size: 14px;
+            margin-top: 0px;
+            line-height: 20px;
+        }
+
+        .onboarding-card .external-link {
+            color: #1a181e;
+        }
+
+        .onboarding-card .underline {
+            text-decoration: underline;
+        }
+
+        .onboarding-card .c-purple-1-i {
+            color: #009ef7 !important;
+        }
+
+        .onboarding-card .custom-stepper-step-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            align-self: stretch;
+            flex-direction: column;
+        }
+
+        .onboarding-card .custom-stepper-step-status-indicator.active {
+            color: #009ef7;
+            background-color: #009ef71a;
+            border-color: #009ef7;
+        }
+
+        .onboarding-card .btn-small {
+            padding: 8px 16px;
+            font-size: 14px;
+            line-height: 20px;
+            font-weight: 500;
+            color: #fff;
+            cursor: pointer;
+            display: inline-block;
+            transition: .15s ease-in-out;
+            background-color: #0000;
+            -webkit-user-select: none;
+            user-select: none;
+            background-color: #009ef7;
+            border-radius: 4px;
+            text-align: center;
+            outline: none;
+            border: none;
+            text-decoration: none;
+        }
+
+        .onboarding-card .custom-stepper-step-status-indicator.disabled {
+            color: #999;
+            background-color: #fff;
+            border-color: #ccc;
+        }
+
+        .onboarding-card .custom-stepper-step-connector.disabled {
+            background-color: #ccc;
+        }
+
+        .onboarding-card .c-gray-4 {
+            color: #999;
+        }
+
+        #kt_content {
+            min-height: 93vh;
+        }
+
+        .animate__animated {
+            -webkit-animation-duration: 1s;
+            animation-duration: 1s;
+            -webkit-animation-duration: var(--animate-duration);
+            animation-duration: var(--animate-duration);
+            -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+        }
+
+        .animate__zoomIn {
+            -webkit-animation-name: zoomIn;
+            animation-name: zoomIn;
+        }
+    </style>
+    <!-- Google Tag Manager -->
+    <!-- End Google Tag Manager -->
 </head>
 <body class="bg-body">
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5SRRMXB" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -261,11 +397,30 @@ a {
             @RenderBody()
         </main>
    
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/nav.js" ></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="~/js/plugins.bundle.js"></script>
+    <script src="~/js/scripts.bundle.js?id=1.0.2.4"></script>
+    <!--begin::Javascript-->
+    <!--begin::Global Javascript Bundle(used by all pages)-->
+    
+    <!--end::Global Javascript Bundle-->
+    <!--end::Javascript-->
+    
+    
+    <!--begin::Page Custom Javascript(used by this page)-->
+    
+    <!--end::Page Custom Javascript-->
+    <script>
+        localStorage.sentToServer = '0';        
+        
+        
+    </script>
+    
+
+    
     <script>
         function displayToggle(id){
             if($(id).attr('style') == 'display : none') {
@@ -305,6 +460,9 @@ a {
         }
         function showError(Message) {
             Swal.fire({ html: Message, icon: "error", buttonsStyling: false, confirmButtonText: "Okay", customClass: { confirmButton: "btn btn-danger" } });
+        }
+        function showWarning(Message) {
+            Swal.fire({ html: Message, icon: "warning", buttonsStyling: false, confirmButtonText: "Okay", customClass: { confirmButton: "btn btn-warning" } });
         }
         function startProcess(selector) { document.querySelector(selector).setAttribute("data-kt-indicator", "on"); document.querySelector(selector).disabled = true; }
         function endProcess(selector) { document.querySelector(selector).removeAttribute("data-kt-indicator"); document.querySelector(selector).disabled = false; }

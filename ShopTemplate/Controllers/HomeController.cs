@@ -172,7 +172,7 @@ namespace ShopTemplate.Controllers
                     bool currPassCheck = validateCurrentPassword(user, updateObj.CurrentPassword);
                     if (currPassCheck)
                     {
-                        returnDetails = CheckEmailExists(updateObj.NewEmail);
+                        returnDetails = CheckEmailIsUnique(updateObj.NewEmail);
                         if ((bool)returnDetails["status"])
                         {
                             user.EmailId = updateObj.NewEmail;
@@ -215,7 +215,7 @@ namespace ShopTemplate.Controllers
             }
             return returnDetails;
         }
-        public Dictionary<string, object> CheckEmailExists(string emailId)
+        public Dictionary<string, object> CheckEmailIsUnique(string emailId)
         {
             bool returnVal = false;
             string errorMsg = "";

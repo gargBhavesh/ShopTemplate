@@ -1,18 +1,8 @@
 ﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor httpContextaccessor
 @{
-    ViewData["Title"] = "Login";
+    ViewData["Title"] = "Shopivana | Login";
 
-    if (httpContextaccessor.HttpContext.Request.Cookies["UserId"] != null){
-        ViewData["IsCookie"] = true;
-        ViewData["CookieVal"] = httpContextaccessor.HttpContext.Request.Cookies["UserId"];
-        ViewData["CookiePwd"] = httpContextaccessor.HttpContext.Request.Cookies["Password"];
-
-    }
-    else{
-        ViewData["IsCookie"] = false;
-        ViewData["CookieVal"] = "";
-        ViewData["CookiePwd"] = "";
-    }
+    
     if (TempData.ContainsKey("loginStatus")) {
         if ((bool)TempData["loginStatus"] == false) {
             string loginErrMag = TempData["loginError"].ToString();
@@ -27,97 +17,182 @@
         TempData.Remove("loginStatus"); 
     }
 }
-<div class="bg-body">
+<body id="kt_body" class="bg-body">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5SRRMXB" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <!--begin::Main-->
     <div class="d-flex flex-column flex-root" id="kt_body1">
+        <!--begin::Authentication - Sign-in -->
         <div class="d-flex flex-column flex-lg-row flex-column-fluid">
+            <!--begin::Aside-->
+            <div class="d-flex flex-column flex-lg-row-auto w-xl-600px positon-xl-relative d-none" style="background-color: #eef3f7;">
+                <!--begin::Wrapper-->
+                <div class="d-flex flex-column position-xl-fixed top-0 bottom-0 w-xl-600px scroll-y">
+                    <!--begin::Content-->
+                    <div class="d-flex flex-row-fluid flex-column text-center p-10 pt-lg-20">
+                        <!--begin::Logo-->
+                        <a href="https://shopivana.com" target="_blank" class="py-9 mb-5">
+                            <img alt="Logo" src="https://app.shopivana.com/Content/images/logo_default_dark.png?1.0.2.4" class="h-100px" />
+                        </a>
+                        <!--end::Logo-->
+                        <!--begin::Title-->
+                        <h1 class="fw-bolder fs-2qx pb-5 pb-md-10" style="color: #444;">Welcome to Shopivana</h1>
+                        <!--end::Title-->
+
+                    </div>
+                    <!--end::Content-->
+                    <!--begin::Illustration-->
+                    <div class="d-flex flex-row-auto bgi-no-repeat bgi-position-x-center bgi-size-contain bgi-position-y-bottom min-h-100px min-h-lg-350px" style="background-image: url('')"></div>
+                    <!--end::Illustration-->
+                </div>
+                <!--end::Wrapper-->
+            </div>
+            <!--end::Aside-->
+            <!--begin::Body-->
             <div class="d-flex flex-column flex-lg-row-fluid py-10 gradient-bg" style="flex: 1 auto; min-width: 0;">
+                <!--begin::Content-->
                 <div class="d-flex flex-center flex-column flex-column-fluid">
-                    <div class="w-lg-400px p-10 p-lg-10 mx-auto bg-white no-auth" style="border-radius: 8px;">
-                        <form class="form w-100 fv-plugins-bootstrap5 fv-plugins-framework" id="kt_sign_in_form" method="post" asp-action="Login">
-                            <div class="mb-5">
-                                <a href="https://shopivana.com" target="_blank" class="pb-10 d-block">
-                                    <img alt="Logo" src="https://app.shopivana.com/Content/images/logo_default_dark.png?1.0.2.4" class="h-60px">
-                                </a>
-                                <p class="text-dark mb-5 fs-1">Login</p>
-                                <p class="text-gray-700 mb-0">Log in to Shopivana to continue to the magic.</p>
-                            </div>
-                            
-                            <div class="fv-row mb-5 fv-plugins-icon-container">
-                                <label class="position-relative w-100">
-                                    @{
-                                        if ((bool)ViewData["IsCookie"])
-                                        {
-                                            <input class="input__field no-auth-input"  type="text" id="Email" name="Email" placeholder=" " value ="@ViewData["CookieVal"]" autocomplete="off" readonly onfocus="$(this).removeAttr('readonly');" onblur="$(this).attr('readonly');" onchange="    return validateEmailField();">
-                                    
-                                        }
-                                        else
-                                        {
-                                            <input class="input__field no-auth-input"  type="text" id="Email" name="Email" placeholder=" " autocomplete="off" readonly onfocus="$(this).removeAttr('readonly');" onblur="$(this).attr('readonly');" onchange="    return validateEmailField();">
-                                        
-                                        }
-                                    }
-                                    <span class="input__label">Email address</span>
-                                </label>
-                                <div class="fv-plugins-message-container invalid-feedback" id="emailfeedback">
+                    <!--begin::Wrapper-->
+                    <div class="w-lg-400px p-10 p-lg-10 mx-auto bg-white no-auth" style="border-radius: 8px;width:90%;">
+                        
+<!--begin::Form-->
+<form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" method="post" asp-action="Login">
+    <input name="__RequestVerificationToken" type="hidden" value="OWcUXzXM7Ip9wfqzzZOK_tr2RsfejWJKPkyNY0wk6jhQ92e_Uia-l7tQLHfj08T_Sg6ZsNnkIOT9OCTI7oCRuED8hudJVjT7wBjVe7RU_hU1" />
+    <!--begin::Heading-->
+    <div class="mb-5">
+        <a href="https://shopivana.com" target="_blank" class="pb-10 d-block">
+            <img alt="Logo" src="https://app.shopivana.com/Content/images/logo_default_dark.png?1.0.2.4" class="h-60px">
+        </a>
+        <!--begin::Title-->
+        <p class="text-dark mb-5 fs-1">Login</p>
+        <p class="text-gray-700 mb-0">Log in to Shopivana to continue to the magic.</p>
+        <!--end::Title-->
+    </div>
+    <!--begin::Heading-->
+    <!--begin::Input group-->
+    <div class="fv-row mb-5">
+        <!--begin::Input-->
+        <label class="position-relative w-100">
+            <input class="input__field no-auth-input" type="text" id="Email" name="Email" placeholder=" " autocomplete="off" readonly onfocus="$(this).removeAttr('readonly');" onblur="$(this).attr('readonly');" onchange="    return validateEmailField();">
+            <span class="input__label">Email address</span>
+        </label>
+        <div class="fv-plugins-message-container invalid-feedback" style="display:none" id="emailfeedback">
 
                                 </div>
-                            </div>
-                            <div class="fv-row mb-5 fv-plugins-icon-container">
-                                <label class="position-relative w-100">
-                                    @{
-                                        if ((bool)ViewData["IsCookie"])
-                                        {
-                                            <input class="input__field no-auth-input" required type="password" id="Password" name="Password" value ="@ViewData["CookiePwd"]" placeholder=" " autocomplete="off" readonly onfocus="$(this).removeAttr('readonly');" onblur="$(this).attr('readonly');" onchange="    return validatePasswordField();">
-                                        }
-                                        else
-                                        {
-                                            <input class="input__field no-auth-input"  required type="password" id="Password" name="Password"  placeholder=" " autocomplete="off" readonly onfocus="$(this).removeAttr('readonly');" onblur="$(this).attr('readonly');" onchange="    return validatePasswordField();">
-                                        }
-                                    }
-                                    <span class="input__label">Password</span>
-                                    <span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2" onclick="showPassword(this)">
-                                        <i class="bi bi-eye-slash fs-5"></i>
-                                    </span>
-                                </label>
-                                <div class="fv-plugins-message-container invalid-feedback" id="passwordfeedback">
+        <!--end::Input-->
+    </div>
+    <!--end::Input group-->
+    <!--begin::Input group-->
+    <div class="fv-row mb-5">
+        <!--begin::Input-->        
+        <label class="position-relative w-100">
+            <input class="input__field no-auth-input" type="password" id="Password" name="Password" placeholder=" " autocomplete="off" readonly onfocus="$(this).removeAttr('readonly');" onblur="$(this).attr('readonly');"  onchange="    return validatePasswordField();">
+            <span class="input__label">Password</span>
+            <span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2" onclick="showPassword(this)">
+                <i class="bi bi-eye-slash fs-2"></i>
+            </span>
+        </label>
+        <div class="fv-plugins-message-container invalid-feedback" style="display:none" id="passwordfeedback">
 
                                 </div>
-                            </div>
-                            <div class="row">
-                                    <div class="col-md-6">
-                                        <a asp-controller="User" asp-action="ForgotPassword" class="link-primary fs-6">Forgot password?</a>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input type="checkbox" for="Remember Me" id="rememberMe" name="rememberMe" />
-                                        <span >Remember Me</span>
-                                    </div>
+        <!--end::Input-->
+    </div>
+    <!--begin::Link-->
+    <a href="#" class="link-primary fs-6">Forgot password?</a>
+    <!--end::Link-->
+    
+    <div class="validation-summary-valid" data-valmsg-summary="true" id="validationSummary"><p ></p></div>
+    <!--end::Input group-->
+    <!--begin::Actions-->
+    <div class="text-left">
+        <!--begin::Submit button-->
+        <button type="button" id="kt_sign_in_submit" class="btn btn-lg btn-primary w-100 my-4" onclick = "return submitForm();">
+            <span class="indicator-label">Login</span>
+            <span class="indicator-progress">
+                Please wait...
+                <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+            </span>
+        </button>
 
-                            </div>
-                            
-                            <div class="fv-row mb-5 fv-plugins-icon-container">
-                                <div class="validation-summary-valid" data-valmsg-summary="true" id="validationSummary">
-                                <p style="display:none"></p>
-                            </div>
-                            </div>
-                            
-                            <div class="text-left">
-                                <button type="button" id="kt_sign_in_submit" class="btn btn-lg btn-primary w-100 my-4" onclick = "return submitForm();">
-                                    <span class="indicator-label">Login</span>
-                                    <span class="indicator-progress" id = "spinnerSpan" style ="display:true">
-                                        Please wait...
-                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
-                                    </span>
-                                </button>
-                                
-                                Don't have an account?&nbsp;<a asp-area="" asp-controller="User" asp-action="RegisterUser" class="link-primary">Sign up</a>
-                            </div>
-                        </form>
+        Don't have an account?&nbsp;<a asp-controller="User" asp-action="RegisterUser" class="link-primary">Sign up</a>
+        <!--end::Submit button-->
+
+    </div>
+
+    <!--end::Actions-->
+</form>
+<!--end::Form-->
+
+<div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered mw-650px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!--begin::Modal title-->
+                <h2 class="fw-bolder">Verify Mobile Number</h2>
+                <!--end::Modal title-->
+                <!--begin::Close-->
+                <div data-bs-dismiss="modal" class="btn btn-icon btn-sm btn-active-icon-primary">
+                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="" />
+                        </svg>
+                    </span>
+                    <!--end::Svg Icon-->
+                </div>
+                <!--end::Close-->
+            </div>
+            <div class="modal-body  py-10 px-lg-17">
+                <div class="scroll-y me-n7 pe-7" id="kt_modal_add_catalog_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_catalog_header" data-kt-scroll-wrappers="#kt_modal_add_catalog_scroll" data-kt-scroll-offset="300px">
+                    <div class="fv-row mb-7">
+                        <input type="text" id="BrandName" class="form-control" placeholder="Brand Name" required="" />
+                        <input type="hidden" id="SocialEmail" />
+                        <input type="hidden" id="SocialDisplayName" />
+                    </div>
+                    <div class="fv-row mb-7">
+                        <input type="text" id="SocialMobile" class="form-control" placeholder="Please enter 10 digit mobile number" style="border-right:none !important;" />
+                        <div class="input-group-append" style="display:none;">
+                            <button id="btnGetOTP" onclick="getOTP();" class="btn btn-brand" type="button" style="width:0;height:38px;border-top:18px solid transparent;border-left:8px solid;border-bottom:18px solid transparent;width:80px;padding:0 !important;line-height:0px;">
+                                Get OTP
+                            </button>
+                        </div>
+                    </div>
+                    <div class="fv-row mb-7" style="display:none;">
+                        <input type="text" id="SocialOTP" class="form-control" placeholder="Please enter OPT sent to your mobile number" />
+                    </div>
+                    <div class="text-center">
+                        <button type="button" id="btnUserLogin" class="btn btn-primary" onclick="register();">
+                            <span class="indicator-label">Register</span>
+                            <span class="indicator-progress">
+                                Please wait...
+                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                            </span>
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
+                    </div>
+                    <!--end::Wrapper-->
+                </div>
+                <!--end::Content-->
+
+            </div>
+            <!--end::Body-->
+        </div>
+        <!--end::Authentication - Sign-in-->
+    </div>
+    <!--end::Main-->
+    
+
+</body>
+
 
 <script type="text/javascript">
         
@@ -128,39 +203,50 @@
             
         });
         function validateEmailField() {
+            startProcess("#btnUserLogin");
             returnVal = true
             if ($("#Email").val().trim() == "") {
+                
                 $("#emailfeedback").html('<div data-field="Email" data-validator="notEmpty">Email address is required </div>')
+                $("#emailfeedback").attr('style',"")
                 returnVal = false
 
             }
             else {
                 valEmailVal = ValidateEmail($("#Email").val().trim())
                 if (valEmailVal == false) {
-                    $("#emailfeedback").html('<div data-field="Email" data-validator="notEmpty">Please enter a valid EmailId</div>')
+                    $("#emailfeedback").html('<div data-field="Email" data-validator="notEmpty">Please enter a valid Email address</div>')
+                    $("#emailfeedback").attr('style',"")
                     returnVal = false
                 } else { 
                     $("#emailfeedback").html('')
+                    $("#emailfeedback").attr('style',"display:none")
                 }
                 
             }
+            endProcess("#btnUserLogin");
             return returnVal
+            
         }
         function validatePasswordField() { 
+            startProcess("#btnUserLogin");
             returnVal = true
             if ($("#Password").val().trim() == "") {
                 $("#passwordfeedback").html('<div data-field="Password" data-validator="notEmpty">Password is required </div>')
+                $("#passwordfeedback").attr('style',"")
                 returnVal = false
 
             } else {
                 $("#passwordfeedback").html('')
+                $("#passwordfeedback").attr('style',"display:none")
             }
+            endProcess("#btnUserLogin");
             return returnVal
         }
         function validate(){
             returnVal =true
             $("#validationSummary").attr('class','validation-summary-valid')
-            $("#validationSummary").html('<p style="display:none"></p>')
+            $("#validationSummary").html('<p ></p>')
             
             retEmailVal = validateEmailField()
             retPassVal = validatePasswordField()
@@ -168,14 +254,16 @@
             return returnVal
         }
         function submitForm(){
-           
+            
             retVal = validate()
+            startProcess("#btnUserLogin");
             if (retVal == true) {
                 $("#kt_sign_in_form").submit()
                 return true
             }
+            endProcess("#btnUserLogin");
             return false
-
+            
         }
         
        

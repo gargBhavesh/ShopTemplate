@@ -1,32 +1,280 @@
 ﻿
 @{
-    ViewData["Title"] = "Celebrate";
+    ViewData["Title"] = "Shopivana | Celebrate";
 
-    
+    string EmailId = "";
+    if (TempData.ContainsKey("EmailId")) {
+        if (TempData["EmailId"] != null)
+        {
+
+            EmailId = TempData["EmailId"].ToString(); 
+        }
+    }
 }
-<div class="bg-body">
+
+<style>
+        @@keyframes confetti-slow {
+            0% {
+                transform: translate3d(0, 0, 0) rotateX(0) rotateY(0);
+            }
+
+            100% {
+                transform: translate3d(25px, 105vh, 0) rotateX(360deg) rotateY(180deg);
+            }
+        }
+
+        @@keyframes confetti-medium {
+            0% {
+                transform: translate3d(0, 0, 0) rotateX(0) rotateY(0);
+            }
+
+            100% {
+                transform: translate3d(100px, 105vh, 0) rotateX(100deg) rotateY(360deg);
+            }
+        }
+
+        @@keyframes confetti-fast {
+            0% {
+                transform: translate3d(0, 0, 0) rotateX(0) rotateY(0);
+            }
+
+            100% {
+                transform: translate3d(-50px, 105vh, 0) rotateX(10deg) rotateY(250deg);
+            }
+        }
+
+        .container {
+            max-width: 100%;
+            height: 100vh;
+            background: #ffffff;
+            border: 0px solid white;
+            display: fixed;
+            top: 0px;
+        }
+
+        .confetti-container {
+            perspective: 700px;
+            position: absolute;
+            overflow: hidden;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+
+        .confetti {
+            position: absolute;
+            z-index: 1;
+            top: -10px;
+            border-radius: 0%;
+        }
+
+        .confetti--animation-slow {
+            animation: confetti-slow 2.25s linear 1 forwards;
+        }
+
+        .confetti--animation-medium {
+            animation: confetti-medium 1.75s linear 1 forwards;
+        }
+
+        .confetti--animation-fast {
+            animation: confetti-fast 1.25s linear 1 forwards;
+        }
+
+        
+
+            
+
+                
+
+                
+
+        @@-webkit-keyframes checkmark {
+            0% {
+                height: 0;
+                width: 0;
+                opacity: 1;
+            }
+
+            20% {
+                height: 0;
+                width: 37.5px;
+                opacity: 1;
+            }
+
+            40% {
+                height: 75px;
+                width: 37.5px;
+                opacity: 1;
+            }
+
+            100% {
+                height: 75px;
+                width: 37.5px;
+                opacity: 1;
+            }
+        }
+
+        @@-moz-keyframes checkmark {
+            0% {
+                height: 0;
+                width: 0;
+                opacity: 1;
+            }
+
+            20% {
+                height: 0;
+                width: 37.5px;
+                opacity: 1;
+            }
+
+            40% {
+                height: 75px;
+                width: 37.5px;
+                opacity: 1;
+            }
+
+            100% {
+                height: 75px;
+                width: 37.5px;
+                opacity: 1;
+            }
+        }
+
+        @@keyframes checkmark {
+            0% {
+                height: 0;
+                width: 0;
+                opacity: 1;
+            }
+
+            20% {
+                height: 0;
+                width: 37.5px;
+                opacity: 1;
+            }
+
+            40% {
+                height: 75px;
+                width: 37.5px;
+                opacity: 1;
+            }
+
+            100% {
+                height: 75px;
+                width: 37.5px;
+                opacity: 1;
+            }
+        }
+
+        .check-parent {
+            text-align: center;
+            margin-top: 25%;
+            position: fixed;
+            width: 100%;
+            height: 100%;           
+            left: 0px;
+            display: flex;
+            flex-direction: column;            
+        }
+
+        .gradient-bg {
+            background-image: none !important;
+            padding: 0px !important;
+        }
+
+        @@media (min-width: 992px) {
+            .w-lg-400px {
+                width: 100% !important;
+                padding: 0px !important;
+                min-height: 100vh;
+            }
+        }
+    </style>
+
+    <body id="kt_body" class="bg-body">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5SRRMXB" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <!--begin::Main-->
     <div class="d-flex flex-column flex-root" id="kt_body1">
+        <!--begin::Authentication - Sign-in -->
         <div class="d-flex flex-column flex-lg-row flex-column-fluid">
-            <div class="d-flex flex-column flex-lg-row-fluid py-10 gradient-bg" style="flex: 1 auto; min-width: 0;">
-                <div class="d-flex flex-center flex-column flex-column-fluid">
-                    <div class="w-lg-400px p-10 p-lg-10 mx-auto bg-white no-auth" style="border-radius: 8px;">
-                        <form class="form w-100 fv-plugins-bootstrap5 fv-plugins-framework" id="kt_sign_in_form" asp-action="Index" asp-controller="Home">
-                            <div class="mb-5">
-                                <a href="https://shopivana.com" target="_blank" class="pb-10 d-block">
-                                    <img alt="Logo" src="https://app.shopivana.com/Content/images/logo_default_dark.png?1.0.2.4" class="h-60px">
-                                </a>
-                                <p class="text-dark mb-5 fs-1">Congratulations, you’re all set!</p>
-                            </div>
-                            
-                            <div class="text-left">
-                                <button  id="kt_sign_in_submit" class="btn btn-lg btn-primary w-100 my-4" >
-                                    <span class="indicator-label">Continue</span>
-                                </button>
-                            </div>
-                        </form>
+            <!--begin::Aside-->
+            <div class="d-flex flex-column flex-lg-row-auto w-xl-600px positon-xl-relative d-none" style="background-color: #eef3f7;">
+                <!--begin::Wrapper-->
+                <div class="d-flex flex-column position-xl-fixed top-0 bottom-0 w-xl-600px scroll-y">
+                    <!--begin::Content-->
+                    <div class="d-flex flex-row-fluid flex-column text-center p-10 pt-lg-20">
+                        <!--begin::Logo-->
+                        <a href="https://shopivana.com" target="_blank" class="py-9 mb-5">
+                            <img alt="Logo" src="https://app.shopivana.com/Content/images/logo_default_dark.png?1.0.2.4" class="h-100px" />
+                        </a>
+                        <!--end::Logo-->
+                        <!--begin::Title-->
+                        <h1 class="fw-bolder fs-2qx pb-5 pb-md-10" style="color: #444;">Welcome to Shopivana</h1>
+                        <!--end::Title-->
+
                     </div>
+                    <!--end::Content-->
+                    <!--begin::Illustration-->
+                    <div class="d-flex flex-row-auto bgi-no-repeat bgi-position-x-center bgi-size-contain bgi-position-y-bottom min-h-100px min-h-lg-350px" style="background-image: url('')"></div>
+                    <!--end::Illustration-->
                 </div>
+                <!--end::Wrapper-->
             </div>
-        </div>
+            <!--end::Aside-->
+            <!--begin::Body-->
+            <div class="d-flex flex-column flex-lg-row-fluid py-10 gradient-bg" style="flex: 1 auto; min-width: 0;">
+                <!--begin::Content-->
+                <div class="d-flex flex-center flex-column flex-column-fluid">
+                    <!--begin::Wrapper-->
+                    <div class="w-lg-400px p-10 p-lg-10 mx-auto bg-white no-auth" style="border-radius: 8px;width:90%;">
+                        
+
+
+
+<div class="check-parent">
+    <div class="mb-5">
+        <a href="https://shopivana.com" target="_blank" class="pb-10 d-block">
+            <img alt="Logo" src="https://app.shopivana.com/Content/images/logo_default_dark.png?1.0.2.4" class="h-60px">
+        </a>
     </div>
+    <h1>Congratulations, you’re all set! </h1>
+    <p>You’ll receive confirmation on @EmailId to verify your account.</p>
+    <button type="submit" id="kt_celebrate" class="btn btn-lg btn-primary w-100 my-4" style="display: inline-block; width: 260px !important; margin: auto;" onclick="Celebrate();">
+        <span class="indicator-label">Continue</span>
+        <span class="indicator-progress">
+            Continue
+            <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+        </span>
+    </button>    
 </div>
+
+
+
+                    </div>
+                    <!--end::Wrapper-->
+                </div>
+                <!--end::Content-->
+
+            </div>
+            <!--end::Body-->
+        </div>
+        <!--end::Authentication - Sign-in-->
+    </div>
+    <!--end::Main-->
+    
+    
+    
+    <script>        
+        function Celebrate() {
+            $('.bg-white.no-auth').attr('style', 'background: url("https://talsuite2.s3.ap-south-1.amazonaws.com/BIZ365/Assets/confetti-new.gif"); background-repeat: no-repeat; background-size: cover;');
+            startProcess('#kt_celebrate');
+            setTimeout(function () { location.href = "/Home/Index"; }, 3000);
+        }
+    </script>
+    
+
+</body>
+
