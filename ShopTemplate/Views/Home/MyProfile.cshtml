@@ -1,11 +1,11 @@
-﻿
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor _HttpContextAccessor
 @{
     ViewData["Title"] = "User Profile | Shopivana";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
 
     string username = "",profilePic="",emailId="";
-    
+    string EmailVerificationStatus = "Unverified";
     if (TempData.ContainsKey("UserName"))
     {
         if (!(TempData["UserName"] is null)) {
@@ -13,12 +13,20 @@
             profilePic = TempData["ProfilePic"].ToString();
             emailId = TempData["EmailId"].ToString();
         }
+        if(TempData["EmailVerificationStatus"] != null){
+            if(TempData["EmailVerificationStatus"].ToString() == "1"){
+                EmailVerificationStatus = "Verified";
+            }
+        }
     }
     if (profilePic == "")
     {
         profilePic = "blank.png";
     }
-    string profileSource = "/Images/ProfilePic/" + profilePic;
+    String hostName = string.Empty,scheme = string.Empty;
+    hostName = _HttpContextAccessor.HttpContext.Request.Host.ToString();
+    scheme = _HttpContextAccessor.HttpContext.Request.Scheme.ToString();
+    string profileSource = scheme + "://" + hostName + "/Images/ProfilePic/" + profilePic;
     
      
 }
@@ -41,6 +49,7 @@
             <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
                 <!--begin::Header-->
                 <partial name="_Header" />
+
                 <!--end::Header-->
                 <!--begin::Content-->
                 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
@@ -49,6 +58,7 @@
 <!--begin::Post-->
 <div class="post d-flex flex-column-fluid" id="kt_post">
     <div id="kt_content_container" class="container-xxl">
+
         <!--begin::Layout-->
         <div class="d-flex flex-column flex-xl-row">
             <!--begin::Sidebar-->
@@ -74,14 +84,14 @@
                                     <div class="image-input image-input-outline">
                                         @{
                                                 if(profilePic=="" || profilePic=="blank.png"){
-                                                            <div class="image-input-wrapper w-125px h-125px" style="background-image: none;" id="PhotoIMG">
-                                                    
-                                                            </div>
+                                                                                                            <div class="image-input-wrapper w-125px h-125px" style="background-image: none;" id="PhotoIMG">
+                                                                                                    
+                                                                                                            </div>
                                                 }
                                                 else{
-                                                            <div class="image-input-wrapper w-125px h-125px" style="background-image: url('@profileSource');" id="PhotoIMG" >
-                                                    
-                                                            </div>
+                                                                                                            <div class="image-input-wrapper w-125px h-125px" style="background-image: url('@profileSource');" id="PhotoIMG" >
+                                                                                                    
+                                                                                                            </div>
                                                 }
                                             }
                                         <!--begin::Preview existing avatar-->
@@ -136,10 +146,12 @@
                 </div>
                 <!--end::Card-->
             </div>
+
             <!--end::Sidebar-->
             <!--begin::Content-->
             <div class="flex-lg-row-fluid ms-lg-15">
                 <div class="d-lg-flex justify-content-between">
+
                     <!--begin:::Tabs-->
                     <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-bold mb-8">
                         <!--begin:::Tab item-->
@@ -154,6 +166,7 @@
                         <!--end:::Tab item-->
 
                     </ul>
+
                     <!--end:::Tabs-->
                     <!--begin::Card title-->
                     <div class="align-self-center ms-auto mb-4 text-end">
@@ -165,13 +178,16 @@
                                     <path d="M10 18C9.7 18 9.5 17.9 9.3 17.7C8.9 17.3 8.9 16.7 9.3 16.3L20.3 5.3C20.7 4.9 21.3 4.9 21.7 5.3C22.1 5.7 22.1 6.30002 21.7 6.70002L10.7 17.7C10.5 17.9 10.3 18 10 18Z" fill=""></path>
                                 </svg>
                             </span>
+
                             <!--end::Svg Icon-->
                             <!--begin::Indicator-->
-                            <span class="indicator-label" ">Save</span>
+                            <span class="indicator-label" >Save</span>
+
                             <span class="indicator-progress">
                                 Please wait...
                                 <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
                             </span>
+
                             <!--end::Indicator-->
                         </button>
                         <!--begin::Actions-->
@@ -185,8 +201,10 @@
                         </button>
                         <!--end::Actions-->
                     </div>
+
                     <!--end::Card title-->
                 </div>
+
                 <!--begin:::Tab content-->
                 <div class="tab-content" id="myTabContent">
                     <!--begin:::Tab pane-->
@@ -218,7 +236,18 @@
                                         <div class="d-flex flex-wrap align-items-center">
                                             <!--begin::Label-->
                                             <div id="kt_signin_email">
-                                                <div class="fs-6 fw-bolder mb-1">Email Address<span class="badge fw-bolder fs-8 px-2 py-1 ms-2 email-verify-badge badge-light-danger">Unverified</span></div>
+                                                <div class="fs-6 fw-bolder mb-1">Email Address
+                                                    @{
+                                                        if(EmailVerificationStatus == "Verified"){
+                                                                                                <span class="badge fw-bolder fs-8 px-2 py-1 ms-2 email-verify-badge badge-light-success">@EmailVerificationStatus</span>
+                                                        }
+                                                        else{
+                                                                                                <span class="badge fw-bolder fs-8 px-2 py-1 ms-2 email-verify-badge badge-light-danger">@EmailVerificationStatus</span>
+                                                        }
+                                                    }
+                                                    
+                                                    
+                                                    </div>
                                                 <div class="fw-bold text-gray-600 profile-email" id="currentEmailDisplay">@emailId</div>
                                                 <input type="email" id="currentEmailVal" hidden value="@emailId" />
                                             </div>
@@ -238,18 +267,18 @@
                                                             <div class="fv-row mb-0 fv-plugins-icon-container">
                                                                 <label for="ProfilePassword" class="required form-label fs-6 fw-bolder mb-3">Confirm Current Password</label>
                                                                 <div class="position-relative mb-3">
-                                                                    <input type="password" class="form-control form-control-lg form-control-solid" placeholder="Confirm Current Password" name="ProfilePassword" id="ProfilePassword" readonly="" onfocus="$(this).removeAttr('readonly');" onblur="$(this).attr('readonly');" autocomplete="off">
+                                                                    <input type="password" onchange="    ValidateEmailChangePassword();" class="form-control form-control-lg form-control-solid" placeholder="Confirm Current Password" name="ProfilePassword" id="ProfilePassword" readonly="" onfocus="$(this).removeAttr('readonly');" onblur="$(this).attr('readonly');" autocomplete="off">
                                                                     <div></div>
                                                                     <span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2" onclick="showPassword(this)">
                                                                         <i class="bi bi-eye-slash fs-2"></i>
                                                                     </span>
                                                                 </div>
 
-                                                            <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                                                            <div class="fv-plugins-message-container invalid-feedback" id="profilePasswordFeedback"></div></div>
                                                         </div>
                                                     </div>
                                                     <div class="d-flex">
-                                                        <button id="kt_signin_submit" onclick="return updateEmail();" type="button" class="btn btn-primary me-2 px-6">
+                                                        <button id="kt_signin_submit" onclick="    updateEmail(); location.reload();" type="button" class="btn btn-primary me-2 px-6">
                                                             <!--begin::Indicator-->
                                                             <span class="indicator-label">Update Email</span>
                                                             <span class="indicator-progress">
@@ -269,24 +298,34 @@
                                             <!--begin::Action-->
                                             <div id="kt_signin_email_button" class="ms-auto">
                                                 <button class="btn btn-light btn-active-light-primary mx-3" id="btnChangeEmail" onclick="     edit_email();">Change Email</button>
-                                                <button type="button" class="btn btn-primary my-4" id="btnVerifyEmail" >
-                                                    <!--begin::Indicator-->
-                                                    <span class="indicator-label">Verify Email !</span>
-                                                    <span class="indicator-progress">
-                                                        Please wait...
-                                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
-                                                    </span>
-                                                    <!--end::Indicator-->
-                                                </button>
+                                                @{
+                                                    if(EmailVerificationStatus!="Verified"){
+                                                                                        <button type="button" class="btn btn-primary my-4" id="btnVerifyEmail" onclick="    verifyEmail();" >
+                                                                                            <!--begin::Indicator-->
+                                                                                            <span class="indicator-label">Verify Email !</span>
+                                                                                            <span class="indicator-progress">
+                                                                                                Please wait...
+                                                                                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                                                                            </span>
+                                                                                            <!--end::Indicator-->
+                                                                                        </button>
+                                                    }
+                                                }
+                                                
+                                                
+                                                
+                                                
                                             </div>
                                             <!--end::Action-->
                                         </div>
                                         <div class="email-check mb-4" style="display:none;">
                                             <div class="d-flex justify-content-end">
                                                 <div class="col-8">
-                                                    <input type="text" maxlength="10" name="EmailVerificationCode" id="EmailVerificationCode" class=" col-lg-4 fs-6 form-control form-control-lg form-control-solid" placeholder="Verification Code">
+                                                    <input type="text" maxlength="10" name="EmailVerificationCode" onchange="    ValidateVerifyCode();" id="EmailVerificationCode" class=" col-lg-4 fs-6 form-control form-control-lg form-control-solid" placeholder="Verification Code">
+                                                    <div class="fv-plugins-message-container invalid-feedback" id="VerificationCodeFeedback">
+                                                        </div>
                                                     <div class="text-end">
-                                                        <button type="button" class="btn btn-primary my-4 btn-verify-email" onclick="VerifyEmail();">
+                                                        <button type="button" class="btn btn-primary my-4 btn-verify-email" onclick="checkVerificationCode();">
                                                             <!--begin::Indicator-->
                                                             <span class="indicator-label">Verify</span>
                                                             <span class="indicator-progress">
@@ -448,7 +487,10 @@
                 </div>
                 <!--end::Content-->
                 <!--begin::Footer-->
+                
                 <partial name="_Footer" />
+
+
                 <!--end::Footer-->
             </div>
             <!--end::Wrapper-->
@@ -552,7 +594,7 @@
                     <div class="swal2-success-circular-line-right" style="background-color: rgb(255, 255, 255);">
                     </div>
                 </div>
-                <div class="swal2-html-container" style="display: block; text-align: center;">
+                <div class="swal2-html-container" id ="sucessModalContainer" style="display: block; text-align: center;">
                     Saved successfully.
                 </div>
             </div>
@@ -1056,15 +1098,27 @@
         }
 
     }
+    function ValidateEmailChangePassword(){
+        var currPassword = $("#ProfilePassword").val();
+
+        if(currentPassword==""){
+            $("#profilePasswordFeedback").html("Password can not be blank");
+            return false;
+        }
+        else{
+             $("#profilePasswordFeedback").html("");
+            return true;
+        }
+
+    }
     function updateEmail(){
         var newEmail = $("#NewEmail").val();
         var currPassword = $("#ProfilePassword").val();
-        var validateEmailCheck = validateNewEmail();
-        if (validateEmailCheck) {
-            var obj = {};
-            obj.newEmail = newEmail;
-            obj.currentPassword = currPassword;
-            $.ajax({
+        
+        var obj = {};
+        obj.newEmail = newEmail;
+        obj.currentPassword = currPassword;
+        $.ajax({
             url: '/Home/updateEmail',
             type: 'POST',
             async: false,
@@ -1074,6 +1128,7 @@
             dataType: "json",
             success: function (returnData) {
                 if(returnData.status) {
+                    $("#sucessModalContainer").html("Email Changed Successfully")
                     $("#successModal").modal('show');
                     $("#currentEmailVal").val = newEmail;
                     $("#currentEmailDisplay").html(newEmail);
@@ -1085,16 +1140,84 @@
                     $("#errorModal").modal('show');
                 }
             },
+            error: function() { 
+                $("#swal2-html-container").html('Oops! Something went wrong');
+            $("#errorModal").modal('show');
+            }
+        });
+        
+        
+    }
+    function verifyEmail(){
+        $("#EmailVerificationCode").val("");
+        
+        startProcess('#btnVerifyEmail');
+            $.ajax({
+            url: '/Mail/VerifyEmail',
+            type: 'POST',
+            async: false,
+            cache: false,
+            success: function (returnData) {
+                
+                if(returnData) {
+                   showSuccess('Verification code has sent to your email. Please verify your email.');
+                    $('.email-check').slideToggle("fast");
+                    returnVal = true;
+                }
+                else {
+                   showError("Oops! Something went wrong. Please try again later.")
+                }
+            },
+            complete: function (data) { endProcess('#btnVerifyEmail'); },
              error: function() { 
-                 $("#swal2-html-container").html('Oops! Something went wrong');
-                $("#errorModal").modal('show');
+                 showError("Oops! Something went wrong. Please try again later.")
              }
         });
-        }
-        else{
+        
+        
+    }
+
+    function ValidateVerifyCode(){
+        if($("#EmailVerificationCode").val()==""){
+            $("#VerificationCodeFeedback").html("Verification Code can not be empty");
             return false;
         }
+        else{
+            $("#VerificationCodeFeedback").html("");
+            return true;
+        }
+
+    }
+    function checkVerificationCode(){
         
+
+
+    startProcess('.btn-verify-email');
+            $.ajax({
+            url: '/Home/CheckVerificationCode',
+            type: 'POST',
+            async: false,
+            cache: false,
+                data: { verificationCode : $("#EmailVerificationCode").val() },
+            success: function (returnData) {
+                
+                if(returnData.status) {
+                    $("#sucessModalContainer").html("Email Verified")
+                    
+                    $('.email-check').slideToggle("fast");
+                    $(".email-verify-badge").removeClass('badge-light-danger').addClass('badge-light-success').text('Verified');
+                    $("#successModal").modal('show');
+                    returnVal = true;
+                }
+                else {
+                   showError("Oops! Something went wrong. Please try again later.")
+                }
+            },
+            complete: function (data) {endProcess('.btn-verify-email'); },
+             error: function() { 
+                 showError("Oops! Something went wrong. Please try again later.")
+             }
+        });
     }
 </script>
 </body>

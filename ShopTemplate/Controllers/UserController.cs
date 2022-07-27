@@ -1,26 +1,34 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ShopTemplate.Data;
 using ShopTemplate.Models;
+using ShopTemplate.Services;
+using System.Text;
+using System.Web;
+using Microsoft.AspNetCore.WebUtilities;
+
 namespace ShopTemplate.Controllers
 {
     public class UserController : Controller
     {
         private AppDBContext _dbContext { get; set; }
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public void DeleteSession(string sessionName="")
-        {
-            if (sessionName == "")
-                HttpContext.Session.Clear();
-            else {
-                HttpContext.Session.Remove(sessionName);
-            }
-        }
         //private readonly DataRepository _repObj;
-        public UserController(AppDBContext dbContext)
+        public UserController(AppDBContext dbContext, IHttpContextAccessor httpContextAccessor)
         {
             //_repObj = repObj;
             _dbContext = dbContext;
+            _httpContextAccessor = httpContextAccessor;
 
+        }
+        public void DeleteSession(string sessionName = "")
+        {
+            if (sessionName == "")
+                HttpContext.Session.Clear();
+            else
+            {
+                HttpContext.Session.Remove(sessionName);
+            }
         }
         public IActionResult RegisterUser()
         {
@@ -32,7 +40,7 @@ namespace ShopTemplate.Controllers
                 DeleteSession();
                 return View();
             }
-            
+
         }
         public IActionResult Login()
         {
@@ -42,7 +50,7 @@ namespace ShopTemplate.Controllers
         public IActionResult Congratulation()
         {
             string EmailId = HttpContext.Session.GetString("RegisterEmailId");
-            
+
             if (EmailId != null)
             {
                 HttpContext.Session.SetString("EmailId", HttpContext.Session.GetString("RegisterEmailId"));
@@ -68,6 +76,7 @@ namespace ShopTemplate.Controllers
                 Response.Cookies.Delete(cookieName);
             }
         }
+
         [HttpPost]
         public ActionResult Login(IFormCollection frm)
         {
@@ -75,7 +84,7 @@ namespace ShopTemplate.Controllers
             string userId = frm["Email"];
             string password = frm["Password"];
             string userName = "";
-            
+
             byte? roleId = null;
             User user = null;
             try {
@@ -93,7 +102,7 @@ namespace ShopTemplate.Controllers
                     roleId = user.RoleId;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 loginStatus = false;
                 TempData["loginStatus"] = false;
@@ -103,21 +112,30 @@ namespace ShopTemplate.Controllers
             if (loginStatus) {
                 if (roleId != null)
                 {
+                    HttpContext.Session.SetString("EmailId", user.EmailId);
+                    HttpContext.Session.SetString("ID", user.Id.ToString());
+                    if (user.EmailVerificationStatus != null)
+                        HttpContext.Session.SetString("EmailVerificationStatus", user.EmailVerificationStatus.ToString());
+                    else {
+                        HttpContext.Session.SetString("EmailVerificationStatus", "0");
+                    }
+                    
+                    
+
                     if (userName == "") {
-                        HttpContext.Session.SetString("RegisterEmailId", user.EmailId);
+                        
                         HttpContext.Session.SetString("Password", password);
                         HttpContext.Session.SetString("ProfilePic", "");
-                        HttpContext.Session.SetString("ID", user.Id.ToString());
+                        
                         return RedirectToAction("PostRegisterUser");
                     }
 
                     HttpContext.Session.SetString("UserName", userName);
-                    HttpContext.Session.SetString("EmailId", user.EmailId);
-                    HttpContext.Session.SetString("ID", user.Id.ToString());
-                    if(user.ProfilePicName is null)
+                    
+                    if (user.ProfilePicName is null)
                         HttpContext.Session.SetString("ProfilePic", "");
                     else
-                        HttpContext.Session.SetString("ProfilePic", user.ProfilePicName );
+                        HttpContext.Session.SetString("ProfilePic", user.ProfilePicName);
                     if (roleId == 1)
                     {
                         TempData["loginStatus"] = true;
@@ -129,7 +147,7 @@ namespace ShopTemplate.Controllers
                         return RedirectToAction("Index", "Home");
                     }
                 }
-                else{
+                else {
                     TempData["loginStatus"] = false;
                     TempData["loginError"] = "Some Error Occurred! Please try agiain later";
                     return RedirectToAction("Login");
@@ -145,18 +163,18 @@ namespace ShopTemplate.Controllers
         public Dictionary<string, object> CheckEmailIsUnique(string emailId) {
             bool returnVal = false;
             string errorMsg = "";
-            Dictionary<string, object> returnDetails= new Dictionary<string, object>();
+            Dictionary<string, object> returnDetails = new Dictionary<string, object>();
             User user = null;
             try
             {
                 user = _dbContext.Users.Where(x => x.EmailId == emailId).FirstOrDefault();
                 if (user is null)
                 {
-                    returnVal= true;
+                    returnVal = true;
                 }
                 else
                 {
-                    returnVal =  false;
+                    returnVal = false;
                     errorMsg = "Email Already Exists";
                 }
             }
@@ -172,7 +190,7 @@ namespace ShopTemplate.Controllers
         }
         [HttpPost]
         public IActionResult RegisterUser(IFormCollection form) {
-            
+
             bool returnValue = false;
             string EmailId = form["EmailId"];
             string password = form["Password"];
@@ -185,7 +203,7 @@ namespace ShopTemplate.Controllers
                 {
                     try {
                         User user = new User();
-                        user.EmailId= EmailId;
+                        user.EmailId = EmailId;
                         user.Password = password;
                         user.Name = "";
                         user.RoleId = 2;
@@ -211,7 +229,7 @@ namespace ShopTemplate.Controllers
                 }
             }
             catch {
-                TempData["errorMsg"]  = "Some Error Occurred. Please Try Again!"; 
+                TempData["errorMsg"] = "Some Error Occurred. Please Try Again!";
                 returnValue = false;
             }
             if (returnValue)
@@ -220,6 +238,171 @@ namespace ShopTemplate.Controllers
                 return RedirectToAction("RegisterUser");
         }
 
+        public IActionResult ForgotPassword() {
+            DeleteSession();
+            
+            return View();
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> ForgotPassword(IFormCollection form) {
+            string email = form["Email"];
+            string password = "";
+            bool returnVal = false;
+            User user = null;
+            user = _dbContext.Users.Where(x => x.EmailId == email).FirstOrDefault();
+            if (!(user is null))
+            {
+                password = user.Password;
+                string encryptedPassword = EncodePasswordToBase64(password);
+                ForgotPasswordRequest request = new ForgotPasswordRequest();
+                request.ToEmail = email;
+                String hostName, scheme;
+                hostName = _httpContextAccessor.HttpContext.Request.Host.ToString();
+                scheme = _httpContextAccessor.HttpContext.Request.Scheme.ToString();
+                System.Collections.Specialized.NameValueCollection queryString = HttpUtility.ParseQueryString(string.Empty);
+                string url = scheme + "://" + hostName + "/User/ResetPassword";
+                var param = new Dictionary<string, string>() { { "email", email },{ "code" , encryptedPassword } };
+
+                var newUrl = new Uri(QueryHelpers.AddQueryString(url, param));
+                request.ResetLink = newUrl.AbsoluteUri;
+
+
+                return RedirectToAction("SendPasswordResetEmail", "Mail", request);
+            }
+            else
+            {
+                returnVal = false;
+                TempData["errorMsg"] = "User Not Found";
+            }
+            
+                return RedirectToAction("ForgotPassword");
+            
+
+        }
+
+        public IActionResult ResetPassword(string email,string code) {
+            string password = DecodeFrom64(code);
+            User user = new User();
+            try
+            {
+                user = _dbContext.Users.Where(x => x.EmailId == email && x.Password == password).FirstOrDefault();
+                if (user != null)
+                {
+
+                    HttpContext.Session.SetString("EmailId", email);
+                    HttpContext.Session.SetString("Password", password);
+                    return View();
+                }
+                else
+                {
+                    TempData["errorMsg"] = "Invalid Token";
+                    return RedirectToAction("ForgotPassword");
+                }
+            }
+            catch {
+                TempData["errorMsg"] = "Some Error Occurred! Please try again later";
+                return RedirectToAction("ForgotPassword");
+            }
+        }
+        public static string EncodePasswordToBase64(string password)
+        {
+            try
+            {
+                byte[] encData_byte = new byte[password.Length];
+                encData_byte =  Encoding.UTF8.GetBytes(password);
+                string encodedData = Convert.ToBase64String(encData_byte);
+                return encodedData;
+            }
+            catch 
+            {
+                return password; 
+            }
+        }
+
+        
+        public string DecodeFrom64(string encodedData)
+        {
+            UTF8Encoding encoder = new  UTF8Encoding();
+            Decoder utf8Decode = encoder.GetDecoder();
+            byte[] todecode_byte = Convert.FromBase64String(encodedData);
+            int charCount = utf8Decode.GetCharCount(todecode_byte, 0, todecode_byte.Length);
+            char[] decoded_char = new char[charCount];
+            utf8Decode.GetChars(todecode_byte, 0, todecode_byte.Length, decoded_char, 0);
+            string result = new String(decoded_char);
+            return result;
+        }
+
+        [HttpPost]
+        public IActionResult ResetPassword(IFormCollection form)
+        {
+            string password = form["Password"];
+            bool returnVal = false;
+            string email = HttpContext.Session.GetString("EmailId");
+            string  currPassword = HttpContext.Session.GetString("Password");
+            string userName = "";
+            
+            byte? roleId ;
+            User user = null;
+            user = _dbContext.Users.Where(x => x.EmailId == email && x.Password == currPassword).FirstOrDefault();
+            if (!(user is null))
+            {
+                DeleteSession("Password");
+                user.Password = password;
+                _dbContext.SaveChanges();
+                userName = user.Name;
+                roleId = user.RoleId;
+                if (roleId != null)
+                {
+                    if (userName == "")
+                    {
+                        HttpContext.Session.SetString("RegisterEmailId", user.EmailId);
+                        HttpContext.Session.SetString("Password", password);
+                        HttpContext.Session.SetString("ProfilePic", "");
+                        HttpContext.Session.SetString("ID", user.Id.ToString());
+                        return RedirectToAction("PostRegisterUser");
+                    }
+                    HttpContext.Session.SetString("UserName", userName);
+                    HttpContext.Session.SetString("EmailId", user.EmailId);
+                    HttpContext.Session.SetString("ID", user.Id.ToString());
+                    if (user.ProfilePicName is null)
+                        HttpContext.Session.SetString("ProfilePic", "");
+                    else
+                        HttpContext.Session.SetString("ProfilePic", user.ProfilePicName);
+                    if (roleId == 1)
+                    {
+                        TempData["loginStatus"] = true;
+                        return RedirectToAction("AdminHome", "Admin");
+                    }
+                    else
+                    {
+                        TempData["loginStatus"] = true;
+                        return RedirectToAction("Index", "Home");
+                    }
+                }
+                else {
+                    returnVal = false;
+                    TempData["errorMsg"] = "Invalid User";
+                }
+            }
+            else
+            {
+                returnVal = false;
+                TempData["errorMsg"] = "User Not Found";
+            }
+            return RedirectToAction("ForgotPassword");
+        }
+
+
+        public IActionResult ForgotPasswordConfirmation()
+        {
+            if (TempData.ContainsKey("errorMsg"))
+            {
+                TempData.Remove("errorMsg");
+            }
+            return View();
+        }
         public IActionResult PostRegisterUser() {
 
             string EmailId = HttpContext.Session.GetString("RegisterEmailId");

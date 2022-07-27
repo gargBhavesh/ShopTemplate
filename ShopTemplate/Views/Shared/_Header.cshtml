@@ -1,4 +1,6 @@
-﻿@{
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor _HttpContextAccessor
+@{
+
     string username = "";
     string profilePic = "";
     string ID = "";
@@ -16,7 +18,10 @@
     {
         profilePic = "blank.png";
     }
-    string profileSource = "/Images/ProfilePic/" + profilePic;
+    String hostName = string.Empty,scheme = string.Empty;
+    hostName = _HttpContextAccessor.HttpContext.Request.Host.ToString();
+    scheme = _HttpContextAccessor.HttpContext.Request.Scheme.ToString();
+    string profileSource = scheme + "://" + hostName + "/Images/ProfilePic/" + profilePic;
 }
 
 <div id="kt_header" class="header align-items-stretch">

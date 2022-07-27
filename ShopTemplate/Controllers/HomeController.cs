@@ -6,6 +6,8 @@ using System;
 using System.Web;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
+using ShopTemplate.Services;
+
 namespace ShopTemplate.Controllers
     
 {
@@ -146,6 +148,8 @@ namespace ShopTemplate.Controllers
                 TempData["EmailId"] = HttpContext.Session.GetString("EmailId");
                 TempData["ProfilePic"] = HttpContext.Session.GetString("ProfilePic");
                 TempData["ID"] = HttpContext.Session.GetString("ID");
+                TempData["EmailVerificationStatus"] =   HttpContext.Session.GetString("EmailVerificationStatus");
+
                 return View();
             }
             
@@ -176,6 +180,7 @@ namespace ShopTemplate.Controllers
                         if ((bool)returnDetails["status"])
                         {
                             user.EmailId = updateObj.NewEmail;
+                            user.EmailVerificationStatus = 0;
                             _dbContext.SaveChanges();
                             returnVal = true;
                         }
@@ -203,6 +208,8 @@ namespace ShopTemplate.Controllers
             }
             if (returnVal) {
                 HttpContext.Session.SetString("EmailId", updateObj.NewEmail);
+                HttpContext.Session.SetString("EmailVerificationStatus","0");
+                TempData["EmailVerificationStatus"] = "0";
             }
             if (returnDetails.ContainsKey("status"))
             {
@@ -246,7 +253,8 @@ namespace ShopTemplate.Controllers
 
         }
 
-
+        
+        
         public async Task<ActionResult> uploadProfilePic() {
 
             bool returnVal = false;
@@ -397,6 +405,75 @@ namespace ShopTemplate.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        public void DeleteSession(string sessionName = "")
+        {
+            if (sessionName == "")
+                HttpContext.Session.Clear();
+            else
+            {
+                HttpContext.Session.Remove(sessionName);
+            }
+        }
+        [HttpPost]
+        public Dictionary<string, object> CheckVerificationCode(string verificationCode)
+        {
+            bool returnVal = false;
+            string errorMsg = "";
+            string EmailId = HttpContext.Session.GetString("EmailId");
+            Dictionary<string, object> returnDetails = new Dictionary<string, object>();
+            User user = null;
+            if (EmailId == null)
+            {
+                returnVal = false;
+                errorMsg = "Session Error! Please Login Again";
+            }
+            try
+            {
+                user = _dbContext.Users.Where(x => x.EmailId == EmailId).FirstOrDefault();
+
+                if (!(user is null))
+                {
+                    string sessionVerificationCode = HttpContext.Session.GetString("VerificationCode");
+                    if (sessionVerificationCode == verificationCode)
+                    {
+                        user.EmailVerificationStatus = 1;
+                        returnVal = true;
+                    }
+                    else {
+                        user.EmailVerificationStatus = 0;
+                        returnVal = false;
+                        errorMsg = "Verification Code does not match";
+                    }
+                    _dbContext.SaveChanges();
+                    DeleteSession("VerificationCode");
+                    HttpContext.Session.SetString("EmailVerificationStatus", user.EmailVerificationStatus.ToString());
+                    TempData["EmailVerificationStatus"] = HttpContext.Session.GetString("EmailVerificationStatus");
+                }
+                else
+                {
+                    returnVal = false;
+                    errorMsg = "User Cannot be found! Please check again";
+                }
+            }
+            catch
+            {
+                returnVal = false;
+                errorMsg = "Some Error Occurred! Please try again Later";
+            }
+
+            if (returnDetails.ContainsKey("status"))
+            {
+                returnDetails["status"] = (object)returnVal;
+                returnDetails["errorMsg"] = (object)errorMsg;
+            }
+            else
+            {
+                returnDetails.Add("status", (object)returnVal);
+                returnDetails.Add("errorMsg", (object)errorMsg);
+            }
+            return returnDetails;
+        }
+
     }
     public class UpdatePasswordModel
     {

@@ -1,6 +1,10 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using ShopTemplate.Models;
 using ShopTemplate;
 using ShopTemplate.Data;
+using ShopTemplate.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 // Add services to the container.
@@ -11,6 +15,9 @@ services.AddDbContext<AppDBContext>(options => options.UseSqlServer(
 services.AddSingleton<DataRepository>(new DataRepository(new AppDBContext(new DbContextOptions<AppDBContext>())));
 
 services.AddRazorPages().AddRazorRuntimeCompilation();
+services.AddTransient<IMailService, MailService>();
+
+services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
 builder.Services.AddDistributedMemoryCache();
 
 builder.Services.AddSession(options =>

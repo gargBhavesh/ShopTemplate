@@ -17,6 +17,9 @@ namespace ShopTemplate.Models
         [DataType(DataType.DateTime)]
         public DateTime RegistrationDate { get; set; }
         public string? ProfilePicName { get; set; }
+        public int? EmailVerificationStatus { get; set; }
+
+        public string? MobileNumber { get; set; }
 
     }
 }
